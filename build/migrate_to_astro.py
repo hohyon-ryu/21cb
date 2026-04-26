@@ -83,6 +83,10 @@ BOOKS = [
     ("마가복음", "mark"),
     ("누가복음", "luke"),
     ("요한복음", "john"),
+    ("사도행전", "acts"),
+    ("로마서", "romans"),
+    ("고린도전서", "corinthians1"),
+    ("고린도후서", "corinthians2"),
 ]
 
 

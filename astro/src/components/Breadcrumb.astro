@@ -53,6 +53,10 @@ const all: Record<BookSlug, { chapter: number; title: string }[]> = {
   mark: [],
   luke: [],
   john: [],
+  acts: [],
+  romans: [],
+  corinthians1: [],
+  corinthians2: [],
 };
 for (const slug of BOOK_ORDER) {
   const items = await getCollection(slug);

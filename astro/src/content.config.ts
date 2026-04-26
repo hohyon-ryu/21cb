@@ -108,4 +108,8 @@ export const collections = {
   mark: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/mark' }), schema: chapter }),
   luke: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/luke' }), schema: chapter }),
   john: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/john' }), schema: chapter }),
+  acts: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/acts' }), schema: chapter }),
+  romans: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/romans' }), schema: chapter }),
+  corinthians1: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/corinthians1' }), schema: chapter }),
+  corinthians2: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/corinthians2' }), schema: chapter }),
 };

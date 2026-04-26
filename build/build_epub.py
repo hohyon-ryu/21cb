@@ -216,6 +216,42 @@ BOOK_INTROS = {
         "overview": "말라기는 구약 정경의 마지막 책. '내가 너를 사랑한다 / 너희가 어떻게 하셨느냐'의 여섯 변론. '엘리야가 다시 올 것'(4:5-6) — 신약이 세례 요한에게 적용한 그 예언.",
         "parts": [{"num": "전체", "title": "말라기", "subtitle": "여섯 변론과 엘리야 약속", "range": (1, 4)}],
     },
+    "사도행전": {
+        "opening": "*예루살렘에서 로마까지 — 한 운동이 어떻게 세상으로 퍼졌나.*",
+        "overview": "사도행전은 누가복음의 후속편이다. 예수의 승천에서 시작해 오순절 성령강림, 베드로의 사역, 스데반 순교, 사울의 회심, 바울의 세 차례 선교 여행, 로마 압송으로 끝난다. 1세기 교회의 첫 30년을 추적한 유일한 역사 자료.",
+        "parts": [
+            {"num": "1부", "title": "예루살렘", "subtitle": "오순절·베드로·스데반·사울 회심", "range": (1, 12)},
+            {"num": "2부", "title": "이방으로", "subtitle": "바울의 1·2·3차 선교 여행", "range": (13, 21)},
+            {"num": "3부", "title": "로마로", "subtitle": "체포·재판·항해·로마 도착", "range": (22, 28)},
+        ],
+    },
+    "로마서": {
+        "opening": "*복음의 가장 체계적인 신학 — 바울의 대작.*",
+        "overview": "로마서는 바울이 직접 가본 적 없는 로마 교회에 보낸 편지(AD 57년경). 자신의 복음을 가장 체계적으로 정리한 신학적 대작. '의인은 믿음으로 살리라'(1:17 — 하박국 인용)가 종교개혁의 토대. 1-11장 교리, 12-16장 실천.",
+        "parts": [
+            {"num": "1부", "title": "구원의 이치", "subtitle": "이신칭의·아담과 그리스도·성령", "range": (1, 8)},
+            {"num": "2부", "title": "이스라엘과 이방", "subtitle": "선택과 자비", "range": (9, 11)},
+            {"num": "3부", "title": "그리스도인의 삶", "subtitle": "산 제사·정부·약자 배려", "range": (12, 16)},
+        ],
+    },
+    "고린도전서": {
+        "opening": "*문제 많은 교회에 보낸 가장 실제적인 편지.*",
+        "overview": "고린도전서는 바울이 에베소에서 고린도 교회에 보낸 편지(AD 55년경). 분쟁·근친상간·소송·결혼·우상 제물·예배 질서·은사·부활까지. 13장 사랑의 송가, 15장 부활의 신학이 정점.",
+        "parts": [
+            {"num": "1부", "title": "교회의 문제", "subtitle": "분파·도덕·소송·결혼", "range": (1, 7)},
+            {"num": "2부", "title": "예배와 사랑", "subtitle": "우상 제물·만찬·은사·사랑", "range": (8, 14)},
+            {"num": "3부", "title": "부활", "subtitle": "그리스도와 우리의 부활", "range": (15, 16)},
+        ],
+    },
+    "고린도후서": {
+        "opening": "*가장 개인적인 편지 — 사도의 약함과 자랑.*",
+        "overview": "고린도후서는 격렬한 갈등 후 화해의 편지(AD 56년경). 바울의 가장 개인적인 글. 사역의 영광과 짐, 약함과 자랑, 가난한 자를 위한 헌금, 거짓 사도들과의 변증 — 사역의 정직한 풍경.",
+        "parts": [
+            {"num": "1부", "title": "화해와 사역", "subtitle": "위로·새 언약·약함의 영광", "range": (1, 7)},
+            {"num": "2부", "title": "헌금", "subtitle": "예루살렘 가난한 자 모금", "range": (8, 9)},
+            {"num": "3부", "title": "사도의 변증", "subtitle": "거짓 사도와의 대립", "range": (10, 13)},
+        ],
+    },
     "마태복음": {
         "opening": "*아브라함의 자손, 다윗의 아들 — 약속의 성취로 시작하는 첫 복음.*",
         "overview": "마태복음은 유대인 청중을 향해 쓰인 복음서다. 예수가 구약의 모든 약속을 성취하는 다윗의 메시아임을 다섯 강화(산상수훈·전도·비유·교회·종말)로 펼친다. 동방박사·이집트 피난·산상수훈·주기도문·팔복·대위임 — 가장 자주 인용되는 복음.",
@@ -522,6 +558,10 @@ def main():
             "마가복음": "assets/maps/genesis/02_east_of_eden_and_nod.png",
             "누가복음": "assets/maps/genesis/03_flood_to_ararat.png",
             "요한복음": "assets/maps/genesis/04_babel_and_dispersion.png",
+            "사도행전": "assets/maps/genesis/05_abram_first_journey.png",
+            "로마서": "assets/maps/genesis/06_kings_war_and_promise_land.png",
+            "고린도전서": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
+            "고린도후서": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel
