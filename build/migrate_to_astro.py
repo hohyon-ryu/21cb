@@ -23,7 +23,7 @@ EMOJI = bw.CHAPTER_EMOJI_BY_BOOK
 
 SUPER_TO_NORMAL = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 VERSE_RE = re.compile(r"^\*\*(\d+)\*\*\s*", re.MULTILINE)
-H1_RE = re.compile(r"^#\s+(\S+)\s+(\d+)장\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
+H1_RE = re.compile(r"^#\s+(\S+)\s+(\d+)(?:장|편)\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
 TAIL_ITALIC_RE = re.compile(r"^(.+?)(?<!\*)\s+\*([^*]{12,}?)\*\s*$")
 
 
@@ -58,6 +58,7 @@ BOOKS = [
     ("느헤미야", "nehemiah"),
     ("에스더", "esther"),
     ("욥기", "job"),
+    ("시편", "psalms"),
     ("잠언", "proverbs"),
     ("전도서", "ecclesiastes"),
     ("아가", "song"),

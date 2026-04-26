@@ -80,6 +80,7 @@ export const collections = {
     loader: glob({ pattern: '*.md', base: './src/content/job' }),
     schema: chapter,
   }),
+  psalms: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/psalms' }), schema: chapter }),
   proverbs: defineCollection({
     loader: glob({ pattern: '*.md', base: './src/content/proverbs' }),
     schema: chapter,

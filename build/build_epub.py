@@ -216,6 +216,17 @@ BOOK_INTROS = {
         "overview": "말라기는 구약 정경의 마지막 책. '내가 너를 사랑한다 / 너희가 어떻게 하셨느냐'의 여섯 변론. '엘리야가 다시 올 것'(4:5-6) — 신약이 세례 요한에게 적용한 그 예언.",
         "parts": [{"num": "전체", "title": "말라기", "subtitle": "여섯 변론과 엘리야 약속", "range": (1, 4)}],
     },
+    "시편": {
+        "opening": "*150편의 노래 — 인간이 하나님께 부른 모든 음역.*",
+        "overview": "시편은 다윗을 비롯한 여러 저자들의 150편 시 모음이다. 찬양·탄원·감사·지혜·왕정·역사·순례 — 인간이 하나님 앞에서 가질 수 있는 거의 모든 마음이 여기 담겼다. 5권으로 나뉘며 각 권 끝에 송영. 시편 119편(가장 긴 장)부터 117편(가장 짧은 장)까지, 분노에서 환희까지 정직하게 기록된다.",
+        "parts": [
+            {"num": "1권", "title": "다윗의 시", "subtitle": "탄원과 신뢰", "range": (1, 41)},
+            {"num": "2권", "title": "왕정 시", "subtitle": "예루살렘과 시온", "range": (42, 72)},
+            {"num": "3권", "title": "성가대 시", "subtitle": "아삽과 고라 자손", "range": (73, 89)},
+            {"num": "4권", "title": "왕이신 야훼", "subtitle": "야훼의 왕권 찬양", "range": (90, 106)},
+            {"num": "5권", "title": "할렐", "subtitle": "찬양·순례·할렐루야", "range": (107, 150)},
+        ],
+    },
     "욥기": {
         "opening": "*아무 죄 없이 모든 것을 잃은 한 사람 — 고난 앞의 가장 정직한 책.*",
         "overview": "욥기는 의로운 한 사람이 모든 것을 잃은 채 친구 셋과 청년 엘리후, 그리고 마지막에 회오리바람의 하나님과 차례로 대화하는 시 형식의 책이다. '인과응보'라는 통념을 가장 격렬하게 흔드는 책. 답을 주지 않고 더 큰 질문으로 응답하는 결말 — 그러나 욥은 회복된다.",
@@ -451,6 +462,7 @@ def main():
             "느헤미야": "assets/maps/genesis/06_kings_war_and_promise_land.png",
             "에스더": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
             "욥기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
+            "시편": "assets/maps/genesis/10_shechem_bethel_seir.png",
             "잠언": "assets/maps/genesis/09_jacob_flight_and_return.png",
             "전도서": "assets/maps/genesis/10_shechem_bethel_seir.png",
             "아가": "assets/maps/genesis/02_east_of_eden_and_nod.png",
