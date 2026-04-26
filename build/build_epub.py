@@ -6,6 +6,7 @@ Usage:
   python3 build_epub.py 창세기_초등 창세기_초등.epub
 """
 import re
+import json
 import os
 import shutil
 import subprocess
@@ -16,6 +17,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "build"
 CSS = BUILD / "epub.css"
+COVER_DATA = ROOT / "scripts/book_cover_data.json"
+COVER_PUBLIC_DIR = ROOT / "astro/public/assets/covers/books"
 
 if len(sys.argv) >= 3:
     SRC_NAME = sys.argv[1]
@@ -35,6 +38,36 @@ if not CH_DIR.exists():
     sys.exit(1)
 
 SUPER_TO_NORMAL = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
+
+
+def load_cover_slugs() -> dict[str, str]:
+    if not COVER_DATA.exists():
+        return {}
+    books = json.loads(COVER_DATA.read_text(encoding="utf-8"))
+    return {book["name"]: book["slug"] for book in books}
+
+
+BOOK_COVER_SLUGS = load_cover_slugs()
+
+
+def get_book_cover_path(book_name: str) -> Path | None:
+    slug = BOOK_COVER_SLUGS.get(book_name.replace("_초등", ""))
+    if not slug:
+        return None
+    cover = COVER_PUBLIC_DIR / f"{slug}.jpg"
+    return cover if cover.exists() else None
+
+
+def make_cover_md(book_name: str) -> str:
+    cover = get_book_cover_path(book_name)
+    if not cover:
+        return ""
+    label = book_name.replace("_초등", " (초등)")
+    return (
+        '<div class="book-cover-page">\n'
+        f'  <img src="{cover.as_posix()}" alt="{label} 표지" />\n'
+        '</div>\n\n'
+    )
 
 PARTS = [
     {"num": "1부", "title": "원역사", "subtitle": "인류 전체의 시작",
@@ -508,6 +541,7 @@ subtitle: 21세기에 읽는 성경 — {edition}
 lang: ko
 ---
 
+{make_cover_md(SRC_NAME)}
 # {book_label}
 
 **21세기에 읽는 성경 — {edition}**
@@ -576,78 +610,13 @@ def main():
         ]
 
         edition = get_edition_label()
-        resource_path = os.pathsep.join([str(CH_DIR), str(ROOT), str(ROOT / "assets")])
-        # 책별 표지 이미지 — 같은 톤의 아카이벌 지도
-        COVERS = {
-            "창세기": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "출애굽기": "assets/maps/genesis/11_joseph_route_to_egypt.png",
-            "레위기": "assets/maps/genesis/03_flood_to_ararat.png",
-            "민수기": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "신명기": "assets/maps/genesis/05_abram_first_journey.png",
-            "여호수아": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "사사기": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-            "룻기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
-            "사무엘상": "assets/maps/genesis/09_jacob_flight_and_return.png",
-            "사무엘하": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "열왕기상": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "열왕기하": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "역대상": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "역대하": "assets/maps/genesis/03_flood_to_ararat.png",
-            "에스라": "assets/maps/genesis/05_abram_first_journey.png",
-            "느헤미야": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "에스더": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-            "욥기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
-            "시편": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "잠언": "assets/maps/genesis/09_jacob_flight_and_return.png",
-            "전도서": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "아가": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "이사야": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "예레미야": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "예레미야애가": "assets/maps/genesis/03_flood_to_ararat.png",
-            "에스겔": "assets/maps/genesis/05_abram_first_journey.png",
-            "다니엘": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "호세아": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "요엘": "assets/maps/genesis/03_flood_to_ararat.png",
-            "아모스": "assets/maps/genesis/05_abram_first_journey.png",
-            "오바댜": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "요나": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-            "미가": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
-            "나훔": "assets/maps/genesis/09_jacob_flight_and_return.png",
-            "하박국": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "스바냐": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "학개": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "스가랴": "assets/maps/genesis/03_flood_to_ararat.png",
-            "말라기": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "마태복음": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "마가복음": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "누가복음": "assets/maps/genesis/03_flood_to_ararat.png",
-            "요한복음": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "사도행전": "assets/maps/genesis/05_abram_first_journey.png",
-            "로마서": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "고린도전서": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-            "고린도후서": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
-            "갈라디아서": "assets/maps/genesis/09_jacob_flight_and_return.png",
-            "에베소서": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "빌립보서": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "골로새서": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "데살로니가전서": "assets/maps/genesis/03_flood_to_ararat.png",
-            "데살로니가후서": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "디모데전서": "assets/maps/genesis/05_abram_first_journey.png",
-            "디모데후서": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "디도서": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-            "빌레몬서": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
-            "히브리서": "assets/maps/genesis/09_jacob_flight_and_return.png",
-            "야고보서": "assets/maps/genesis/10_shechem_bethel_seir.png",
-            "베드로전서": "assets/maps/genesis/01_eden_and_four_rivers.png",
-            "베드로후서": "assets/maps/genesis/02_east_of_eden_and_nod.png",
-            "요한일서": "assets/maps/genesis/03_flood_to_ararat.png",
-            "요한이서": "assets/maps/genesis/04_babel_and_dispersion.png",
-            "요한삼서": "assets/maps/genesis/05_abram_first_journey.png",
-            "유다서": "assets/maps/genesis/06_kings_war_and_promise_land.png",
-            "요한계시록": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
-        }
-        cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
-        cover = ROOT / cover_rel
+        resource_path = os.pathsep.join([
+            str(CH_DIR),
+            str(ROOT),
+            str(ROOT / "assets"),
+            str(ROOT / "astro/public"),
+        ])
+        cover = get_book_cover_path(SRC_NAME)
         title_meta = SRC_NAME.replace("_초등", "(초등)")
         cmd = [
             "pandoc",
@@ -659,13 +628,16 @@ def main():
             "--metadata", f"creator=21세기에 읽는 성경 ({edition})",
             "--metadata", "lang=ko",
             "--css", str(CSS),
-            "--epub-cover-image", str(cover),
             "--toc",
             "--toc-depth=1",
             "--split-level=1",
             "--resource-path", resource_path,
             str(intro_path),
         ] + [str(p) for p in chapter_paths]
+
+        if cover:
+            toc_idx = cmd.index("--toc")
+            cmd[toc_idx:toc_idx] = ["--epub-cover-image", str(cover)]
 
         print("EPUB 빌드 중...")
         subprocess.run(cmd, check=True)

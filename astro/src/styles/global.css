@@ -99,11 +99,11 @@ a { color: inherit; }
   font-weight: 500;
   flex-shrink: 0;
 }
-.crumb-sep-emoji {
+.crumb-emoji {
   font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
   font-size: 0.95rem;
   line-height: 1;
-  margin: 0 1px;
+  margin-right: 6px;
 }
 
 .crumb-picker {
@@ -659,6 +659,21 @@ a { color: inherit; }
   padding: 0 28px;
   font-size: clamp(17px, 1.05vw, 19px);
   line-height: 1.9;
+}
+
+.book-cover {
+  margin: 0 auto 3em;
+  max-width: min(420px, 100%);
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.book-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1.414;
+  object-fit: cover;
 }
 
 .reader h1.chapter-title {

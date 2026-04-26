@@ -102,10 +102,10 @@ const chapterLabel = activeChapter
       <span class="crumb-brand-text">21세기 성경</span>
       <span class="crumb-brand-icon" aria-hidden="true">📖</span>
     </a>
-    <span class="crumb-sep crumb-sep-emoji" aria-hidden="true">{activeBookEmoji}</span>
 
     <details class="crumb-picker">
       <summary>
+        <span class="crumb-emoji" aria-hidden="true">{activeBookEmoji}</span>
         <span class="crumb-text">{activeBookName}</span>
       </summary>
       <ul class="crumb-menu scroll" role="menu">
@@ -142,9 +142,9 @@ const chapterLabel = activeChapter
 
     {activeChapters.length > 0 && activeChapter !== null && (
       <>
-        <span class="crumb-sep crumb-sep-emoji" aria-hidden="true">{activeChapterEmoji}</span>
         <details class="crumb-picker chapter">
           <summary>
+            <span class="crumb-emoji" aria-hidden="true">{activeChapterEmoji}</span>
             <span class="crumb-text">{chapterLabel}</span>
           </summary>
           <ul class="crumb-menu scroll" role="menu">

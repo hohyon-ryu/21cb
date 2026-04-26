@@ -17,11 +17,11 @@ ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "build"
 CSS = BUILD / "epub.css"
 OUT = BUILD / "21세기성경_전체.epub"
-COVER = ROOT / "assets/maps/genesis/01_eden_and_four_rivers.png"
 
 sys.path.insert(0, str(BUILD))
 from build_epub import (  # noqa: E402
     SUPER_TO_NORMAL, BOOK_INTROS, strip_blockquotes, convert_verse_numbers,
+    get_book_cover_path, make_cover_md,
 )
 
 BOOKS_ORDER = [
@@ -82,6 +82,7 @@ def make_book_intro(book_ko: str) -> str:
             f"*{p['subtitle']}*\n"
         )
     return (
+        f"{make_cover_md(book_ko)}"
         f"# {book_ko}\n\n"
         f"{info['opening']}\n\n"
         f"---\n\n"
@@ -153,7 +154,10 @@ def main():
                 count += 1
             print(f"  {book_ko}: {count} 장")
 
-        resource_paths = [str(ROOT)] + [str(ROOT / b) for b in BOOKS_ORDER if (ROOT / b).exists()]
+        resource_paths = [str(ROOT), str(ROOT / "astro/public")] + [
+            str(ROOT / b) for b in BOOKS_ORDER if (ROOT / b).exists()
+        ]
+        cover = get_book_cover_path("창세기")
         cmd = [
             "pandoc",
             "-o", str(OUT),
@@ -164,12 +168,15 @@ def main():
             "--metadata", "creator=21세기에 읽는 성경 (현대 번역본)",
             "--metadata", "lang=ko",
             "--css", str(CSS),
-            "--epub-cover-image", str(COVER),
             "--toc",
             "--toc-depth=2",
             "--split-level=1",
             "--resource-path", os.pathsep.join(resource_paths),
         ] + [str(f) for f in files]
+
+        if cover:
+            toc_idx = cmd.index("--toc")
+            cmd[toc_idx:toc_idx] = ["--epub-cover-image", str(cover)]
 
         print(f"\nEPUB 빌드 중... ({len(files)} 파일)")
         subprocess.run(cmd, check=True)

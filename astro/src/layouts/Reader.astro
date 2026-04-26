@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import BookCover from '../components/BookCover.astro';
 import type { BookSlug } from '../lib/books';
 import { url } from '../lib/url';
 
@@ -45,6 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   <main class="shell">
     <section class="reader-wrap">
       <article class="reader">
+        {chapter === 1 && <BookCover bookSlug={bookSlug} />}
         <slot />
 
         <nav class="chapter-nav" aria-label="장 이동">

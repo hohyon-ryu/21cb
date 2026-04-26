@@ -1,0 +1,12 @@
+---
+import { BOOKS, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const { bookSlug } = Astro.props as { bookSlug: BookSlug };
+const book = BOOKS[bookSlug];
+const src = url(`/assets/covers/books/${bookSlug}.jpg`);
+---
+
+<figure class="book-cover" aria-label={`${book.name} 표지`}>
+  <img src={src} alt={`${book.name} 표지`} loading="eager" decoding="async" />
+</figure>
