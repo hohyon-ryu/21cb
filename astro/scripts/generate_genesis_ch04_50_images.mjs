@@ -7,7 +7,7 @@ const OUT_DIR = path.join(ROOT, 'public/assets/maps/genesis');
 
 const START_CHAPTER = 4;
 const END_CHAPTER = 50;
-const CONCURRENCY = 2;
+const CONCURRENCY = 1;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -36,12 +36,12 @@ function buildPrompt(chapter, title) {
   ].join(' ');
 }
 
-async function fetchImageBuffer(prompt, seed) {
+async function fetchImageBuffer(prompt, seed, retries = 10) {
   const url =
     `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
     `?width=1536&height=1024&seed=${seed}&nologo=true&enhance=true`;
 
-  for (let attempt = 1; attempt <= 8; attempt += 1) {
+  for (let attempt = 1; attempt <= retries; attempt += 1) {
     try {
       const res = await fetch(url, {
         headers: { Accept: 'image/*' },
@@ -57,10 +57,10 @@ async function fetchImageBuffer(prompt, seed) {
         throw new Error(`bad status ${res.status}`);
       }
     } catch (err) {
-      if (attempt === 8) throw err;
+      if (attempt === retries) throw err;
     }
 
-    await sleep(1800 * attempt);
+    await sleep(2200 * attempt);
   }
 
   throw new Error('exhausted retries');
@@ -78,7 +78,7 @@ async function generateOne(chapter) {
   console.log(`done ch${String(chapter).padStart(2, '0')} ${title}`);
 }
 
-async function runPool(items, concurrency) {
+async function runPool(items, concurrency, failed) {
   let cursor = 0;
 
   const worker = async () => {
@@ -86,8 +86,14 @@ async function runPool(items, concurrency) {
       const idx = cursor;
       cursor += 1;
       if (idx >= items.length) return;
-      await generateOne(items[idx]);
-      await sleep(500);
+      const ch = items[idx];
+      try {
+        await generateOne(ch);
+      } catch (err) {
+        failed.push(ch);
+        console.log(`fail ch${String(ch).padStart(2, '0')} ${err?.message ?? err}`);
+      }
+      await sleep(700);
     }
   };
 
@@ -102,5 +108,25 @@ const chapters = Array.from(
 );
 
 console.log(`generating chapters ${START_CHAPTER}-${END_CHAPTER}...`);
-await runPool(chapters, CONCURRENCY);
+const failed = [];
+await runPool(chapters, CONCURRENCY, failed);
+
+if (failed.length) {
+  console.log(`retrying failed chapters: ${failed.join(', ')}`);
+  for (const ch of failed.slice()) {
+    try {
+      await generateOne(ch);
+      const idx = failed.indexOf(ch);
+      if (idx >= 0) failed.splice(idx, 1);
+    } catch (err) {
+      console.log(`retry-fail ch${String(ch).padStart(2, '0')} ${err?.message ?? err}`);
+    }
+    await sleep(1400);
+  }
+}
+
+if (failed.length) {
+  throw new Error(`still failed chapters: ${failed.join(', ')}`);
+}
+
 console.log('GENESIS_CH04_50_DONE');
