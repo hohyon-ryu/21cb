@@ -104,4 +104,8 @@ export const collections = {
   haggai: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/haggai' }), schema: chapter }),
   zechariah: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/zechariah' }), schema: chapter }),
   malachi: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/malachi' }), schema: chapter }),
+  matthew: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/matthew' }), schema: chapter }),
+  mark: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/mark' }), schema: chapter }),
+  luke: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/luke' }), schema: chapter }),
+  john: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/john' }), schema: chapter }),
 };

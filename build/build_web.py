@@ -57,6 +57,10 @@ SLUG = {
     "학개": "haggai",
     "스가랴": "zechariah",
     "말라기": "malachi",
+    "마태복음": "matthew",
+    "마가복음": "mark",
+    "누가복음": "luke",
+    "요한복음": "john",
 }.get(SRC_NAME, SRC_NAME.lower())
 OUT = ROOT / "site/web" / SLUG / "index.html" if SLUG else ROOT / "site/web/index.html"
 
@@ -299,6 +303,10 @@ CHAPTER_EMOJI_BY_BOOK = {
         11: "💰", 12: "🪨", 13: "💧", 14: "👑",
     },
     "말라기": {1: "🌾", 2: "💔", 3: "🔥", 4: "☀️"},
+    "마태복음": {n: "✝️" for n in range(1, 29)},
+    "마가복음": {n: "🦁" for n in range(1, 17)},
+    "누가복음": {n: "🐂" for n in range(1, 25)},
+    "요한복음": {n: "🦅" for n in range(1, 22)},
 }
 CHAPTER_EMOJI = CHAPTER_EMOJI_BY_BOOK.get(SRC_NAME, {})
 

@@ -49,6 +49,10 @@ const all: Record<BookSlug, { chapter: number; title: string }[]> = {
   haggai: [],
   zechariah: [],
   malachi: [],
+  matthew: [],
+  mark: [],
+  luke: [],
+  john: [],
 };
 for (const slug of BOOK_ORDER) {
   const items = await getCollection(slug);

@@ -79,6 +79,10 @@ BOOKS = [
     ("학개", "haggai"),
     ("스가랴", "zechariah"),
     ("말라기", "malachi"),
+    ("마태복음", "matthew"),
+    ("마가복음", "mark"),
+    ("누가복음", "luke"),
+    ("요한복음", "john"),
 ]
 
 
