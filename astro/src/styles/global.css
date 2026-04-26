@@ -165,6 +165,13 @@ a { color: inherit; }
 .crumb-menu a:hover { background: var(--line-soft); }
 .crumb-menu a.active { background: var(--accent-soft); color: var(--accent-strong); }
 
+.crumb-menu .cm-emoji {
+  flex-shrink: 0;
+  width: 1.4em;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1;
+}
 .crumb-menu .cm-name { flex: 1; font-weight: 600; }
 
 .crumb-menu .cm-section {
@@ -514,6 +521,12 @@ a { color: inherit; }
 }
 
 .dl-list a:hover { background: #eceff3; color: #111827; }
+.dl-list a.dl-full {
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  border-radius: 0 0 8px 8px;
+}
 
 /* layout */
 .content-grid {

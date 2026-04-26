@@ -73,7 +73,7 @@ const FILES: Record<string, { epub?: string; pdf?: string }> = {
 };
 
 const files = FILES[book] ?? {};
-const hasAny = !!(files.epub || files.pdf);
+const hasAny = true;
 ---
 
 {hasAny && (
@@ -86,8 +86,9 @@ const hasAny = !!(files.epub || files.pdf);
       </svg>
     </summary>
     <div class="dl-list" role="menu">
-      {files.epub && <a role="menuitem" href={url(files.epub)} download>전자책 (EPUB)</a>}
-      {files.pdf && <a role="menuitem" href={url(files.pdf)} download>PDF</a>}
+      {files.epub && <a role="menuitem" href={url(files.epub)} download>이 책 EPUB</a>}
+      {files.pdf && <a role="menuitem" href={url(files.pdf)} download>이 책 PDF</a>}
+      <a role="menuitem" href={url('/files/full.epub')} download class="dl-full">66권 전체 EPUB</a>
     </div>
   </details>
 )}
