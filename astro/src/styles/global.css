@@ -43,13 +43,18 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 14px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 14px 28px;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
 }
 
 .crumb {

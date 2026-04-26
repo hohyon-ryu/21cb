@@ -30,12 +30,13 @@ const chapterLabel = activeChapter
 ---
 
 <header class="topbar" role="banner">
+ <div class="topbar-inner">
   <nav class="crumb" aria-label="네비게이션">
     <a class="crumb-brand" href={url('/')}>
       <span class="b-era">21세기</span>
       <span class="b-name">성경</span>
     </a>
-    <span class="crumb-sep" aria-hidden="true">·</span>
+    <span class="crumb-sep" aria-hidden="true">›</span>
 
     <details class="crumb-picker">
       <summary>
@@ -62,7 +63,7 @@ const chapterLabel = activeChapter
 
     {activeChapters.length > 0 && activeChapter !== null && (
       <>
-        <span class="crumb-sep" aria-hidden="true">·</span>
+        <span class="crumb-sep" aria-hidden="true">›</span>
         <details class="crumb-picker chapter">
           <summary>
             <span class="crumb-text">{chapterLabel}</span>
@@ -90,4 +91,5 @@ const chapterLabel = activeChapter
   <div class="topbar-actions">
     <DownloadMenu book={activeSlug} />
   </div>
+ </div>
 </header>
