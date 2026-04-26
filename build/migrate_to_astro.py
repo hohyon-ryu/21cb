@@ -42,6 +42,8 @@ def _split_tail_italic(text: str) -> str:
 BOOKS = [
     ("창세기", "genesis"),
     ("출애굽기", "exodus"),
+    ("레위기", "leviticus"),
+    ("민수기", "numbers"),
 ]
 
 

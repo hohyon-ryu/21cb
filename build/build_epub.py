@@ -74,6 +74,24 @@ BOOK_INTROS = {
             {"num": "3부", "title": "성막", "subtitle": "설계, 금송아지, 건축, 영광", "range": (25, 40)},
         ],
     },
+    "레위기": {
+        "opening": "*거룩한 분 가까이에서 — 어떻게 살 것인가.*",
+        "overview": "레위기는 출애굽기 끝에 세워진 성막에서, 광야 한가운데 임한 거룩과 어떻게 함께 살 것인가에 대한 책이다. 다섯 가지 제사, 제사장 위임, 정한 것과 부정한 것, 거룩 법전, 절기, 희년 — 일상의 모든 결을 거룩의 자리에 두는 안내서다.",
+        "parts": [
+            {"num": "1부", "title": "제사", "subtitle": "다섯 제사와 제사장 위임", "range": (1, 10)},
+            {"num": "2부", "title": "정결", "subtitle": "음식, 몸, 피부", "range": (11, 16)},
+            {"num": "3부", "title": "거룩 법전", "subtitle": "이웃 사랑, 절기, 희년", "range": (17, 27)},
+        ],
+    },
+    "민수기": {
+        "opening": "*시내산을 떠나 약속의 땅 앞까지 — 광야 40년의 책.*",
+        "overview": "민수기는 시내산을 떠난 이스라엘이 가나안 문턱까지 가는 길을 적는다. 두 번의 인구조사 사이에, 한 세대가 통째로 광야에서 사라지고 새 세대가 일어선다. 정탐꾼의 두려움, 고라의 반역, 발람의 예언, 놋뱀, 슬로브핫 딸들의 상속권 — 약속을 향해 걸으면서 만난 사건들이 한 책에 모인다.",
+        "parts": [
+            {"num": "1부", "title": "시내산에서", "subtitle": "인구조사, 진영, 출발 준비", "range": (1, 10)},
+            {"num": "2부", "title": "광야의 위기", "subtitle": "원망, 정탐, 반역, 40년 형벌", "range": (11, 25)},
+            {"num": "3부", "title": "새 세대", "subtitle": "두 번째 인구조사, 도피성, 약속의 문턱", "range": (26, 36)},
+        ],
+    },
 }
 
 
@@ -170,6 +188,8 @@ def main():
         COVERS = {
             "창세기": "assets/maps/genesis/01_eden_and_four_rivers.png",
             "출애굽기": "assets/maps/genesis/11_joseph_route_to_egypt.png",
+            "레위기": "assets/maps/genesis/03_flood_to_ararat.png",
+            "민수기": "assets/maps/genesis/04_babel_and_dispersion.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel

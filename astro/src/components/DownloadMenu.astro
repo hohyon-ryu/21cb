@@ -6,6 +6,8 @@ const { book = 'genesis' } = Astro.props as { book?: string };
 const FILES: Record<string, { epub?: string; pdf?: string }> = {
   genesis: { epub: '/files/genesis.epub', pdf: '/files/genesis.pdf' },
   exodus: { epub: '/files/exodus.epub' },
+  leviticus: { epub: '/files/leviticus.epub' },
+  numbers: { epub: '/files/numbers.epub' },
 };
 
 const files = FILES[book] ?? {};
