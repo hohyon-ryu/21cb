@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { BOOKS, BOOK_ORDER, type BookSlug } from '../lib/books';
+import { BOOKS, BOOK_ORDER, OT_BOOKS, NT_BOOKS, type BookSlug } from '../lib/books';
 import { url } from '../lib/url';
 import DownloadMenu from './DownloadMenu.astro';
 
@@ -106,8 +106,22 @@ const chapterLabel = activeChapter
       <summary>
         <span class="crumb-text">{activeBookName}</span>
       </summary>
-      <ul class="crumb-menu" role="menu">
-        {BOOK_ORDER.map((slug) => {
+      <ul class="crumb-menu scroll" role="menu">
+        <li class="cm-section" aria-hidden="true">오랜 약속</li>
+        {OT_BOOKS.map((slug) => {
+          const written = all[slug].length;
+          const cls = slug === activeSlug ? 'active' : '';
+          const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
+          return (
+            <li>
+              <a class={cls} href={href} role="menuitem">
+                <span class="cm-name">{BOOKS[slug].name}</span>
+              </a>
+            </li>
+          );
+        })}
+        <li class="cm-section" aria-hidden="true">새 약속</li>
+        {NT_BOOKS.map((slug) => {
           const written = all[slug].length;
           const cls = slug === activeSlug ? 'active' : '';
           const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);

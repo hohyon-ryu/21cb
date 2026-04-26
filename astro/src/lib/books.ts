@@ -69,4 +69,8 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   revelation: { name: '요한계시록', total: 22 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'psalms', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi', 'matthew', 'mark', 'luke', 'john', 'acts', 'romans', 'corinthians1', 'corinthians2', 'galatians', 'ephesians', 'philippians', 'colossians', 'thessalonians1', 'thessalonians2', 'timothy1', 'timothy2', 'titus', 'philemon', 'hebrews', 'james', 'peter1', 'peter2', 'john1', 'john2', 'john3', 'jude', 'revelation'];
+export const OT_BOOKS: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'psalms', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'];
+
+export const NT_BOOKS: BookSlug[] = ['matthew', 'mark', 'luke', 'john', 'acts', 'romans', 'corinthians1', 'corinthians2', 'galatians', 'ephesians', 'philippians', 'colossians', 'thessalonians1', 'thessalonians2', 'timothy1', 'timothy2', 'titus', 'philemon', 'hebrews', 'james', 'peter1', 'peter2', 'john1', 'john2', 'john3', 'jude', 'revelation'];
+
+export const BOOK_ORDER: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS];
