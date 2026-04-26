@@ -46,6 +46,10 @@ BOOKS = [
     ("민수기", "numbers"),
     ("신명기", "deuteronomy"),
     ("여호수아", "joshua"),
+    ("사사기", "judges"),
+    ("룻기", "ruth"),
+    ("사무엘상", "samuel1"),
+    ("사무엘하", "samuel2"),
 ]
 
 

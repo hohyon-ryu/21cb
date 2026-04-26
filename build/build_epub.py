@@ -92,6 +92,40 @@ BOOK_INTROS = {
             {"num": "3부", "title": "새 세대", "subtitle": "두 번째 인구조사, 도피성, 약속의 문턱", "range": (26, 36)},
         ],
     },
+    "사무엘상": {
+        "opening": "*마지막 사사, 첫 왕 — 한 시대가 끝나고 다른 시대가 열린다.*",
+        "overview": "사무엘상은 한나의 기도에서 시작된다. 마지막 사사 사무엘이 자라고, 이스라엘의 요청으로 첫 왕 사울이 세워지고, 사울이 무너지고, 다윗이 기름부음을 받고 광야에서 도망 다니며 단련된다. 사울의 길보아 산 자결로 끝나는, 두 왕의 교차 서사.",
+        "parts": [
+            {"num": "1부", "title": "사무엘", "subtitle": "한나의 기도, 어린 사무엘, 언약궤", "range": (1, 7)},
+            {"num": "2부", "title": "사울", "subtitle": "왕 요청, 즉위, 첫 패배", "range": (8, 15)},
+            {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
+        ],
+    },
+    "사무엘하": {
+        "opening": "*다윗의 왕국 — 영광과 추락이 한 사람 안에서.*",
+        "overview": "사무엘하는 다윗의 통일 왕국 전체를 다룬다. 사울의 죽음 애도에서 시작해, 헤브론·예루살렘 두 단계의 즉위, 언약궤 운반과 다윗 언약, 밧세바 사건과 그 대가로 무너지는 가족 — 암논의 강간, 압살롬의 반역, 세바의 봉기, 마지막 인구조사까지. 한 인간 안의 빛과 어둠이 가장 정직하게 기록된 책.",
+        "parts": [
+            {"num": "1부", "title": "왕좌", "subtitle": "헤브론, 예루살렘, 언약궤", "range": (1, 10)},
+            {"num": "2부", "title": "추락", "subtitle": "밧세바, 암논, 압살롬", "range": (11, 19)},
+            {"num": "3부", "title": "마무리", "subtitle": "세바, 시편, 인구조사", "range": (20, 24)},
+        ],
+    },
+    "룻기": {
+        "opening": "*베들레헴의 추수 들판 — 한 이방 여인의 헌신.*",
+        "overview": "룻기는 사사 시대를 배경으로 한 4장의 짧은 가족 이야기다. 모압 출신 룻이 시어머니 나오미를 따라 베들레헴으로 돌아오고, 친족 보아스와의 결혼으로 이어진다. 그 사이에서 태어난 오벳이 다윗의 할아버지가 된다. 사사기의 어둠 한가운데 놓인 빛, 이방 여인이 메시아 계보로 들어오는 통로.",
+        "parts": [
+            {"num": "전체", "title": "룻기", "subtitle": "헌신·이삭 줍기·기업 무를 자·다윗의 할머니", "range": (1, 4)},
+        ],
+    },
+    "사사기": {
+        "opening": "*왕이 없던 시절 — 사람마다 자기 눈에 옳은 대로.*",
+        "overview": "사사기는 여호수아 사후, 왕정이 시작되기 전의 어두운 막간이다. 이스라엘이 가나안 신들에게 빠져들고, 외세의 압제 아래 놓이고, 부르짖으면 사사가 일어나 구원하고, 다시 타락하는 — 죄/형벌/회개/구원의 순환이 일곱 번 반복된다. 옷니엘·에훗·드보라·기드온·입다·삼손, 그리고 마지막의 끔찍한 두 부록(미가의 우상, 베냐민 학살). '왕이 없으므로 사람마다 자기 눈에 옳은 대로 행하였다.'",
+        "parts": [
+            {"num": "1부", "title": "정복의 미완성", "subtitle": "남은 가나안, 타락의 시작", "range": (1, 3)},
+            {"num": "2부", "title": "큰 사사들", "subtitle": "드보라, 기드온, 입다, 삼손", "range": (4, 16)},
+            {"num": "3부", "title": "두 개의 부록", "subtitle": "미가의 우상, 베냐민의 만행", "range": (17, 21)},
+        ],
+    },
     "여호수아": {
         "opening": "*요단강을 건너 — 약속의 땅을 손에 넣다.*",
         "overview": "여호수아는 모세 사후 새 지도자가 요단강을 건너 가나안을 정복하고 열두 지파에 땅을 분배하는 책이다. 라합의 신앙, 무너지는 여리고 성벽, 아이성의 패배와 회복, 기브온과의 속임수 조약, 멈춘 태양, 가나안 분배, 마지막 세겜 언약까지 — 약속의 성취와 동시에 새 책임의 시작을 다룬다.",
@@ -212,6 +246,10 @@ def main():
             "민수기": "assets/maps/genesis/04_babel_and_dispersion.png",
             "신명기": "assets/maps/genesis/05_abram_first_journey.png",
             "여호수아": "assets/maps/genesis/06_kings_war_and_promise_land.png",
+            "사사기": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
+            "룻기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
+            "사무엘상": "assets/maps/genesis/09_jacob_flight_and_return.png",
+            "사무엘하": "assets/maps/genesis/10_shechem_bethel_seir.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel
