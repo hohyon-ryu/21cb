@@ -9,7 +9,7 @@ const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
   activeChapter?: number | null;
 };
 
-const all: Record<BookSlug, { chapter: number; title: string }[]> = {
+const all: Record<BookSlug, { chapter: number; title: string; emoji: string }[]> = {
   genesis: [],
   exodus: [],
   leviticus: [],
@@ -80,7 +80,7 @@ const all: Record<BookSlug, { chapter: number; title: string }[]> = {
 for (const slug of BOOK_ORDER) {
   const items = await getCollection(slug);
   all[slug] = items
-    .map((it) => ({ chapter: it.data.chapter, title: it.data.title }))
+    .map((it) => ({ chapter: it.data.chapter, title: it.data.title, emoji: it.data.emoji ?? '' }))
     .sort((a, b) => a.chapter - b.chapter);
 }
 
@@ -154,6 +154,7 @@ const chapterLabel = activeChapter
                   role="menuitem"
                 >
                   <span class="cm-num">{ch.chapter}</span>
+                  <span class="cm-emoji" aria-hidden="true">{ch.emoji}</span>
                   <span class="cm-title">{ch.title}</span>
                 </a>
               </li>
