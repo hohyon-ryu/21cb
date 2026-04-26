@@ -92,6 +92,16 @@ BOOK_INTROS = {
             {"num": "3부", "title": "새 세대", "subtitle": "두 번째 인구조사, 도피성, 약속의 문턱", "range": (26, 36)},
         ],
     },
+    "신명기": {
+        "opening": "*요단강 건너기 직전 — 모세의 마지막 설교.*",
+        "overview": "신명기는 모세가 가나안 진입을 앞둔 새 세대에게 들려준 마지막 설교 모음이다. 광야 40년을 회고하고, 십계명과 율법을 다시 풀어주고, 축복과 저주의 양 갈래를 제시한다. 이름의 뜻 그대로 '두 번째 율법'(deutero-nomos) — 같은 율법을 새 세대의 언어로 다시 설교한 책이다. 모세는 약속의 땅을 보지만 들어가지 못하고 느보산에서 죽는다.",
+        "parts": [
+            {"num": "1부", "title": "회고", "subtitle": "광야 40년의 되짚기", "range": (1, 4)},
+            {"num": "2부", "title": "재선포", "subtitle": "십계명, 쉐마, 핵심 율법", "range": (5, 11)},
+            {"num": "3부", "title": "법전", "subtitle": "예배·전쟁·재판·일상의 규례", "range": (12, 26)},
+            {"num": "4부", "title": "언약과 마지막", "subtitle": "축복과 저주, 모세의 노래, 느보산", "range": (27, 34)},
+        ],
+    },
 }
 
 
@@ -190,6 +200,7 @@ def main():
             "출애굽기": "assets/maps/genesis/11_joseph_route_to_egypt.png",
             "레위기": "assets/maps/genesis/03_flood_to_ararat.png",
             "민수기": "assets/maps/genesis/04_babel_and_dispersion.png",
+            "신명기": "assets/maps/genesis/05_abram_first_journey.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel

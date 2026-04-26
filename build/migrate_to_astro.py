@@ -44,6 +44,7 @@ BOOKS = [
     ("출애굽기", "exodus"),
     ("레위기", "leviticus"),
     ("민수기", "numbers"),
+    ("신명기", "deuteronomy"),
 ]
 
 

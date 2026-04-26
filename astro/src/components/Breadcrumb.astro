@@ -12,6 +12,9 @@ const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
 const all: Record<BookSlug, { chapter: number; title: string }[]> = {
   genesis: [],
   exodus: [],
+  leviticus: [],
+  numbers: [],
+  deuteronomy: [],
 };
 for (const slug of BOOK_ORDER) {
   const items = await getCollection(slug);

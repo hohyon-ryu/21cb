@@ -24,4 +24,8 @@ export const collections = {
     loader: glob({ pattern: '*.md', base: './src/content/numbers' }),
     schema: chapter,
   }),
+  deuteronomy: defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/deuteronomy' }),
+    schema: chapter,
+  }),
 };
