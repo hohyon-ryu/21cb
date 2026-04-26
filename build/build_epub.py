@@ -54,43 +54,60 @@ def get_edition_label() -> str:
     return "현대 번역본"
 
 
+BOOK_INTROS = {
+    "창세기": {
+        "opening": "*아무것도 없을 때, 하나님이 세상을 만드셨다.*",
+        "overview": "창세기는 두 부분으로 나뉜다. 앞 11장은 인류 전체의 시작을, 뒤 39장은 한 가문(아브라함부터 요셉까지)에 내려진 약속을 다룬다.",
+        "parts": PARTS,
+    },
+    "창세기_초등": {
+        "opening": "*아무것도 없을 때, 하나님이 세상을 만드셨어요.*",
+        "overview": "창세기는 크게 두 부분이에요. 앞쪽 1~11장은 온 세상이 어떻게 시작됐는지를, 뒤쪽 12~50장은 아브라함부터 요셉까지 한 가족의 이야기를 들려줘요.",
+        "parts": PARTS,
+    },
+    "출애굽기": {
+        "opening": "*노예의 땅에서 자유의 산까지 — 한 민족이 만들어진 책.*",
+        "overview": "출애굽기는 야곱의 일흔 명이 한 민족이 되어 가는 책이다. 이집트의 압제, 모세의 부르심, 열 가지 재앙, 홍해 도하, 시내산의 언약, 그리고 광야 한가운데 세워진 성막 — 한 책 안에 해방의 서사와 거룩의 청사진이 함께 있다.",
+        "parts": [
+            {"num": "1부", "title": "출애굽", "subtitle": "압제, 모세, 재앙, 홍해", "range": (1, 18)},
+            {"num": "2부", "title": "시내 언약", "subtitle": "십계명과 언약법전", "range": (19, 24)},
+            {"num": "3부", "title": "성막", "subtitle": "설계, 금송아지, 건축, 영광", "range": (25, 40)},
+        ],
+    },
+}
+
+
 def make_intro_md() -> str:
     """표지 + 조망 페이지를 마크다운으로 작성."""
     edition = get_edition_label()
-    is_kids = "초등" in SRC_NAME
+    info = BOOK_INTROS.get(SRC_NAME, BOOK_INTROS["창세기"])
+    book_label = SRC_NAME.replace("_초등", " (초등)")
 
     parts_md = []
-    for p in PARTS:
+    for p in info.get("parts", []):
         a, b = p["range"]
         parts_md.append(
             f"### {p['num']} · {p['title']} ({a}~{b}장)\n\n"
             f"*{p['subtitle']}*\n"
         )
 
-    if is_kids:
-        opening = "*아무것도 없을 때, 하나님이 세상을 만드셨어요.*"
-        intro_text = "창세기는 크게 두 부분이에요. 앞쪽 1~11장은 온 세상이 어떻게 시작됐는지를, 뒤쪽 12~50장은 아브라함부터 요셉까지 한 가족의 이야기를 들려줘요."
-    else:
-        opening = "*아무것도 없을 때, 하나님이 세상을 만드셨다.*"
-        intro_text = "창세기는 두 부분으로 나뉜다. 앞 11장은 인류 전체의 시작을, 뒤 39장은 한 가문(아브라함부터 요셉까지)에 내려진 약속을 다룬다."
-
     return f"""---
-title: 창세기
+title: {book_label}
 subtitle: 21세기에 읽는 성경 — {edition}
 lang: ko
 ---
 
-# 창세기
+# {book_label}
 
 **21세기에 읽는 성경 — {edition}**
 
-{opening}
+{info['opening']}
 
 ---
 
-## 창세기 조망
+## {book_label} 조망
 
-{intro_text}
+{info['overview']}
 
 {chr(10).join(parts_md)}
 """
@@ -149,13 +166,20 @@ def main():
 
         edition = get_edition_label()
         resource_path = os.pathsep.join([str(CH_DIR), str(ROOT), str(ROOT / "assets")])
-        cover = ROOT / "assets/maps/genesis/01_eden_and_four_rivers.png"
+        # 책별 표지 이미지 — 같은 톤의 아카이벌 지도
+        COVERS = {
+            "창세기": "assets/maps/genesis/01_eden_and_four_rivers.png",
+            "출애굽기": "assets/maps/genesis/11_joseph_route_to_egypt.png",
+        }
+        cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
+        cover = ROOT / cover_rel
+        title_meta = SRC_NAME.replace("_초등", "(초등)")
         cmd = [
             "pandoc",
             "-o", str(OUT),
             "--from=markdown+smart",
             "--to=epub3",
-            "--metadata", "title=창세기",
+            "--metadata", f"title={title_meta}",
             "--metadata", f"subtitle=21세기에 읽는 성경 — {edition}",
             "--metadata", f"creator=21세기에 읽는 성경 ({edition})",
             "--metadata", "lang=ko",
