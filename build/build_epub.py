@@ -101,6 +101,29 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "에스라": {
+        "opening": "*폐허에서 두 번째 성전까지 — 70년 후의 귀향.*",
+        "overview": "에스라는 페르시아 고레스의 칙령(BC 538)으로 시작된 두 차례의 귀환을 다룬다. 첫 귀환에서 스룹바벨이 두 번째 성전을 짓고, 80년 후 학자 에스라가 율법을 들고 와 이방 여인 결혼 문제를 다룬다. 정체성의 재구성, 율법 공동체의 부활.",
+        "parts": [
+            {"num": "1부", "title": "성전 재건", "subtitle": "스룹바벨, 폐허에서 다시", "range": (1, 6)},
+            {"num": "2부", "title": "에스라의 개혁", "subtitle": "율법, 결혼, 회개", "range": (7, 10)},
+        ],
+    },
+    "느헤미야": {
+        "opening": "*폐허가 된 성벽 — 한 술 맡은 자가 일으킨 도시.*",
+        "overview": "느헤미야는 페르시아 왕 아닥사스다의 술 맡은 자였다. 예루살렘 성벽이 무너졌다는 소식에 휴직하고 돌아와 52일 만에 성벽을 다시 세운다. 산발랏의 방해, 빈민의 빚 문제, 에스라와의 협력으로 율법을 함께 낭독, 그리고 마지막 안식일·결혼 개혁까지.",
+        "parts": [
+            {"num": "1부", "title": "성벽", "subtitle": "기도, 휴직, 52일", "range": (1, 7)},
+            {"num": "2부", "title": "갱신", "subtitle": "율법 낭독, 언약 봉인", "range": (8, 13)},
+        ],
+    },
+    "에스더": {
+        "opening": "*하나님의 이름 한 번 안 나오는 책 — 그러나 가장 또렷한 섭리.*",
+        "overview": "에스더는 페르시아 왕 아하수에로(크세르크세스) 시대 수산 궁의 한 유대인 여인 이야기다. 와스디의 폐위, 에스더의 등극, 하만의 음모, 모르드개의 거절, 두 잔치, 처형대의 역전 — 한 민족의 멸절 위기와 부림절의 기원. 본문 어디에도 하나님이 명시되지 않으나 모든 우연이 섭리로 짜인다.",
+        "parts": [
+            {"num": "전체", "title": "수산의 잔치", "subtitle": "와스디·에스더·하만·모르드개·부림절", "range": (1, 10)},
+        ],
+    },
     "역대상": {
         "opening": "*포로 귀환 후 다시 쓰인 다윗의 이야기 — 성전 중심의 재해석.*",
         "overview": "역대상은 사무엘서·열왕기와 같은 시대를 다루지만, 포로 귀환 공동체가 다시 쓴 신학적 재해석이다. 9장에 걸친 족보로 시작해 사울의 죽음과 다윗 왕국 전체를 다루되, 다윗의 어두운 면(밧세바·압살롬)은 빠지고 성전 준비와 예배 조직이 강조된다. 마지막 장에서 다윗이 솔로몬에게 성전 청사진과 모든 자재를 인계한다.",
@@ -290,6 +313,9 @@ def main():
             "열왕기하": "assets/maps/genesis/04_babel_and_dispersion.png",
             "역대상": "assets/maps/genesis/01_eden_and_four_rivers.png",
             "역대하": "assets/maps/genesis/03_flood_to_ararat.png",
+            "에스라": "assets/maps/genesis/05_abram_first_journey.png",
+            "느헤미야": "assets/maps/genesis/06_kings_war_and_promise_land.png",
+            "에스더": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel

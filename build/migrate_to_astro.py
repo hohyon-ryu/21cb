@@ -54,6 +54,9 @@ BOOKS = [
     ("열왕기하", "kings2"),
     ("역대상", "chronicles1"),
     ("역대하", "chronicles2"),
+    ("에스라", "ezra"),
+    ("느헤미야", "nehemiah"),
+    ("에스더", "esther"),
 ]
 
 
