@@ -40,4 +40,12 @@ export const collections = {
     loader: glob({ pattern: '*.md', base: './src/content/ruth' }),
     schema: chapter,
   }),
+  samuel1: defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/samuel1' }),
+    schema: chapter,
+  }),
+  samuel2: defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/samuel2' }),
+    schema: chapter,
+  }),
 };
