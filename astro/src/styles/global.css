@@ -254,19 +254,18 @@ a { color: inherit; }
 }
 
 .dl-list {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 9px);
-  min-width: 208px;
-  background: #fcfcfd;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 6px;
-  box-shadow: none;
+  margin-top: 6px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  padding: 4px;
   display: grid;
   gap: 2px;
-  z-index: 30;
 }
+
+.side-actions .dl-list { margin-top: 0; }
+.side-actions .dl-menu[open] .action-btn { border-radius: 8px 8px 0 0; border-color: var(--ink); }
 
 .dl-list a {
   display: flex;
