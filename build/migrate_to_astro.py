@@ -59,6 +59,20 @@ BOOKS = [
     ("에스더", "esther"),
     ("욥기", "job"),
     ("잠언", "proverbs"),
+    ("전도서", "ecclesiastes"),
+    ("아가", "song"),
+    ("호세아", "hosea"),
+    ("요엘", "joel"),
+    ("아모스", "amos"),
+    ("오바댜", "obadiah"),
+    ("요나", "jonah"),
+    ("미가", "micah"),
+    ("나훔", "nahum"),
+    ("하박국", "habakkuk"),
+    ("스바냐", "zephaniah"),
+    ("학개", "haggai"),
+    ("스가랴", "zechariah"),
+    ("말라기", "malachi"),
 ]
 
 

@@ -101,6 +101,82 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "전도서": {
+        "opening": "*해 아래 새것이 없다 — 전도자(코헬렛)의 회의 노트.*",
+        "overview": "전도서는 자신을 '코헬렛'(모인 자들의 교사)이라 부르는 자의 기록이다. 부와 지혜와 쾌락과 일을 두루 시험한 끝에 '헤벨'(헛된 숨)이라는 결론으로 돌아온다. 그러나 결말은 회의가 아니라 '하나님을 경외하라'다. 욥기·잠언과 함께 지혜 문학의 세 정점.",
+        "parts": [{"num": "전체", "title": "전도서", "subtitle": "헤벨의 12장", "range": (1, 12)}],
+    },
+    "아가": {
+        "opening": "*가장 노골적인 사랑 노래 — 정경 안의 인간 욕망.*",
+        "overview": "아가는 신랑·신부·예루살렘 처녀들의 대화로 짜인 사랑 시 모음이다. 본문에 하나님이 한 번도 등장하지 않으면서 정경에 들어온 책. 유대 전승은 야훼와 이스라엘의 사랑, 기독교 전승은 그리스도와 교회의 사랑으로 풀이해 왔으나 본문 자체는 두 인간의 노래다. 유월절에 낭독된다.",
+        "parts": [{"num": "전체", "title": "아가", "subtitle": "8장의 사랑 시", "range": (1, 8)}],
+    },
+    "호세아": {
+        "opening": "*고멜과 결혼한 예언자 — 부정한 사랑의 비유로 산 일생.*",
+        "overview": "호세아는 북왕국의 마지막 예언자(BC 8세기). 음란한 여자 고멜과의 결혼이 야훼와 이스라엘의 관계를 그대로 비춘다. 자녀의 이름조차 메시지였다 — '이스르엘', '로루하마(긍휼받지 못함)', '로암미(내 백성이 아니다)'. 그러나 결말은 회복.",
+        "parts": [
+            {"num": "1부", "title": "고멜", "subtitle": "결혼 비유와 자녀 이름", "range": (1, 3)},
+            {"num": "2부", "title": "고발과 회복", "subtitle": "북왕국의 죄와 야훼의 사랑", "range": (4, 14)},
+        ],
+    },
+    "요엘": {
+        "opening": "*메뚜기 떼가 다 먹어 치웠다 — 여호와의 날.*",
+        "overview": "요엘은 메뚜기 재앙의 묘사로 시작해 '여호와의 날'을 선포한다. 사도행전 2장 베드로의 오순절 설교가 인용한 '내가 모든 육체에 내 영을 부어 주리라'(2:28-32)가 이 책에 있다.",
+        "parts": [{"num": "전체", "title": "요엘", "subtitle": "메뚜기·영의 부음·심판의 날", "range": (1, 3)}],
+    },
+    "아모스": {
+        "opening": "*드고아의 목자 — 정의가 강물처럼.*",
+        "overview": "아모스는 남왕국 유다의 목자였으나 북왕국 베델에서 예언했다. 사회 정의의 가장 격렬한 외침. '오직 정의를 강같이 흐르게 하라.' 일곱 이방 민족 심판으로 시작해 자기 백성에게 칼을 돌린다.",
+        "parts": [{"num": "전체", "title": "아모스", "subtitle": "이방 심판·이스라엘 고발·다섯 환상", "range": (1, 9)}],
+    },
+    "오바댜": {
+        "opening": "*에돔에 대한 가장 짧은 책 — 형제의 배신을 잊지 마라.*",
+        "overview": "오바댜는 구약에서 가장 짧은 책(21절). 에돔(에서의 후손)에 대한 심판 예언. 예루살렘 함락 때 약탈에 가담한 형제 민족에 대한 분노.",
+        "parts": [{"num": "전체", "title": "오바댜", "subtitle": "한 장 안의 에돔 심판", "range": (1, 1)}],
+    },
+    "요나": {
+        "opening": "*도망친 예언자 — 큰 물고기와 박 넝쿨.*",
+        "overview": "요나는 니느웨로 가라는 명령을 받고 다시스로 도망친다. 폭풍, 큰 물고기, 토해냄, 회개한 니느웨, 그리고 박 넝쿨 아래 분노. 이방 도시의 회개와 한 예언자의 좁은 마음을 대조한 책. 예수가 자신의 부활 표적으로 인용.",
+        "parts": [{"num": "전체", "title": "요나", "subtitle": "도망·물고기·니느웨·박넝쿨", "range": (1, 4)}],
+    },
+    "미가": {
+        "opening": "*베들레헴에서 나올 한 분 — 정의·자비·겸손.*",
+        "overview": "미가는 아모스와 동시대의 시골 예언자. 베들레헴에서 메시아가 나올 것을 예언(5:2 — 마태 2:6 인용). '정의·자비·겸손'(6:8) — 가장 자주 인용되는 미가의 한 절.",
+        "parts": [{"num": "전체", "title": "미가", "subtitle": "심판·메시아·정의의 요약", "range": (1, 7)}],
+    },
+    "나훔": {
+        "opening": "*니느웨의 멸망 — 요나가 외친 그 도시의 마지막.*",
+        "overview": "나훔은 BC 612년 아시리아 수도 니느웨의 멸망을 미리 노래한다. 요나가 회개시킨 도시가 후대에 다시 부패하고, 결국 메대·바벨론 연합군에 무너진다.",
+        "parts": [{"num": "전체", "title": "나훔", "subtitle": "니느웨의 마지막", "range": (1, 3)}],
+    },
+    "하박국": {
+        "opening": "*왜 침묵하십니까 — 항변과 응답.*",
+        "overview": "하박국은 야훼와 직접 대화하는 형식의 책이다. '의인은 그 믿음으로 살리라'(2:4) — 사도 바울이 로마서·갈라디아서에서 인용한 신약 신학의 토대 구절. 마지막 3장은 시.",
+        "parts": [{"num": "전체", "title": "하박국", "subtitle": "두 항변·다섯 화·기도의 시", "range": (1, 3)}],
+    },
+    "스바냐": {
+        "opening": "*여호와의 날 — 그러나 남은 자의 노래.*",
+        "overview": "스바냐는 요시야 시대 예언자. 다가올 심판과 그 너머의 회복을 노래한다. 마지막은 '여호와께서 너로 인하여 기쁨을 이기지 못하시며'(3:17)의 사랑 노래.",
+        "parts": [{"num": "전체", "title": "스바냐", "subtitle": "심판·이방·노래", "range": (1, 3)}],
+    },
+    "학개": {
+        "opening": "*성전을 다시 지어라 — 두 장의 짧은 격려.*",
+        "overview": "학개는 포로 귀환 후 침체된 성전 재건을 다시 일으키는 짧은 예언서. BC 520년 다리오 2년의 정확한 날짜로 시작.",
+        "parts": [{"num": "전체", "title": "학개", "subtitle": "두 장의 격려", "range": (1, 2)}],
+    },
+    "스가랴": {
+        "opening": "*여덟 환상과 메시아의 그림 — 구약의 묵시문학 정점.*",
+        "overview": "스가랴는 학개와 동시대 예언자. 1-6장 여덟 환상, 7-8장 율법 회복, 9-14장 메시아 묵시. '나귀를 탄 왕'(9:9), '은 30조각'(11:12-13), '찔린 자를 바라봄'(12:10) 등 신약 수난 서사가 직접 인용한 텍스트.",
+        "parts": [
+            {"num": "1부", "title": "여덟 환상", "subtitle": "재건·정결·메시아", "range": (1, 8)},
+            {"num": "2부", "title": "메시아 묵시", "subtitle": "나귀의 왕·은 30·찔린 자", "range": (9, 14)},
+        ],
+    },
+    "말라기": {
+        "opening": "*구약의 마지막 — 엘리야가 다시 올 것이다.*",
+        "overview": "말라기는 구약 정경의 마지막 책. '내가 너를 사랑한다 / 너희가 어떻게 하셨느냐'의 여섯 변론. '엘리야가 다시 올 것'(4:5-6) — 신약이 세례 요한에게 적용한 그 예언.",
+        "parts": [{"num": "전체", "title": "말라기", "subtitle": "여섯 변론과 엘리야 약속", "range": (1, 4)}],
+    },
     "욥기": {
         "opening": "*아무 죄 없이 모든 것을 잃은 한 사람 — 고난 앞의 가장 정직한 책.*",
         "overview": "욥기는 의로운 한 사람이 모든 것을 잃은 채 친구 셋과 청년 엘리후, 그리고 마지막에 회오리바람의 하나님과 차례로 대화하는 시 형식의 책이다. '인과응보'라는 통념을 가장 격렬하게 흔드는 책. 답을 주지 않고 더 큰 질문으로 응답하는 결말 — 그러나 욥은 회복된다.",
@@ -337,6 +413,20 @@ def main():
             "에스더": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
             "욥기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
             "잠언": "assets/maps/genesis/09_jacob_flight_and_return.png",
+            "전도서": "assets/maps/genesis/10_shechem_bethel_seir.png",
+            "아가": "assets/maps/genesis/02_east_of_eden_and_nod.png",
+            "호세아": "assets/maps/genesis/04_babel_and_dispersion.png",
+            "요엘": "assets/maps/genesis/03_flood_to_ararat.png",
+            "아모스": "assets/maps/genesis/05_abram_first_journey.png",
+            "오바댜": "assets/maps/genesis/06_kings_war_and_promise_land.png",
+            "요나": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
+            "미가": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
+            "나훔": "assets/maps/genesis/09_jacob_flight_and_return.png",
+            "하박국": "assets/maps/genesis/10_shechem_bethel_seir.png",
+            "스바냐": "assets/maps/genesis/01_eden_and_four_rivers.png",
+            "학개": "assets/maps/genesis/02_east_of_eden_and_nod.png",
+            "스가랴": "assets/maps/genesis/03_flood_to_ararat.png",
+            "말라기": "assets/maps/genesis/04_babel_and_dispersion.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel

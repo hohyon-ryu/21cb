@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'proverbs';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'proverbs' | 'ecclesiastes' | 'song' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   genesis: { name: '창세기', total: 50 },
@@ -20,6 +20,20 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   esther: { name: '에스더', total: 10 },
   job: { name: '욥기', total: 42 },
   proverbs: { name: '잠언', total: 31 },
+  ecclesiastes: { name: '전도서', total: 12 },
+  song: { name: '아가', total: 8 },
+  hosea: { name: '호세아', total: 14 },
+  joel: { name: '요엘', total: 3 },
+  amos: { name: '아모스', total: 9 },
+  obadiah: { name: '오바댜', total: 1 },
+  jonah: { name: '요나', total: 4 },
+  micah: { name: '미가', total: 7 },
+  nahum: { name: '나훔', total: 3 },
+  habakkuk: { name: '하박국', total: 3 },
+  zephaniah: { name: '스바냐', total: 3 },
+  haggai: { name: '학개', total: 2 },
+  zechariah: { name: '스가랴', total: 14 },
+  malachi: { name: '말라기', total: 4 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'proverbs'];
+export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'proverbs', 'ecclesiastes', 'song', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'];
