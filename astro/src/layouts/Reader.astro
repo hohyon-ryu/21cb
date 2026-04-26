@@ -41,18 +41,10 @@ const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
   <meta name="twitter:card" content="summary" />
 </head>
 <body>
+  <div class="dl-float">
+    <DownloadMenu book={bookSlug} />
+  </div>
   <div class="shell">
-    <header class="topbar">
-      <div class="brand-block">
-        <p class="brand-kicker">BIBLE READER</p>
-        <a class="brand" href={url('/')}>21세기 성경</a>
-        <p class="brand-sub">{contextLabel} · 장별 본문과 주해</p>
-      </div>
-      <div class="topbar-actions">
-        <DownloadMenu book={bookSlug} />
-      </div>
-    </header>
-
     <main class="content-grid">
       <Sidebar activeSlug={bookSlug} activeChapter={chapter} />
 
@@ -94,22 +86,6 @@ const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
   </div>
 
   <script>
-    // 사이드바 — 탑바 가시 영역만큼 위에서 빼고 viewport 안에 들어가도록
-    const sideEl = document.querySelector<HTMLElement>('.side');
-    const topbarEl = document.querySelector<HTMLElement>('.topbar');
-    function adjustSide() {
-      if (!sideEl || !topbarEl) return;
-      const rect = topbarEl.getBoundingClientRect();
-      const topVisible = Math.max(0, rect.bottom);
-      const offset = Math.max(topVisible + 12, 16);
-      sideEl.style.top = offset + 'px';
-      sideEl.style.maxHeight = `calc(100vh - ${offset + 16}px)`;
-    }
-    if (sideEl && topbarEl) {
-      adjustSide();
-      window.addEventListener('scroll', adjustSide, { passive: true });
-      window.addEventListener('resize', adjustSide);
-    }
 
     const pullZone = document.querySelector<HTMLElement>('.pull-zone');
     const nextUrl = pullZone?.dataset.nextUrl;
