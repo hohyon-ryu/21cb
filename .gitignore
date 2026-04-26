@@ -21,3 +21,4 @@ Thumbs.db
 
 # Local-only state
 .omc/
+build/__pycache__/
