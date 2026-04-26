@@ -101,6 +101,24 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "역대상": {
+        "opening": "*포로 귀환 후 다시 쓰인 다윗의 이야기 — 성전 중심의 재해석.*",
+        "overview": "역대상은 사무엘서·열왕기와 같은 시대를 다루지만, 포로 귀환 공동체가 다시 쓴 신학적 재해석이다. 9장에 걸친 족보로 시작해 사울의 죽음과 다윗 왕국 전체를 다루되, 다윗의 어두운 면(밧세바·압살롬)은 빠지고 성전 준비와 예배 조직이 강조된다. 마지막 장에서 다윗이 솔로몬에게 성전 청사진과 모든 자재를 인계한다.",
+        "parts": [
+            {"num": "1부", "title": "족보", "subtitle": "아담부터 귀환 공동체까지", "range": (1, 9)},
+            {"num": "2부", "title": "다윗의 즉위와 정복", "subtitle": "헤브론·예루살렘·블레셋", "range": (10, 20)},
+            {"num": "3부", "title": "성전 준비", "subtitle": "타작마당, 자재, 레위인 조직, 청사진 인계", "range": (21, 29)},
+        ],
+    },
+    "역대하": {
+        "opening": "*솔로몬에서 포로까지 — 유다 왕국의 신학적 회고.*",
+        "overview": "역대하는 솔로몬의 즉위·성전 건축에서 시작해 남왕국 유다의 모든 왕을 다룬다(북왕국은 거의 빠진다). 마지막 장에서 예루살렘 함락과 함께 페르시아 고레스의 칙령 — 귀환과 성전 재건 명령 — 으로 끝난다. 한 시대의 종말이 새 시대의 약속과 겹치는 결말.",
+        "parts": [
+            {"num": "1부", "title": "솔로몬", "subtitle": "지혜·성전·시바 여왕", "range": (1, 9)},
+            {"num": "2부", "title": "분열 후 유다", "subtitle": "르호보암부터 아하스까지", "range": (10, 28)},
+            {"num": "3부", "title": "개혁과 멸망", "subtitle": "히스기야·요시야·바벨론, 고레스 칙령", "range": (29, 36)},
+        ],
+    },
     "열왕기상": {
         "opening": "*솔로몬의 영광에서 분열까지 — 한 왕국이 둘로 갈라진 책.*",
         "overview": "열왕기상은 솔로몬의 즉위·성전 건축·세계 명성에서 시작해, 그의 우상숭배와 사후 왕국이 북왕국 이스라엘과 남왕국 유다로 갈라지는 과정을 다룬다. 후반부는 두 왕국의 왕들 — 특히 북왕국 아합과 이세벨, 그리고 그들과 맞선 예언자 엘리야 — 의 격렬한 충돌이 무대다. 갈멜산의 불, 사르밧 과부, 호렙의 세미한 음성, 나봇의 포도원이 모두 여기 있다.",
@@ -270,6 +288,8 @@ def main():
             "사무엘하": "assets/maps/genesis/10_shechem_bethel_seir.png",
             "열왕기상": "assets/maps/genesis/02_east_of_eden_and_nod.png",
             "열왕기하": "assets/maps/genesis/04_babel_and_dispersion.png",
+            "역대상": "assets/maps/genesis/01_eden_and_four_rivers.png",
+            "역대하": "assets/maps/genesis/03_flood_to_ararat.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel

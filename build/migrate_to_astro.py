@@ -52,6 +52,8 @@ BOOKS = [
     ("사무엘하", "samuel2"),
     ("열왕기상", "kings1"),
     ("열왕기하", "kings2"),
+    ("역대상", "chronicles1"),
+    ("역대하", "chronicles2"),
 ]
 
 
