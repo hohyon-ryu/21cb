@@ -99,6 +99,12 @@ a { color: inherit; }
   font-weight: 500;
   flex-shrink: 0;
 }
+.crumb-sep-emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1;
+  margin: 0 1px;
+}
 
 .crumb-picker {
   position: relative;

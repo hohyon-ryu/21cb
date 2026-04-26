@@ -86,8 +86,10 @@ for (const slug of BOOK_ORDER) {
 
 const activeChapters = all[activeSlug] ?? [];
 const activeBookName = BOOKS[activeSlug].name;
-const activeChapterTitle =
-  activeChapters.find((c) => c.chapter === activeChapter)?.title ?? '';
+const activeBookEmoji = BOOKS[activeSlug].emoji;
+const activeChapterEntry = activeChapters.find((c) => c.chapter === activeChapter);
+const activeChapterTitle = activeChapterEntry?.title ?? '';
+const activeChapterEmoji = activeChapterEntry?.emoji ?? '';
 const chapterLabel = activeChapter
   ? `${activeChapter}장 — ${activeChapterTitle}`
   : '장 선택';
@@ -100,7 +102,7 @@ const chapterLabel = activeChapter
       <span class="crumb-brand-text">21세기 성경</span>
       <span class="crumb-brand-icon" aria-hidden="true">📖</span>
     </a>
-    <span class="crumb-sep" aria-hidden="true">›</span>
+    <span class="crumb-sep crumb-sep-emoji" aria-hidden="true">{activeBookEmoji}</span>
 
     <details class="crumb-picker">
       <summary>
@@ -140,7 +142,7 @@ const chapterLabel = activeChapter
 
     {activeChapters.length > 0 && activeChapter !== null && (
       <>
-        <span class="crumb-sep" aria-hidden="true">›</span>
+        <span class="crumb-sep crumb-sep-emoji" aria-hidden="true">{activeChapterEmoji}</span>
         <details class="crumb-picker chapter">
           <summary>
             <span class="crumb-text">{chapterLabel}</span>
