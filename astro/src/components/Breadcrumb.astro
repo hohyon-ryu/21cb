@@ -32,16 +32,12 @@ const chapterLabel = activeChapter
 <header class="topbar" role="banner">
  <div class="topbar-inner">
   <nav class="crumb" aria-label="네비게이션">
-    <a class="crumb-brand" href={url('/')}>
-      <span class="b-era">21세기</span>
-      <span class="b-name">성경</span>
-    </a>
+    <a class="crumb-brand" href={url('/')}>21세기 성경</a>
     <span class="crumb-sep" aria-hidden="true">›</span>
 
     <details class="crumb-picker">
       <summary>
         <span class="crumb-text">{activeBookName}</span>
-        <span class="crumb-caret" aria-hidden="true">▾</span>
       </summary>
       <ul class="crumb-menu" role="menu">
         {BOOK_ORDER.map((slug) => {
@@ -67,7 +63,6 @@ const chapterLabel = activeChapter
         <details class="crumb-picker chapter">
           <summary>
             <span class="crumb-text">{chapterLabel}</span>
-            <span class="crumb-caret" aria-hidden="true">▾</span>
           </summary>
           <ul class="crumb-menu scroll" role="menu">
             {activeChapters.map((ch) => (
