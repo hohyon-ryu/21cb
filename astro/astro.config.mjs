@@ -8,7 +8,7 @@ const BASE = '/21cb';
 export default defineConfig({
   site: 'https://hohyon-ryu.github.io',
   base: BASE,
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
   integrations: [sitemap()],
   markdown: {
     smartypants: true,

@@ -70,11 +70,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
           </nav>
 
           {next && (
-            <div
-              id="end-sentinel"
-              data-next-url={next.url}
-              aria-hidden="true"
-            ></div>
+            <div class="pull-zone" data-next-url={next.url} data-next-label={next.label}>
+              <div class="pull-inner">
+                <div class="pull-hint">
+                  <span class="dir">
+                    <span class="dir-pulling">↓ 더 당기면 다음 장</span>
+                    <span class="dir-ready">↓ 놓으면 다음 장으로</span>
+                  </span>
+                  <span class="lbl">{next.label}</span>
+                </div>
+              </div>
+            </div>
           )}
         </article>
       </section>
@@ -82,46 +88,153 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   </div>
 
   <script>
-    const sentinel = document.getElementById('end-sentinel');
-    const nextUrl = sentinel?.dataset.nextUrl;
+    const pullZone = document.querySelector<HTMLElement>('.pull-zone');
+    const nextUrl = pullZone?.dataset.nextUrl;
 
-    if (sentinel && nextUrl) {
-      let inView = false;
-      const obs = new IntersectionObserver(
-        ([e]) => { inView = e.isIntersecting; },
-        { threshold: 0.5 }
-      );
-      obs.observe(sentinel);
+    if (pullZone && nextUrl) {
+      const MAX = 260;          // sticky 최대 늘어나는 높이
+      const CONFIRM = 80;        // held 상태에서 추가로 스크롤해야 하는 양
+      const WHEEL_DAMP = 0.45;
+      const TOUCH_DAMP = 0.85;
+      const RELEASE_MS = 280;
 
-      let lastReset = 0;
-      let scrollAccum = 0;
-      let triggered = false;
+      type PullState = 'normal' | 'stretching' | 'held' | 'committing';
+      let stretch = 0;
+      let state: PullState = 'normal';
+      let confirmAccum = 0;
+      let releaseTimer: number | null = null;
 
-      function trigger() {
-        if (triggered) return;
-        triggered = true;
-        location.href = nextUrl;
+      function setStretch(v: number) {
+        stretch = Math.max(0, Math.min(v, MAX));
+        pullZone!.style.height = stretch + 'px';
+        pullZone!.style.setProperty('--pull-ratio', (stretch / MAX).toString());
       }
 
-      window.addEventListener('wheel', (e: WheelEvent) => {
-        if (!inView || e.deltaY <= 0) return;
-        const now = Date.now();
-        if (now - lastReset > 600) scrollAccum = 0;
-        lastReset = now;
-        scrollAccum += e.deltaY;
-        if (scrollAccum > 240) trigger();
-      }, { passive: true });
+      function setState(s: PullState) {
+        state = s;
+        pullZone!.classList.toggle('held', s === 'held');
+        pullZone!.classList.toggle('committing', s === 'committing');
+      }
 
-      let touchStartY: number | null = null;
-      window.addEventListener('touchstart', (e: TouchEvent) => {
-        touchStartY = e.touches[0]?.clientY ?? null;
-      }, { passive: true });
-      window.addEventListener('touchmove', (e: TouchEvent) => {
-        if (!inView || touchStartY === null) return;
-        const y = e.touches[0]?.clientY ?? null;
-        if (y === null) return;
-        if (touchStartY - y > 90) trigger();
-      }, { passive: true });
+      function snapBack() {
+        if (state === 'committing') return;
+        pullZone!.style.transition = 'height 280ms cubic-bezier(.2,.9,.3,1)';
+        setStretch(0);
+        setState('normal');
+        confirmAccum = 0;
+        window.setTimeout(() => { pullZone!.style.transition = ''; }, 320);
+      }
+
+      function commit() {
+        setState('committing');
+        pullZone!.style.transition = 'height 180ms ease-in';
+        pullZone!.style.height = (MAX + 60) + 'px';
+        window.setTimeout(() => { location.href = nextUrl; }, 200);
+      }
+
+      function scheduleRelease() {
+        if (releaseTimer) clearTimeout(releaseTimer);
+        releaseTimer = window.setTimeout(() => {
+          if (state === 'stretching') snapBack();
+        }, RELEASE_MS);
+      }
+
+      function clearReleaseTimer() {
+        if (releaseTimer) {
+          clearTimeout(releaseTimer);
+          releaseTimer = null;
+        }
+      }
+
+      function atBottom() {
+        return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      }
+
+      // 단방향 delta를 받아 상태 머신을 진행. 가로채야 하면 true 반환
+      function handleDelta(delta: number, dampening: number) {
+        if (state === 'committing') return true;
+
+        if (delta > 0) {
+          if (state === 'normal') {
+            if (!atBottom()) return false;
+            setState('stretching');
+            setStretch(stretch + delta * dampening);
+            if (stretch >= MAX) setState('held');
+            else scheduleRelease();
+            return true;
+          }
+          if (state === 'stretching') {
+            setStretch(stretch + delta * dampening);
+            if (stretch >= MAX) {
+              setState('held');
+              clearReleaseTimer();
+            } else {
+              scheduleRelease();
+            }
+            return true;
+          }
+          if (state === 'held') {
+            confirmAccum += delta;
+            if (confirmAccum >= CONFIRM) commit();
+            return true;
+          }
+        }
+
+        if (delta < 0) {
+          if (state === 'held') {
+            snapBack();
+            return true;
+          }
+          if (state === 'stretching') {
+            const next = stretch + delta * dampening;
+            if (next <= 0) snapBack();
+            else {
+              setStretch(next);
+              scheduleRelease();
+            }
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      window.addEventListener(
+        'wheel',
+        (e: WheelEvent) => {
+          if (handleDelta(e.deltaY, WHEEL_DAMP)) e.preventDefault();
+        },
+        { passive: false }
+      );
+
+      // Touch — 매 프레임마다 직전 touch 위치와의 증분 delta
+      let lastTouchY: number | null = null;
+      window.addEventListener(
+        'touchstart',
+        (e: TouchEvent) => {
+          if (state === 'committing') return;
+          lastTouchY = e.touches[0]?.clientY ?? null;
+        },
+        { passive: true }
+      );
+      window.addEventListener(
+        'touchmove',
+        (e: TouchEvent) => {
+          if (lastTouchY === null) return;
+          const y = e.touches[0]?.clientY;
+          if (y === undefined) return;
+          const delta = lastTouchY - y;
+          lastTouchY = y;
+          if (handleDelta(delta, TOUCH_DAMP) && e.cancelable) {
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+      window.addEventListener('touchend', () => {
+        lastTouchY = null;
+        if (state === 'stretching') snapBack();
+      });
     }
   </script>
 </body>

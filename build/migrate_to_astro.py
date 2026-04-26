@@ -24,6 +24,20 @@ EMOJI = bw.CHAPTER_EMOJI_BY_BOOK
 SUPER_TO_NORMAL = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 VERSE_RE = re.compile(r"^\*\*(\d+)\*\*\s*", re.MULTILINE)
 H1_RE = re.compile(r"^#\s+(\S+)\s+(\d+)장\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
+TAIL_ITALIC_RE = re.compile(r"^(.+?)(?<!\*)\s+\*([^*]{12,}?)\*\s*$")
+
+
+def _split_tail_italic(text: str) -> str:
+    out = []
+    for line in text.split("\n"):
+        m = TAIL_ITALIC_RE.match(line)
+        if m and not line.lstrip().startswith(">"):
+            out.append(m.group(1).rstrip())
+            out.append("")
+            out.append(f"> *{m.group(2)}*")
+        else:
+            out.append(line)
+    return "\n".join(out)
 
 BOOKS = [
     ("창세기", "genesis"),
@@ -55,6 +69,10 @@ def migrate(book_ko: str, slug: str) -> int:
         body = re.sub(r"^\n+", "", body)
         body = body.translate(SUPER_TO_NORMAL)
         body = VERSE_RE.sub(r'<sup class="verse">\1</sup> ', body)
+        # 인라인 **bold** → <strong>: ) 또는 한글 인접 시 markdown 처리 실패하는 경우 회피
+        body = re.sub(r"\*\*([^*\n]+?)\*\*", r"<strong>\1</strong>", body)
+        # 단락 끝 부연 italic을 별도 blockquote로 분리
+        body = _split_tail_italic(body)
         body = body.replace("../assets/", "/assets/")
         safe_title = title.replace('"', '\\"')
         front = (
