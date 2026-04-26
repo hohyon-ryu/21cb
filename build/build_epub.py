@@ -101,6 +101,24 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "열왕기상": {
+        "opening": "*솔로몬의 영광에서 분열까지 — 한 왕국이 둘로 갈라진 책.*",
+        "overview": "열왕기상은 솔로몬의 즉위·성전 건축·세계 명성에서 시작해, 그의 우상숭배와 사후 왕국이 북왕국 이스라엘과 남왕국 유다로 갈라지는 과정을 다룬다. 후반부는 두 왕국의 왕들 — 특히 북왕국 아합과 이세벨, 그리고 그들과 맞선 예언자 엘리야 — 의 격렬한 충돌이 무대다. 갈멜산의 불, 사르밧 과부, 호렙의 세미한 음성, 나봇의 포도원이 모두 여기 있다.",
+        "parts": [
+            {"num": "1부", "title": "솔로몬", "subtitle": "지혜, 성전, 왕궁, 시바 여왕", "range": (1, 11)},
+            {"num": "2부", "title": "분열", "subtitle": "여로보암과 르호보암, 북·남 두 왕국", "range": (12, 16)},
+            {"num": "3부", "title": "엘리야 시대", "subtitle": "갈멜산, 호렙, 나봇의 포도원", "range": (17, 22)},
+        ],
+    },
+    "열왕기하": {
+        "opening": "*두 왕국의 멸망 — 북은 아시리아에, 남은 바벨론에.*",
+        "overview": "열왕기하는 엘리야의 회오리바람 승천에서 시작해, 엘리사의 기적, 두 왕국의 흥망, 북왕국의 BC 722년 아시리아 멸망, 남왕국의 BC 587년 바벨론 멸망과 예루살렘 성전 파괴까지 다룬다. 히스기야의 산헤립 침공 격퇴, 요시야의 율법책 발견과 개혁, 마지막 왕 시드기야의 눈이 뽑히는 장면 — 한 민족의 정치적 종말과 신학적 진단이 함께 기록된다.",
+        "parts": [
+            {"num": "1부", "title": "엘리사", "subtitle": "회오리바람, 기적들, 예후의 혁명", "range": (1, 13)},
+            {"num": "2부", "title": "북왕국 멸망", "subtitle": "아시리아의 칼, 사마리아 함락(BC 722)", "range": (14, 17)},
+            {"num": "3부", "title": "남왕국의 마지막", "subtitle": "히스기야, 요시야, 바벨론 포로(BC 587)", "range": (18, 25)},
+        ],
+    },
     "사무엘하": {
         "opening": "*다윗의 왕국 — 영광과 추락이 한 사람 안에서.*",
         "overview": "사무엘하는 다윗의 통일 왕국 전체를 다룬다. 사울의 죽음 애도에서 시작해, 헤브론·예루살렘 두 단계의 즉위, 언약궤 운반과 다윗 언약, 밧세바 사건과 그 대가로 무너지는 가족 — 암논의 강간, 압살롬의 반역, 세바의 봉기, 마지막 인구조사까지. 한 인간 안의 빛과 어둠이 가장 정직하게 기록된 책.",
@@ -250,6 +268,8 @@ def main():
             "룻기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
             "사무엘상": "assets/maps/genesis/09_jacob_flight_and_return.png",
             "사무엘하": "assets/maps/genesis/10_shechem_bethel_seir.png",
+            "열왕기상": "assets/maps/genesis/02_east_of_eden_and_nod.png",
+            "열왕기하": "assets/maps/genesis/04_babel_and_dispersion.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel
