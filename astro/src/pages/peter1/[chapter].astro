@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import Reader from '../../layouts/Reader.astro';
+import ChapterTitle from '../../components/ChapterTitle.astro';
+import { BOOKS } from '../../lib/books';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const items = (await getCollection('peter1')).sort(
+    (a, b) => a.data.chapter - b.data.chapter
+  );
+  return items.map((entry, idx) => ({
+    params: { chapter: String(entry.data.chapter) },
+    props: {
+      entry,
+      prev: items[idx - 1]
+        ? { chapter: items[idx - 1].data.chapter, title: items[idx - 1].data.title }
+        : null,
+      next: items[idx + 1]
+        ? { chapter: items[idx + 1].data.chapter, title: items[idx + 1].data.title }
+        : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const bookName = BOOKS.peter1.name;
+const slug = 'peter1';
+const { chapter, title, emoji } = entry.data;
+const seoTitle = `${bookName} ${chapter}장 — ${title} | 21세기 성경`;
+const desc = `21세기에 읽는 성경. ${bookName} ${chapter}장: ${title}. 본문, 부연 설명, 고고학·세 종교 해석 비교.`;
+---
+
+<Reader
+  title={seoTitle}
+  description={desc}
+  bookSlug={slug}
+  chapter={chapter}
+  prev={prev ? { url: url(`/${slug}/${prev.chapter}`), label: `${prev.chapter}장 · ${prev.title}` } : null}
+  next={next ? { url: url(`/${slug}/${next.chapter}`), label: `${next.chapter}장 · ${next.title}` } : null}
+>
+  <ChapterTitle bookName={bookName} chapter={chapter} title={title} emoji={emoji} />
+  <Content />
+</Reader>

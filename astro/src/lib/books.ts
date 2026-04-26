@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'psalms' | 'proverbs' | 'ecclesiastes' | 'song' | 'isaiah' | 'jeremiah' | 'lamentations' | 'ezekiel' | 'daniel' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi' | 'matthew' | 'mark' | 'luke' | 'john' | 'acts' | 'romans' | 'corinthians1' | 'corinthians2';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'psalms' | 'proverbs' | 'ecclesiastes' | 'song' | 'isaiah' | 'jeremiah' | 'lamentations' | 'ezekiel' | 'daniel' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi' | 'matthew' | 'mark' | 'luke' | 'john' | 'acts' | 'romans' | 'corinthians1' | 'corinthians2' | 'galatians' | 'ephesians' | 'philippians' | 'colossians' | 'thessalonians1' | 'thessalonians2' | 'timothy1' | 'timothy2' | 'titus' | 'philemon' | 'hebrews' | 'james' | 'peter1' | 'peter2' | 'john1' | 'john2' | 'john3' | 'jude' | 'revelation';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   genesis: { name: '창세기', total: 50 },
@@ -48,6 +48,25 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   romans: { name: '로마서', total: 16 },
   corinthians1: { name: '고린도전서', total: 16 },
   corinthians2: { name: '고린도후서', total: 13 },
+  galatians: { name: '갈라디아서', total: 6 },
+  ephesians: { name: '에베소서', total: 6 },
+  philippians: { name: '빌립보서', total: 4 },
+  colossians: { name: '골로새서', total: 4 },
+  thessalonians1: { name: '데살로니가전서', total: 5 },
+  thessalonians2: { name: '데살로니가후서', total: 3 },
+  timothy1: { name: '디모데전서', total: 6 },
+  timothy2: { name: '디모데후서', total: 4 },
+  titus: { name: '디도서', total: 3 },
+  philemon: { name: '빌레몬서', total: 1 },
+  hebrews: { name: '히브리서', total: 13 },
+  james: { name: '야고보서', total: 5 },
+  peter1: { name: '베드로전서', total: 5 },
+  peter2: { name: '베드로후서', total: 3 },
+  john1: { name: '요한일서', total: 5 },
+  john2: { name: '요한이서', total: 1 },
+  john3: { name: '요한삼서', total: 1 },
+  jude: { name: '유다서', total: 1 },
+  revelation: { name: '요한계시록', total: 22 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'psalms', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi', 'matthew', 'mark', 'luke', 'john', 'acts', 'romans', 'corinthians1', 'corinthians2'];
+export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'psalms', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi', 'matthew', 'mark', 'luke', 'john', 'acts', 'romans', 'corinthians1', 'corinthians2', 'galatians', 'ephesians', 'philippians', 'colossians', 'thessalonians1', 'thessalonians2', 'timothy1', 'timothy2', 'titus', 'philemon', 'hebrews', 'james', 'peter1', 'peter2', 'john1', 'john2', 'john3', 'jude', 'revelation'];
