@@ -797,27 +797,8 @@ a { color: inherit; }
 }
 
 /* responsive */
-@media (max-width: 1080px) {
-  .shell { padding: 16px 14px 32px; }
-  .topbar {
-    gap: 14px;
-    align-items: flex-end;
-    padding: 14px 14px 14px 16px;
-  }
-  .dl-menu { align-self: center; }
-  .content-grid { grid-template-columns: 1fr; gap: 14px; }
-  .side { position: static; max-height: none; order: 1; }
-  .reader-wrap { order: 2; }
-  .reader { padding: 0 20px; }
-}
-
 @media (max-width: 780px) {
-  .topbar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 13px 12px 13px 15px;
-  }
-  .topbar-actions {
-    justify-content: flex-start;
-  }
+  .shell { padding: 16px 14px 32px; }
+  .topbar-inner { padding: 10px 16px; }
+  .reader { padding: 0 16px; }
 }

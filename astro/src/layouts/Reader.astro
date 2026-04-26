@@ -1,7 +1,8 @@
 ---
 import '../styles/global.css';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { BOOKS, type BookSlug } from '../lib/books';
+import type { BookSlug } from '../lib/books';
+import { url } from '../lib/url';
 
 const {
   title,
@@ -29,6 +30,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="alternate icon" href={url('/favicon.ico')} />
   <link rel="canonical" href={canonical} />
   <meta property="og:title" content={title} />
   {description && <meta property="og:description" content={description} />}
