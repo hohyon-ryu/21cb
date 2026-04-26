@@ -101,6 +101,45 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "이사야": {
+        "opening": "*예루살렘의 가장 큰 예언자 — 위로하라, 위로하라.*",
+        "overview": "이사야는 BC 8세기 예루살렘 예언자에서 시작해 포로기·귀환기까지를 아우르는 66장의 거대한 책. 처음 39장은 심판의 분위기, 40장부터는 위로의 분위기. '한 어린 아이가 우리를 위해 났다'(9:6), '고난의 종'(53장), '새 하늘 새 땅'(65-66장) — 신약이 가장 자주 인용한 구약 책.",
+        "parts": [
+            {"num": "1부", "title": "심판과 약속", "subtitle": "예루살렘·임마누엘·이방 심판", "range": (1, 39)},
+            {"num": "2부", "title": "위로의 책", "subtitle": "포로 위로·고난의 종·새 하늘", "range": (40, 66)},
+        ],
+    },
+    "예레미야": {
+        "opening": "*우는 예언자 — 예루살렘의 마지막 40년.*",
+        "overview": "예레미야는 요시야 13년(BC 627)부터 예루살렘 함락 후 이집트 망명까지 활동한 예언자. 토기장이의 비유, 깨진 항아리, 새 언약(31:31-34), 시드기야의 눈이 뽑히는 장면, 바벨론 70년 — 한 민족의 종말을 가장 가까이서 본 자의 기록.",
+        "parts": [
+            {"num": "1부", "title": "초기 예언", "subtitle": "소명·항아리·성전 설교", "range": (1, 25)},
+            {"num": "2부", "title": "고난과 환상", "subtitle": "예언자의 박해와 새 언약", "range": (26, 45)},
+            {"num": "3부", "title": "이방 신탁과 함락", "subtitle": "열방 심판·예루살렘 멸망", "range": (46, 52)},
+        ],
+    },
+    "예레미야애가": {
+        "opening": "*불타 버린 도시 위의 다섯 노래 — 알파벳 두운의 통곡.*",
+        "overview": "예레미야애가는 예루살렘 함락(BC 587) 직후의 다섯 편 시. 1·2·4장은 알파벳 22행 두운, 3장은 66행(각 글자 3행씩). 유대교는 매년 9월 9일(티샤 베아브)에 낭독한다. 가장 어두운 책 한가운데 '여호와의 인자와 긍휼이 새롭다'(3:22-23)가 빛난다.",
+        "parts": [{"num": "전체", "title": "다섯 애가", "subtitle": "예루살렘 함락의 통곡", "range": (1, 5)}],
+    },
+    "에스겔": {
+        "opening": "*포로지에서 본 환상들 — 마른 뼈가 살아나는 책.*",
+        "overview": "에스겔은 1차 포로(BC 597) 때 바벨론으로 끌려간 제사장 출신. 그발 강가에서 본 네 생물과 바퀴, 예루살렘 성전을 떠나는 영광, 마른 뼈 골짜기, 곡과 마곡, 새 성전 환상 — 가장 환상적이고 묵시적인 예언서.",
+        "parts": [
+            {"num": "1부", "title": "심판 환상", "subtitle": "네 생물·성전 떠난 영광·예루살렘 함락", "range": (1, 24)},
+            {"num": "2부", "title": "이방 신탁", "subtitle": "두로·이집트 등 일곱 민족", "range": (25, 32)},
+            {"num": "3부", "title": "회복 환상", "subtitle": "마른 뼈·새 성전·생명의 강", "range": (33, 48)},
+        ],
+    },
+    "다니엘": {
+        "opening": "*바벨론 궁의 네 청년 — 사자 굴과 묵시.*",
+        "overview": "다니엘은 1차 포로(BC 605)로 끌려간 청년. 전반 6장은 궁중 이야기(채소·금 신상·풀무불·꿈·벽의 글씨·사자 굴), 후반 6장은 묵시 환상(네 짐승·숫양과 숫염소·70주·마지막 환상). 구약과 신약을 잇는 가장 직접적인 다리 — '인자 같은 이'(7:13) → 예수의 자기 호칭.",
+        "parts": [
+            {"num": "1부", "title": "궁중 이야기", "subtitle": "채소·금 신상·사자 굴", "range": (1, 6)},
+            {"num": "2부", "title": "환상", "subtitle": "네 짐승·70주·마지막 날", "range": (7, 12)},
+        ],
+    },
     "전도서": {
         "opening": "*해 아래 새것이 없다 — 전도자(코헬렛)의 회의 노트.*",
         "overview": "전도서는 자신을 '코헬렛'(모인 자들의 교사)이라 부르는 자의 기록이다. 부와 지혜와 쾌락과 일을 두루 시험한 끝에 '헤벨'(헛된 숨)이라는 결론으로 돌아온다. 그러나 결말은 회의가 아니라 '하나님을 경외하라'다. 욥기·잠언과 함께 지혜 문학의 세 정점.",
@@ -415,6 +454,11 @@ def main():
             "잠언": "assets/maps/genesis/09_jacob_flight_and_return.png",
             "전도서": "assets/maps/genesis/10_shechem_bethel_seir.png",
             "아가": "assets/maps/genesis/02_east_of_eden_and_nod.png",
+            "이사야": "assets/maps/genesis/01_eden_and_four_rivers.png",
+            "예레미야": "assets/maps/genesis/04_babel_and_dispersion.png",
+            "예레미야애가": "assets/maps/genesis/03_flood_to_ararat.png",
+            "에스겔": "assets/maps/genesis/05_abram_first_journey.png",
+            "다니엘": "assets/maps/genesis/06_kings_war_and_promise_land.png",
             "호세아": "assets/maps/genesis/04_babel_and_dispersion.png",
             "요엘": "assets/maps/genesis/03_flood_to_ararat.png",
             "아모스": "assets/maps/genesis/05_abram_first_journey.png",

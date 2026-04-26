@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'proverbs' | 'ecclesiastes' | 'song' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'proverbs' | 'ecclesiastes' | 'song' | 'isaiah' | 'jeremiah' | 'lamentations' | 'ezekiel' | 'daniel' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   genesis: { name: '창세기', total: 50 },
@@ -22,6 +22,11 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   proverbs: { name: '잠언', total: 31 },
   ecclesiastes: { name: '전도서', total: 12 },
   song: { name: '아가', total: 8 },
+  isaiah: { name: '이사야', total: 66 },
+  jeremiah: { name: '예레미야', total: 52 },
+  lamentations: { name: '예레미야애가', total: 5 },
+  ezekiel: { name: '에스겔', total: 48 },
+  daniel: { name: '다니엘', total: 12 },
   hosea: { name: '호세아', total: 14 },
   joel: { name: '요엘', total: 3 },
   amos: { name: '아모스', total: 9 },
@@ -36,4 +41,4 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   malachi: { name: '말라기', total: 4 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'proverbs', 'ecclesiastes', 'song', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'];
+export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'];
