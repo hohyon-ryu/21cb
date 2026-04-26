@@ -57,6 +57,8 @@ BOOKS = [
     ("에스라", "ezra"),
     ("느헤미야", "nehemiah"),
     ("에스더", "esther"),
+    ("욥기", "job"),
+    ("잠언", "proverbs"),
 ]
 
 

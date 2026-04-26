@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'proverbs';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   genesis: { name: '창세기', total: 50 },
@@ -18,6 +18,8 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   ezra: { name: '에스라', total: 10 },
   nehemiah: { name: '느헤미야', total: 13 },
   esther: { name: '에스더', total: 10 },
+  job: { name: '욥기', total: 42 },
+  proverbs: { name: '잠언', total: 31 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther'];
+export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'proverbs'];

@@ -101,6 +101,25 @@ BOOK_INTROS = {
             {"num": "3부", "title": "다윗의 도망", "subtitle": "골리앗, 사울의 시기, 광야 생활", "range": (16, 31)},
         ],
     },
+    "욥기": {
+        "opening": "*아무 죄 없이 모든 것을 잃은 한 사람 — 고난 앞의 가장 정직한 책.*",
+        "overview": "욥기는 의로운 한 사람이 모든 것을 잃은 채 친구 셋과 청년 엘리후, 그리고 마지막에 회오리바람의 하나님과 차례로 대화하는 시 형식의 책이다. '인과응보'라는 통념을 가장 격렬하게 흔드는 책. 답을 주지 않고 더 큰 질문으로 응답하는 결말 — 그러나 욥은 회복된다.",
+        "parts": [
+            {"num": "1부", "title": "재앙", "subtitle": "사탄의 시험, 모든 것의 상실", "range": (1, 3)},
+            {"num": "2부", "title": "친구들과의 변론", "subtitle": "엘리바스·빌닷·소발 세 차례", "range": (4, 31)},
+            {"num": "3부", "title": "엘리후", "subtitle": "젊은 청년의 새 관점", "range": (32, 37)},
+            {"num": "4부", "title": "회오리바람과 회복", "subtitle": "야훼의 응답, 욥의 두 배", "range": (38, 42)},
+        ],
+    },
+    "잠언": {
+        "opening": "*지혜의 시작은 여호와를 경외함이라 — 일상의 신학.*",
+        "overview": "잠언은 솔로몬과 후대 현자들의 짧은 격언 모음이다. 1-9장은 아버지가 아들에게 들려주는 긴 권면, 10-29장은 짧은 두 행 격언의 폭포, 30장은 아굴, 31장은 르무엘 왕의 어머니가 아들에게 한 말과 '현숙한 여인' 시. 추상 신학이 아니라 일상의 결단을 위한 지혜.",
+        "parts": [
+            {"num": "1부", "title": "지혜의 권면", "subtitle": "아들아, 들으라 — 긴 권면", "range": (1, 9)},
+            {"num": "2부", "title": "솔로몬의 잠언", "subtitle": "두 행 격언의 폭포", "range": (10, 29)},
+            {"num": "3부", "title": "아굴과 르무엘", "subtitle": "마지막 두 부록, 현숙한 여인", "range": (30, 31)},
+        ],
+    },
     "에스라": {
         "opening": "*폐허에서 두 번째 성전까지 — 70년 후의 귀향.*",
         "overview": "에스라는 페르시아 고레스의 칙령(BC 538)으로 시작된 두 차례의 귀환을 다룬다. 첫 귀환에서 스룹바벨이 두 번째 성전을 짓고, 80년 후 학자 에스라가 율법을 들고 와 이방 여인 결혼 문제를 다룬다. 정체성의 재구성, 율법 공동체의 부활.",
@@ -316,6 +335,8 @@ def main():
             "에스라": "assets/maps/genesis/05_abram_first_journey.png",
             "느헤미야": "assets/maps/genesis/06_kings_war_and_promise_land.png",
             "에스더": "assets/maps/genesis/07_patriarch_centers_hebron_beersheba_moriah.png",
+            "욥기": "assets/maps/genesis/08_rebekah_route_aram_to_canaan.png",
+            "잠언": "assets/maps/genesis/09_jacob_flight_and_return.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel
