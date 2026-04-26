@@ -301,13 +301,12 @@ a { color: inherit; }
 .side {
   position: sticky;
   top: 16px;
-  max-height: calc(100vh - 32px);
-  overflow: auto;
   padding: 14px 16px 18px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--paper);
   box-shadow: var(--shadow);
+  /* dropdown들이 자유롭게 사이드바 밖으로 펼쳐지도록 overflow 제거 */
 }
 
 .nav-section + .nav-section {
