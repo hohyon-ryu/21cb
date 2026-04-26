@@ -45,6 +45,7 @@ BOOKS = [
     ("레위기", "leviticus"),
     ("민수기", "numbers"),
     ("신명기", "deuteronomy"),
+    ("여호수아", "joshua"),
 ]
 
 

@@ -28,4 +28,8 @@ export const collections = {
     loader: glob({ pattern: '*.md', base: './src/content/deuteronomy' }),
     schema: chapter,
   }),
+  joshua: defineCollection({
+    loader: glob({ pattern: '*.md', base: './src/content/joshua' }),
+    schema: chapter,
+  }),
 };

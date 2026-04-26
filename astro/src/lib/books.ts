@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   genesis: { name: '창세기', total: 50 },
@@ -6,6 +6,7 @@ export const BOOKS: Record<BookSlug, { name: string; total: number }> = {
   leviticus: { name: '레위기', total: 27 },
   numbers: { name: '민수기', total: 36 },
   deuteronomy: { name: '신명기', total: 34 },
+  joshua: { name: '여호수아', total: 24 },
 };
 
-export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy'];
+export const BOOK_ORDER: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua'];

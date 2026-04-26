@@ -92,6 +92,16 @@ BOOK_INTROS = {
             {"num": "3부", "title": "새 세대", "subtitle": "두 번째 인구조사, 도피성, 약속의 문턱", "range": (26, 36)},
         ],
     },
+    "여호수아": {
+        "opening": "*요단강을 건너 — 약속의 땅을 손에 넣다.*",
+        "overview": "여호수아는 모세 사후 새 지도자가 요단강을 건너 가나안을 정복하고 열두 지파에 땅을 분배하는 책이다. 라합의 신앙, 무너지는 여리고 성벽, 아이성의 패배와 회복, 기브온과의 속임수 조약, 멈춘 태양, 가나안 분배, 마지막 세겜 언약까지 — 약속의 성취와 동시에 새 책임의 시작을 다룬다.",
+        "parts": [
+            {"num": "1부", "title": "강을 건너", "subtitle": "여호수아 임직, 라합, 요단 도하", "range": (1, 5)},
+            {"num": "2부", "title": "정복", "subtitle": "여리고, 아이, 기브온, 멈춘 태양", "range": (6, 12)},
+            {"num": "3부", "title": "분배", "subtitle": "지파별 영토 할당, 도피성, 레위 성읍", "range": (13, 21)},
+            {"num": "4부", "title": "마지막 언약", "subtitle": "동편 지파 귀환, 세겜 갱신", "range": (22, 24)},
+        ],
+    },
     "신명기": {
         "opening": "*요단강 건너기 직전 — 모세의 마지막 설교.*",
         "overview": "신명기는 모세가 가나안 진입을 앞둔 새 세대에게 들려준 마지막 설교 모음이다. 광야 40년을 회고하고, 십계명과 율법을 다시 풀어주고, 축복과 저주의 양 갈래를 제시한다. 이름의 뜻 그대로 '두 번째 율법'(deutero-nomos) — 같은 율법을 새 세대의 언어로 다시 설교한 책이다. 모세는 약속의 땅을 보지만 들어가지 못하고 느보산에서 죽는다.",
@@ -201,6 +211,7 @@ def main():
             "레위기": "assets/maps/genesis/03_flood_to_ararat.png",
             "민수기": "assets/maps/genesis/04_babel_and_dispersion.png",
             "신명기": "assets/maps/genesis/05_abram_first_journey.png",
+            "여호수아": "assets/maps/genesis/06_kings_war_and_promise_land.png",
         }
         cover_rel = COVERS.get(SRC_NAME, "assets/maps/genesis/01_eden_and_four_rivers.png")
         cover = ROOT / cover_rel
