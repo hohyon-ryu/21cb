@@ -31,15 +31,15 @@ const currentChapterLabel = activeChapter
 ---
 
 <aside class="side" aria-label="성경 네비게이터">
+  <div class="dl-corner">
+    <DownloadMenu book={activeSlug} />
+  </div>
+
   <a class="brand" href={url('/')}>
     <span class="b-era">21세기</span>
     <span class="b-rule" aria-hidden="true"></span>
     <span class="b-name">성<span class="b-gap"></span>경</span>
   </a>
-
-  <div class="side-actions">
-    <DownloadMenu book={activeSlug} />
-  </div>
 
   <details class="picker book-picker">
     <summary>

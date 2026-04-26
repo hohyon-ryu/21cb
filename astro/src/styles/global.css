@@ -87,21 +87,54 @@ a { color: inherit; }
 .side .brand:hover .b-name { color: var(--accent); }
 .side .brand:hover .b-rule { background: var(--accent); opacity: 1; }
 
-/* sidebar actions row (download menu lives here) */
-.side-actions {
-  display: flex;
-  margin: 0 0 14px 0;
+/* download icon — top-right corner of sidebar */
+.dl-corner {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
 }
 
-.side-actions .dl-menu { width: 100%; }
-.side-actions .action-btn {
-  width: 100%;
-  justify-content: space-between;
+.dl-corner .dl-menu { position: relative; }
+
+.dl-corner .dl-trigger {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  transition: background 130ms ease, color 130ms ease, border-color 130ms ease;
 }
-.side-actions .dl-list {
-  right: auto;
-  left: 0;
-  min-width: 100%;
+.dl-corner .dl-trigger::-webkit-details-marker { display: none; }
+.dl-corner .dl-trigger:hover {
+  color: var(--ink);
+  background: var(--line-soft);
+  border-color: var(--line);
+}
+.dl-corner .dl-menu[open] .dl-trigger {
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--ink);
+}
+
+.dl-corner .dl-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  min-width: 168px;
+  margin: 0;
+  padding: 4px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+  z-index: 25;
 }
 
 /* book/chapter picker (dropdown) */

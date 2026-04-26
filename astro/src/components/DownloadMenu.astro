@@ -13,9 +13,12 @@ const hasAny = !!(files.epub || files.pdf);
 
 {hasAny && (
   <details class="dl-menu">
-    <summary class="action-btn primary">
-      <span class="btn-dot" aria-hidden="true"></span>
-      내려받기
+    <summary class="dl-trigger" aria-label="내려받기" title="내려받기">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 4v12" />
+        <path d="m6 11 6 6 6-6" />
+        <path d="M5 20h14" />
+      </svg>
     </summary>
     <div class="dl-list" role="menu">
       {files.epub && <a role="menuitem" href={url(files.epub)} download>전자책 (EPUB)</a>}
