@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Sidebar from '../components/Sidebar.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { BOOKS, type BookSlug } from '../lib/books';
 
 const {
@@ -20,8 +20,6 @@ const {
 };
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
-const bookName = BOOKS[bookSlug].name;
-const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
 ---
 
 <!doctype html>
@@ -39,31 +37,29 @@ const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
   <meta name="twitter:card" content="summary" />
 </head>
 <body>
-  <div class="shell">
-    <main class="content-grid">
-      <Sidebar activeSlug={bookSlug} activeChapter={chapter} />
+  <Breadcrumb activeSlug={bookSlug} activeChapter={chapter} />
 
-      <section class="reader-wrap">
-        <article class="reader">
-          <slot />
+  <main class="shell">
+    <section class="reader-wrap">
+      <article class="reader">
+        <slot />
 
-          <nav class="chapter-nav" aria-label="장 이동">
-            {prev ? (
-              <a class="chapter-nav-link prev" href={prev.url}>
-                <span class="dir">← 이전</span>
-                <span class="lbl">{prev.label}</span>
-              </a>
-            ) : <span></span>}
-            {next ? (
-              <a class="chapter-nav-link next" href={next.url}>
-                <span class="dir">다음 →</span>
-                <span class="lbl">{next.label}</span>
-              </a>
-            ) : <span></span>}
-          </nav>
-        </article>
-      </section>
-    </main>
-  </div>
+        <nav class="chapter-nav" aria-label="장 이동">
+          {prev ? (
+            <a class="chapter-nav-link prev" href={prev.url}>
+              <span class="dir">← 이전</span>
+              <span class="lbl">{prev.label}</span>
+            </a>
+          ) : <span></span>}
+          {next ? (
+            <a class="chapter-nav-link next" href={next.url}>
+              <span class="dir">다음 →</span>
+              <span class="lbl">{next.label}</span>
+            </a>
+          ) : <span></span>}
+        </nav>
+      </article>
+    </section>
+  </main>
 </body>
 </html>

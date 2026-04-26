@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import { BOOKS, BOOK_ORDER, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+import DownloadMenu from './DownloadMenu.astro';
+
+const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
+  activeSlug?: BookSlug;
+  activeChapter?: number | null;
+};
+
+const all: Record<BookSlug, { chapter: number; title: string }[]> = {
+  genesis: [],
+  exodus: [],
+};
+for (const slug of BOOK_ORDER) {
+  const items = await getCollection(slug);
+  all[slug] = items
+    .map((it) => ({ chapter: it.data.chapter, title: it.data.title }))
+    .sort((a, b) => a.chapter - b.chapter);
+}
+
+const activeChapters = all[activeSlug] ?? [];
+const activeBookName = BOOKS[activeSlug].name;
+const activeChapterTitle =
+  activeChapters.find((c) => c.chapter === activeChapter)?.title ?? '';
+const chapterLabel = activeChapter
+  ? `${activeChapter}장 — ${activeChapterTitle}`
+  : '장 선택';
+---
+
+<header class="topbar" role="banner">
+  <nav class="crumb" aria-label="네비게이션">
+    <a class="crumb-brand" href={url('/')}>
+      <span class="b-era">21세기</span>
+      <span class="b-name">성경</span>
+    </a>
+    <span class="crumb-sep" aria-hidden="true">·</span>
+
+    <details class="crumb-picker">
+      <summary>
+        <span class="crumb-text">{activeBookName}</span>
+        <span class="crumb-caret" aria-hidden="true">▾</span>
+      </summary>
+      <ul class="crumb-menu" role="menu">
+        {BOOK_ORDER.map((slug) => {
+          const written = all[slug].length;
+          const total = BOOKS[slug].total;
+          const cls = slug === activeSlug ? 'active' : '';
+          const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
+          return (
+            <li>
+              <a class={cls} href={href} role="menuitem">
+                <span class="cm-name">{BOOKS[slug].name}</span>
+                <span class="cm-meta">{written}/{total}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </details>
+
+    {activeChapters.length > 0 && activeChapter !== null && (
+      <>
+        <span class="crumb-sep" aria-hidden="true">·</span>
+        <details class="crumb-picker chapter">
+          <summary>
+            <span class="crumb-text">{chapterLabel}</span>
+            <span class="crumb-caret" aria-hidden="true">▾</span>
+          </summary>
+          <ul class="crumb-menu scroll" role="menu">
+            {activeChapters.map((ch) => (
+              <li>
+                <a
+                  class={ch.chapter === activeChapter ? 'active' : ''}
+                  href={url(`/${activeSlug}/${ch.chapter}`)}
+                  role="menuitem"
+                >
+                  <span class="cm-num">{ch.chapter}</span>
+                  <span class="cm-title">{ch.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </>
+    )}
+  </nav>
+
+  <div class="topbar-actions">
+    <DownloadMenu book={activeSlug} />
+  </div>
+</header>
