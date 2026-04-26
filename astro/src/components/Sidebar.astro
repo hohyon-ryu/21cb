@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { BOOKS, BOOK_ORDER, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
+  activeSlug?: BookSlug;
+  activeChapter?: number | null;
+};
+
+const all: Record<BookSlug, { chapter: number; title: string }[]> = {
+  genesis: [],
+  exodus: [],
+};
+
+for (const slug of BOOK_ORDER) {
+  const items = await getCollection(slug);
+  all[slug] = items
+    .map((it) => ({ chapter: it.data.chapter, title: it.data.title }))
+    .sort((a, b) => a.chapter - b.chapter);
+}
+
+const activeChapters = all[activeSlug] ?? [];
+const activeBookName = BOOKS[activeSlug].name;
+---
+
+<aside class="side" aria-label="성경 네비게이터">
+  <section class="nav-section">
+    <h2>책</h2>
+    <ul class="book-list">
+      {BOOK_ORDER.map((slug) => {
+        const written = all[slug].length;
+        const total = BOOKS[slug].total;
+        const cls = slug === activeSlug ? 'active' : '';
+        const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
+        return (
+          <li>
+            <a class={cls} href={href}>
+              {BOOKS[slug].name}
+              <em class="ch-count">{written}/{total}</em>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
+  <section class="nav-section">
+    <h2>{activeBookName} · 장</h2>
+    <ul class="chapter-list">
+      {activeChapters.map((ch) => (
+        <li>
+          <a
+            class={ch.chapter === activeChapter ? 'active' : ''}
+            href={url(`/${activeSlug}/${ch.chapter}`)}
+          >
+            <span class="ch-num">{ch.chapter}</span>
+            <span class="ch-title">{ch.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</aside>

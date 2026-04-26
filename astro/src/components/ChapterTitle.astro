@@ -1,0 +1,14 @@
+---
+const { bookName, chapter, title, emoji } = Astro.props as {
+  bookName: string;
+  chapter: number;
+  title: string;
+  emoji?: string;
+};
+---
+
+<h1 class="chapter-title" id={`${bookName}-${chapter}장-${title.replaceAll(' ', '-')}`}>
+  {emoji && <span class="ch-emoji" aria-hidden="true">{emoji}</span>}
+  <span class="ch-num">{bookName} {chapter}장</span>
+  <span class="ch-title">{title}</span>
+</h1>

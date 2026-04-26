@@ -1,0 +1,22 @@
+---
+import { url } from '../lib/url';
+
+const { book = 'genesis' } = Astro.props as { book?: string };
+
+const FILES: Record<string, { epub?: string; pdf?: string }> = {
+  genesis: { epub: '/files/genesis.epub', pdf: '/files/genesis.pdf' },
+};
+
+const files = FILES[book] ?? {};
+const hasAny = !!(files.epub || files.pdf);
+---
+
+{hasAny && (
+  <details class="dl-menu">
+    <summary class="action-btn primary">다운로드</summary>
+    <div class="dl-list" role="menu">
+      {files.epub && <a role="menuitem" href={url(files.epub)} download>전자책 (EPUB)</a>}
+      {files.pdf && <a role="menuitem" href={url(files.pdf)} download>PDF</a>}
+    </div>
+  </details>
+)}

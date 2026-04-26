@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Astro
+astro/.astro/
+astro/dist/
+astro/.env
+astro/.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local-only state
+.omc/

@@ -1,0 +1,94 @@
+/* 21세기에 읽는 성경 — 창세기 EPUB 스타일 (미니멀, 디바이스 기본 폰트) */
+
+body {
+  line-height: 1.75;
+}
+
+h1 {
+  font-size: 1.8em;
+  text-align: center;
+  font-weight: normal;
+  margin: 2em 0 1em;
+  letter-spacing: 0.05em;
+}
+
+h2 {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 1.5em 0 0.8em;
+}
+
+h3 {
+  font-size: 1.1em;
+  text-align: center;
+  margin: 2em 0 1em;
+  letter-spacing: 0.15em;
+  font-weight: bold;
+  color: #2a8fb8;  /* 청량한 하늘색 — 초등학생용 친근한 액센트 */
+}
+
+p {
+  margin: 0 0 0.7em 0;
+  text-align: justify;
+}
+
+/* 지도 삽화 */
+.map-figure {
+  margin: 0 0 1.2em 0;
+  text-align: center;
+}
+
+.map-figure img {
+  display: block;
+  width: 92%;
+  margin: 0 auto 0.4em auto;
+}
+
+.map-figure .map-caption {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+}
+
+/* 절 번호 — 빌드 시 <sup class="verse">로 명시 변환 */
+sup.verse {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 0;
+  margin-right: 0.15em;
+  color: #2a8fb8;
+}
+
+/* 인용 → 본문과 동일 */
+blockquote {
+  margin: 0.7em 0;
+  padding: 0;
+  border: none;
+  font-size: 1em;
+  line-height: 1.75;
+}
+blockquote p {
+  margin: 0;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+hr {
+  display: none;
+}
+
+/* 다음 장 예고 (마지막 인용) — 가운데 이탤릭만 */
+blockquote:last-child {
+  margin-top: 2.5em;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.95em;
+}

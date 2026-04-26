@@ -1,0 +1,128 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import DownloadMenu from '../components/DownloadMenu.astro';
+import type { BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const {
+  title,
+  description,
+  bookSlug = 'genesis',
+  chapter = null,
+  prev = null,
+  next = null,
+} = Astro.props as {
+  title: string;
+  description?: string;
+  bookSlug?: BookSlug;
+  chapter?: number | null;
+  prev?: { url: string; label: string } | null;
+  next?: { url: string; label: string } | null;
+};
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={title} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand-block">
+        <a class="brand" href={url('/')}>21세기 성경</a>
+      </div>
+      <DownloadMenu book={bookSlug} />
+    </header>
+
+    <main class="content-grid">
+      <Sidebar activeSlug={bookSlug} activeChapter={chapter} />
+
+      <section class="reader-wrap">
+        <article class="reader">
+          <slot />
+
+          <nav class="chapter-nav" aria-label="장 이동">
+            {prev ? (
+              <a class="chapter-nav-link prev" href={prev.url}>
+                <span class="dir">← 이전</span>
+                <span class="lbl">{prev.label}</span>
+              </a>
+            ) : <span></span>}
+            {next ? (
+              <a class="chapter-nav-link next" href={next.url}>
+                <span class="dir">다음 →</span>
+                <span class="lbl">{next.label}</span>
+              </a>
+            ) : <span></span>}
+          </nav>
+
+          {next && (
+            <div
+              id="end-sentinel"
+              data-next-url={next.url}
+              aria-hidden="true"
+            ></div>
+          )}
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sentinel = document.getElementById('end-sentinel');
+    const nextUrl = sentinel?.dataset.nextUrl;
+
+    if (sentinel && nextUrl) {
+      let inView = false;
+      const obs = new IntersectionObserver(
+        ([e]) => { inView = e.isIntersecting; },
+        { threshold: 0.5 }
+      );
+      obs.observe(sentinel);
+
+      let lastReset = 0;
+      let scrollAccum = 0;
+      let triggered = false;
+
+      function trigger() {
+        if (triggered) return;
+        triggered = true;
+        location.href = nextUrl;
+      }
+
+      window.addEventListener('wheel', (e: WheelEvent) => {
+        if (!inView || e.deltaY <= 0) return;
+        const now = Date.now();
+        if (now - lastReset > 600) scrollAccum = 0;
+        lastReset = now;
+        scrollAccum += e.deltaY;
+        if (scrollAccum > 240) trigger();
+      }, { passive: true });
+
+      let touchStartY: number | null = null;
+      window.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartY = e.touches[0]?.clientY ?? null;
+      }, { passive: true });
+      window.addEventListener('touchmove', (e: TouchEvent) => {
+        if (!inView || touchStartY === null) return;
+        const y = e.touches[0]?.clientY ?? null;
+        if (y === null) return;
+        if (touchStartY - y > 90) trigger();
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
