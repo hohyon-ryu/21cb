@@ -73,6 +73,8 @@ def migrate(book_ko: str, slug: str) -> int:
         body = VERSE_RE.sub(r'<sup class="verse">\1</sup> ', body)
         # 인라인 **bold** → <strong>: ) 또는 한글 인접 시 markdown 처리 실패하는 경우 회피
         body = re.sub(r"\*\*([^*\n]+?)\*\*", r"<strong>\1</strong>", body)
+        # 숫자 사이 물결(1~7장)이 GFM 취소선으로 파싱되는 문제 방지
+        body = re.sub(r"(\d)~(\d)", r"\1–\2", body)
         # 단락 끝 부연 italic을 별도 blockquote로 분리
         body = _split_tail_italic(body)
         body = body.replace("../assets/", "/assets/")

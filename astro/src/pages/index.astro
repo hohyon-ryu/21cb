@@ -1,4 +1,15 @@
 ---
 import { url } from '../lib/url';
-return Astro.redirect(url('/genesis/1'));
+const target = url('/genesis/1');
 ---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>21세기 성경</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <script set:html={`location.replace(${JSON.stringify(target)})`} />
+  </head>
+  <body></body>
+</html>

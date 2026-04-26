@@ -32,7 +32,7 @@ const chapterLabel = activeChapter
 <header class="topbar" role="banner">
  <div class="topbar-inner">
   <nav class="crumb" aria-label="네비게이션">
-    <a class="crumb-brand" href={url('/')} aria-label="21세기 성경 홈">
+    <a class="crumb-brand" href={url('/genesis/1')} aria-label="21세기 성경 홈">
       <span class="crumb-brand-text">21세기 성경</span>
       <span class="crumb-brand-icon" aria-hidden="true">📖</span>
     </a>
@@ -45,14 +45,12 @@ const chapterLabel = activeChapter
       <ul class="crumb-menu" role="menu">
         {BOOK_ORDER.map((slug) => {
           const written = all[slug].length;
-          const total = BOOKS[slug].total;
           const cls = slug === activeSlug ? 'active' : '';
           const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
           return (
             <li>
               <a class={cls} href={href} role="menuitem">
                 <span class="cm-name">{BOOKS[slug].name}</span>
-                <span class="cm-meta">{written}/{total}</span>
               </a>
             </li>
           );
@@ -91,3 +89,18 @@ const chapterLabel = activeChapter
   </div>
  </div>
 </header>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open], details.dl-menu[open]').forEach((d) => {
+      if (!d.contains(target)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open], details.dl-menu[open]').forEach((d) => {
+      d.open = false;
+    });
+  });
+</script>

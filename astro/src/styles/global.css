@@ -166,17 +166,6 @@ a { color: inherit; }
 .crumb-menu a.active { background: var(--accent-soft); color: var(--accent-strong); }
 
 .crumb-menu .cm-name { flex: 1; font-weight: 600; }
-.crumb-menu .cm-meta {
-  font-family: 'Pretendard', 'SUIT', -apple-system, sans-serif;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  background: var(--line-soft);
-  padding: 2px 7px;
-  border-radius: 999px;
-  flex-shrink: 0;
-}
 .crumb-menu .cm-num {
   flex-shrink: 0;
   width: 28px;
