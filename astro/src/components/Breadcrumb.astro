@@ -32,7 +32,10 @@ const chapterLabel = activeChapter
 <header class="topbar" role="banner">
  <div class="topbar-inner">
   <nav class="crumb" aria-label="네비게이션">
-    <a class="crumb-brand" href={url('/')}>21세기 성경</a>
+    <a class="crumb-brand" href={url('/')} aria-label="21세기 성경 홈">
+      <span class="crumb-brand-text">21세기 성경</span>
+      <span class="crumb-brand-icon" aria-hidden="true">📖</span>
+    </a>
     <span class="crumb-sep" aria-hidden="true">›</span>
 
     <details class="crumb-picker">

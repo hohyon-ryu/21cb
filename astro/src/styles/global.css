@@ -81,6 +81,19 @@ a { color: inherit; }
   padding: 4px 0;
 }
 
+.crumb-brand-text { display: inline; }
+.crumb-brand-icon {
+  display: none;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .crumb-brand-text { display: none; }
+  .crumb-brand-icon { display: inline; }
+}
+
 .crumb-sep {
   color: var(--muted);
   font-weight: 500;
