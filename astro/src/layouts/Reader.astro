@@ -94,17 +94,35 @@ const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
   </div>
 
   <script>
+    // 사이드바 — 탑바 가시 영역만큼 위에서 빼고 viewport 안에 들어가도록
+    const sideEl = document.querySelector<HTMLElement>('.side');
+    const topbarEl = document.querySelector<HTMLElement>('.topbar');
+    function adjustSide() {
+      if (!sideEl || !topbarEl) return;
+      const rect = topbarEl.getBoundingClientRect();
+      const topVisible = Math.max(0, rect.bottom);
+      const offset = Math.max(topVisible + 12, 16);
+      sideEl.style.top = offset + 'px';
+      sideEl.style.maxHeight = `calc(100vh - ${offset + 16}px)`;
+    }
+    if (sideEl && topbarEl) {
+      adjustSide();
+      window.addEventListener('scroll', adjustSide, { passive: true });
+      window.addEventListener('resize', adjustSide);
+    }
+
     const pullZone = document.querySelector<HTMLElement>('.pull-zone');
     const nextUrl = pullZone?.dataset.nextUrl;
 
     if (pullZone && nextUrl) {
       // iOS pull-to-refresh 스타일 — 단일 제스처. 끝까지 당겨서 임계점 넘기면 armed 상태,
       // 손 떼면(또는 휠 멈추면) trigger / 스냅백.
-      const TRIGGER = 180;        // 임계점 (이 이상이면 armed)
-      const MAX = 240;             // 시각적 최대치
-      const WHEEL_DAMP = 0.18;     // 휠은 트랙패드 inertia 때문에 매우 느리게
+      const TRIGGER = 120;
+      const MAX = 200;
+      const WHEEL_DAMP = 0.45;
       const TOUCH_DAMP = 0.95;
-      const WHEEL_RELEASE_MS = 500;
+      const WHEEL_RELEASE_MS = 90;
+      const WHEEL_ACTIVE_DELTA = 12;  // 이 이하의 deltaY는 inertia 꼬리로 간주, 타이머 리셋 X
 
       let stretch = 0;
       let armed = false;
@@ -171,13 +189,13 @@ const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
         return true;
       }
 
-      // Wheel — 휠 멈춘 후 일정 시간 지나면 release
+      // Wheel — 활성 스크롤만 release timer 리셋, inertia 꼬리는 무시 → 손 떼자마자 release
       window.addEventListener(
         'wheel',
         (e: WheelEvent) => {
           if (touching) return;
           if (handleDelta(e.deltaY, WHEEL_DAMP)) e.preventDefault();
-          if (stretch > 0) {
+          if (stretch > 0 && Math.abs(e.deltaY) >= WHEEL_ACTIVE_DELTA) {
             if (wheelReleaseTimer) clearTimeout(wheelReleaseTimer);
             wheelReleaseTimer = window.setTimeout(release, WHEEL_RELEASE_MS);
           }
