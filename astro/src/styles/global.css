@@ -150,10 +150,6 @@ a { color: inherit; }
 .picker[open] .picker-caret { transform: rotate(180deg); }
 
 .picker-list {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
   margin: 0;
   padding: 4px;
   list-style: none;
@@ -161,8 +157,6 @@ a { color: inherit; }
   border: 1px solid var(--ink);
   border-top: 0;
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-  z-index: 25;
   display: grid;
   gap: 1px;
 }
@@ -585,8 +579,8 @@ a { color: inherit; }
   }
   .dl-menu { align-self: center; }
   .content-grid { grid-template-columns: 1fr; gap: 14px; }
-  .side { position: static; max-height: none; order: 2; }
-  .reader-wrap { order: 1; }
+  .side { position: static; max-height: none; order: 1; }
+  .reader-wrap { order: 2; }
   .reader { padding: 0 20px; }
 }
 
