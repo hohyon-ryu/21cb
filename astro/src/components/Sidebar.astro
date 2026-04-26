@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { BOOKS, BOOK_ORDER, type BookSlug } from '../lib/books';
 import { url } from '../lib/url';
+import DownloadMenu from './DownloadMenu.astro';
 
 const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
   activeSlug?: BookSlug;
@@ -25,7 +26,15 @@ const activeBookName = BOOKS[activeSlug].name;
 ---
 
 <aside class="side" aria-label="성경 네비게이터">
-  <a class="brand" href={url('/')}>21세기 성경</a>
+  <a class="brand" href={url('/')}>
+    <span class="b-era">21세기</span>
+    <span class="b-rule" aria-hidden="true"></span>
+    <span class="b-name">성<span class="b-gap"></span>경</span>
+  </a>
+
+  <div class="side-actions">
+    <DownloadMenu book={activeSlug} />
+  </div>
 
   <section class="nav-section">
     <h2>책</h2>
