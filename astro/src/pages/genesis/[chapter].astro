@@ -5,46 +5,6 @@ import ChapterTitle from '../../components/ChapterTitle.astro';
 import { BOOKS } from '../../lib/books';
 import { url } from '../../lib/url';
 
-type ChapterImage = {
-  src: string;
-  alt: string;
-  caption: string;
-};
-
-function getHeroMap(chapter: number, title: string): ChapterImage {
-  const c = String(chapter).padStart(2, '0');
-
-  if (chapter === 1) {
-    return {
-      src: '/assets/maps/genesis/ch01_chapter_scene_creation_order.png',
-      alt: '빛과 물, 땅의 질서가 시작된다.',
-      caption: '빛과 물, 땅의 질서가 시작된다.',
-    };
-  }
-
-  if (chapter === 2) {
-    return {
-      src: '/assets/maps/genesis/ch02_chapter_map_eden_modern_location.png',
-      alt: '에덴의 좌표는 본문에 없고, 현대 이라크 남부·페르시아만 인접 메소포타미아를 추정 권역으로 본다.',
-      caption: '에덴의 좌표는 본문에 없고, 현대 이라크 남부·페르시아만 인접 메소포타미아를 추정 권역으로 본다.',
-    };
-  }
-
-  if (chapter === 3) {
-    return {
-      src: '/assets/maps/genesis/ch03_chapter_scene_fall_exile.png',
-      alt: '에덴의 경계에서 동쪽 땅으로 향하는 추방이 시작된다.',
-      caption: '에덴의 경계에서 동쪽 땅으로 향하는 추방이 시작된다.',
-    };
-  }
-
-  return {
-    src: `/assets/maps/genesis/ch${c}_chapter_scene.png`,
-    alt: `${title}의 장면.`,
-    caption: `${title}의 장면이 펼쳐진다.`,
-  };
-}
-
 export async function getStaticPaths() {
   const items = (await getCollection('genesis')).sort(
     (a, b) => a.data.chapter - b.data.chapter
@@ -75,7 +35,6 @@ const slug = 'genesis';
 const { chapter, title, emoji } = entry.data;
 const seoTitle = `${bookName} ${chapter}장 — ${title} | 21세기 성경`;
 const desc = `21세기에 읽는 성경. ${bookName} ${chapter}장: ${title}. 본문, 부연 설명, 고고학·세 종교 해석 비교.`;
-const heroMap = getHeroMap(chapter, title);
 ---
 
 <Reader
@@ -87,11 +46,5 @@ const heroMap = getHeroMap(chapter, title);
   next={next ? { url: url(`/${slug}/${next.chapter}`), label: `${next.chapter}장 · ${next.title}` } : null}
 >
   <ChapterTitle bookName={bookName} chapter={chapter} title={title} emoji={emoji} />
-  {chapter !== 2 && (
-    <div class="map-figure">
-      <img src={url(heroMap.src)} alt={heroMap.alt} loading="lazy" />
-      <p class="map-caption">{heroMap.caption}</p>
-    </div>
-  )}
   <Content />
 </Reader>

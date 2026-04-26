@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Sidebar from '../components/Sidebar.astro';
 import DownloadMenu from '../components/DownloadMenu.astro';
-import type { BookSlug } from '../lib/books';
+import { BOOKS, type BookSlug } from '../lib/books';
 import { url } from '../lib/url';
 
 const {
@@ -22,6 +22,8 @@ const {
 };
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const bookName = BOOKS[bookSlug].name;
+const contextLabel = chapter ? `${bookName} ${chapter}장` : bookName;
 ---
 
 <!doctype html>
@@ -42,9 +44,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   <div class="shell">
     <header class="topbar">
       <div class="brand-block">
+        <p class="brand-kicker">BIBLE READER</p>
         <a class="brand" href={url('/')}>21세기 성경</a>
+        <p class="brand-sub">{contextLabel} · 장별 본문과 주해</p>
       </div>
-      <DownloadMenu book={bookSlug} />
+      <div class="topbar-actions">
+        <DownloadMenu book={bookSlug} />
+      </div>
     </header>
 
     <main class="content-grid">
@@ -74,8 +80,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
               <div class="pull-inner">
                 <div class="pull-hint">
                   <span class="dir">
-                    <span class="dir-pulling">↓ 더 당기면 다음 장</span>
-                    <span class="dir-ready">↓ 놓으면 다음 장으로</span>
+                    <span class="dir-pulling">↓ 당겨서 다음 장</span>
+                    <span class="dir-armed">↑ 놓으면 다음 장</span>
                   </span>
                   <span class="lbl">{next.label}</span>
                 </div>
@@ -92,127 +98,100 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
     const nextUrl = pullZone?.dataset.nextUrl;
 
     if (pullZone && nextUrl) {
-      const MAX = 260;          // sticky 최대 늘어나는 높이
-      const CONFIRM = 80;        // held 상태에서 추가로 스크롤해야 하는 양
-      const WHEEL_DAMP = 0.45;
-      const TOUCH_DAMP = 0.85;
-      const RELEASE_MS = 280;
+      // iOS pull-to-refresh 스타일 — 단일 제스처. 끝까지 당겨서 임계점 넘기면 armed 상태,
+      // 손 떼면(또는 휠 멈추면) trigger / 스냅백.
+      const TRIGGER = 180;        // 임계점 (이 이상이면 armed)
+      const MAX = 240;             // 시각적 최대치
+      const WHEEL_DAMP = 0.18;     // 휠은 트랙패드 inertia 때문에 매우 느리게
+      const TOUCH_DAMP = 0.95;
+      const WHEEL_RELEASE_MS = 500;
 
-      type PullState = 'normal' | 'stretching' | 'held' | 'committing';
       let stretch = 0;
-      let state: PullState = 'normal';
-      let confirmAccum = 0;
-      let releaseTimer: number | null = null;
+      let armed = false;
+      let committing = false;
+      let touching = false;
+      let wheelReleaseTimer: number | null = null;
 
-      function setStretch(v: number) {
-        stretch = Math.max(0, Math.min(v, MAX));
-        pullZone!.style.height = stretch + 'px';
-        pullZone!.style.setProperty('--pull-ratio', (stretch / MAX).toString());
+      function applyResistance(target: number) {
+        // target이 MAX를 초과하지 않게, 끝부분 부드럽게 둔화
+        if (target <= 0) return 0;
+        if (target >= MAX) return MAX;
+        return target;
       }
 
-      function setState(s: PullState) {
-        state = s;
-        pullZone!.classList.toggle('held', s === 'held');
-        pullZone!.classList.toggle('committing', s === 'committing');
+      function setStretch(v: number) {
+        stretch = applyResistance(v);
+        pullZone!.style.height = stretch + 'px';
+        pullZone!.style.setProperty('--pull-ratio', Math.min(stretch / TRIGGER, 1).toString());
+        const newArmed = stretch >= TRIGGER;
+        if (newArmed !== armed) {
+          armed = newArmed;
+          pullZone!.classList.toggle('armed', armed);
+        }
       }
 
       function snapBack() {
-        if (state === 'committing') return;
+        if (committing) return;
         pullZone!.style.transition = 'height 280ms cubic-bezier(.2,.9,.3,1)';
         setStretch(0);
-        setState('normal');
-        confirmAccum = 0;
         window.setTimeout(() => { pullZone!.style.transition = ''; }, 320);
       }
 
       function commit() {
-        setState('committing');
-        pullZone!.style.transition = 'height 180ms ease-in';
-        pullZone!.style.height = (MAX + 60) + 'px';
-        window.setTimeout(() => { location.href = nextUrl; }, 200);
+        if (committing) return;
+        committing = true;
+        pullZone!.classList.add('committing');
+        pullZone!.style.transition = 'height 160ms ease-in';
+        pullZone!.style.height = (TRIGGER + 40) + 'px';
+        window.setTimeout(() => { location.href = nextUrl; }, 180);
       }
 
-      function scheduleRelease() {
-        if (releaseTimer) clearTimeout(releaseTimer);
-        releaseTimer = window.setTimeout(() => {
-          if (state === 'stretching') snapBack();
-        }, RELEASE_MS);
-      }
-
-      function clearReleaseTimer() {
-        if (releaseTimer) {
-          clearTimeout(releaseTimer);
-          releaseTimer = null;
-        }
+      function release() {
+        if (committing) return;
+        if (armed) commit();
+        else snapBack();
       }
 
       function atBottom() {
         return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
       }
 
-      // 단방향 delta를 받아 상태 머신을 진행. 가로채야 하면 true 반환
       function handleDelta(delta: number, dampening: number) {
-        if (state === 'committing') return true;
-
-        if (delta > 0) {
-          if (state === 'normal') {
-            if (!atBottom()) return false;
-            setState('stretching');
-            setStretch(stretch + delta * dampening);
-            if (stretch >= MAX) setState('held');
-            else scheduleRelease();
-            return true;
-          }
-          if (state === 'stretching') {
-            setStretch(stretch + delta * dampening);
-            if (stretch >= MAX) {
-              setState('held');
-              clearReleaseTimer();
-            } else {
-              scheduleRelease();
-            }
-            return true;
-          }
-          if (state === 'held') {
-            confirmAccum += delta;
-            if (confirmAccum >= CONFIRM) commit();
-            return true;
-          }
+        if (committing) return true;
+        // 활성 조건: 화면 끝에서 아래로 스크롤하거나 이미 stretch 상태인 경우
+        const active = stretch > 0 || (delta > 0 && atBottom());
+        if (!active) return false;
+        const next = stretch + delta * dampening;
+        if (next <= 0) {
+          // 위로 끝까지 풀면 끝
+          setStretch(0);
+        } else {
+          setStretch(next);
         }
-
-        if (delta < 0) {
-          if (state === 'held') {
-            snapBack();
-            return true;
-          }
-          if (state === 'stretching') {
-            const next = stretch + delta * dampening;
-            if (next <= 0) snapBack();
-            else {
-              setStretch(next);
-              scheduleRelease();
-            }
-            return true;
-          }
-        }
-
-        return false;
+        return true;
       }
 
+      // Wheel — 휠 멈춘 후 일정 시간 지나면 release
       window.addEventListener(
         'wheel',
         (e: WheelEvent) => {
+          if (touching) return;
           if (handleDelta(e.deltaY, WHEEL_DAMP)) e.preventDefault();
+          if (stretch > 0) {
+            if (wheelReleaseTimer) clearTimeout(wheelReleaseTimer);
+            wheelReleaseTimer = window.setTimeout(release, WHEEL_RELEASE_MS);
+          }
         },
         { passive: false }
       );
 
-      // Touch — 매 프레임마다 직전 touch 위치와의 증분 delta
+      // Touch — touchend 시점에 release
       let lastTouchY: number | null = null;
       window.addEventListener(
         'touchstart',
         (e: TouchEvent) => {
-          if (state === 'committing') return;
+          if (committing) return;
+          touching = true;
           lastTouchY = e.touches[0]?.clientY ?? null;
         },
         { passive: true }
@@ -232,8 +211,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
         { passive: false }
       );
       window.addEventListener('touchend', () => {
+        touching = false;
         lastTouchY = null;
-        if (state === 'stretching') snapBack();
+        release();
       });
     }
   </script>

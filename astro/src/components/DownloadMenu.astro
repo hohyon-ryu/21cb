@@ -13,7 +13,10 @@ const hasAny = !!(files.epub || files.pdf);
 
 {hasAny && (
   <details class="dl-menu">
-    <summary class="action-btn primary">다운로드</summary>
+    <summary class="action-btn primary">
+      <span class="btn-dot" aria-hidden="true"></span>
+      내려받기
+    </summary>
     <div class="dl-list" role="menu">
       {files.epub && <a role="menuitem" href={url(files.epub)} download>전자책 (EPUB)</a>}
       {files.pdf && <a role="menuitem" href={url(files.pdf)} download>PDF</a>}
