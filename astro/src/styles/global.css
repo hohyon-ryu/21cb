@@ -69,7 +69,7 @@ a { color: inherit; }
 .crumb-picker > summary,
 .crumb-sep {
   font-family: 'MaruBuri', 'Noto Serif KR', serif;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--ink);
   line-height: 1.4;
@@ -85,7 +85,7 @@ a { color: inherit; }
 .crumb-brand-icon {
   display: none;
   font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
