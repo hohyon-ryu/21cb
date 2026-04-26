@@ -57,8 +57,10 @@ def post_process_chapter_html(html: str) -> str:
 
 
 def build_cover_html() -> str:
-    return """
+    cover_img = (ROOT / "assets/maps/genesis/01_eden_and_four_rivers.png").as_posix()
+    return f"""
 <div class="cover">
+  <img class="cover-image" src="{cover_img}" alt="에덴과 네 강의 지도" />
   <div class="ornament">✦ ✦ ✦</div>
   <div class="subtitle">21 세 기 에 &nbsp; 읽 는</div>
   <div class="main-title">성 경</div>

@@ -51,7 +51,7 @@ PARTS = [
 def get_edition_label() -> str:
     if "초등" in SRC_NAME or "kid" in SRC_NAME.lower():
         return "초등학생을 위한 쉬운 번역본"
-    return "현대 번역본 (중학생 수준)"
+    return "현대 번역본"
 
 
 def make_intro_md() -> str:
@@ -149,6 +149,7 @@ def main():
 
         edition = get_edition_label()
         resource_path = os.pathsep.join([str(CH_DIR), str(ROOT), str(ROOT / "assets")])
+        cover = ROOT / "assets/maps/genesis/01_eden_and_four_rivers.png"
         cmd = [
             "pandoc",
             "-o", str(OUT),
@@ -159,6 +160,7 @@ def main():
             "--metadata", f"creator=21세기에 읽는 성경 ({edition})",
             "--metadata", "lang=ko",
             "--css", str(CSS),
+            "--epub-cover-image", str(cover),
             "--toc",
             "--toc-depth=1",
             "--split-level=1",

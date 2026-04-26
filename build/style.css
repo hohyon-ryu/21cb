@@ -89,10 +89,18 @@ body {
   padding: 40mm 30mm;
   box-sizing: border-box;
 }
+.cover .cover-image {
+  width: 60%;
+  max-width: 110mm;
+  height: auto;
+  margin-bottom: 14mm;
+  border: 1pt solid var(--secondary);
+  box-shadow: 0 2mm 4mm rgba(0,0,0,0.08);
+}
 .cover .ornament {
-  font-size: 22pt;
+  font-size: 18pt;
   color: var(--accent);
-  margin-bottom: 22mm;
+  margin-bottom: 14mm;
   letter-spacing: 10pt;
 }
 .cover .subtitle {
