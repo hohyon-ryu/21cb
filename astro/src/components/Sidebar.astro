@@ -23,6 +23,11 @@ for (const slug of BOOK_ORDER) {
 
 const activeChapters = all[activeSlug] ?? [];
 const activeBookName = BOOKS[activeSlug].name;
+const currentChapterTitle =
+  activeChapters.find((c) => c.chapter === activeChapter)?.title ?? '';
+const currentChapterLabel = activeChapter
+  ? `${activeChapter}장 · ${currentChapterTitle}`
+  : '장 선택';
 ---
 
 <aside class="side" aria-label="성경 네비게이터">
@@ -36,9 +41,13 @@ const activeBookName = BOOKS[activeSlug].name;
     <DownloadMenu book={activeSlug} />
   </div>
 
-  <section class="nav-section">
-    <h2>책</h2>
-    <ul class="book-list">
+  <details class="picker book-picker">
+    <summary>
+      <span class="picker-label">책</span>
+      <span class="picker-value">{activeBookName}</span>
+      <span class="picker-caret" aria-hidden="true">▾</span>
+    </summary>
+    <ul class="picker-list" role="menu">
       {BOOK_ORDER.map((slug) => {
         const written = all[slug].length;
         const total = BOOKS[slug].total;
@@ -46,30 +55,37 @@ const activeBookName = BOOKS[activeSlug].name;
         const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
         return (
           <li>
-            <a class={cls} href={href}>
-              {BOOKS[slug].name}
-              <em class="ch-count">{written}/{total}</em>
+            <a class={cls} href={href} role="menuitem">
+              <span class="pi-name">{BOOKS[slug].name}</span>
+              <span class="pi-meta">{written}/{total}</span>
             </a>
           </li>
         );
       })}
     </ul>
-  </section>
+  </details>
 
-  <section class="nav-section">
-    <h2>{activeBookName} · 장</h2>
-    <ul class="chapter-list">
-      {activeChapters.map((ch) => (
-        <li>
-          <a
-            class={ch.chapter === activeChapter ? 'active' : ''}
-            href={url(`/${activeSlug}/${ch.chapter}`)}
-          >
-            <span class="ch-num">{ch.chapter}</span>
-            <span class="ch-title">{ch.title}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  {activeChapters.length > 0 && (
+    <details class="picker chapter-picker">
+      <summary>
+        <span class="picker-label">장</span>
+        <span class="picker-value">{currentChapterLabel}</span>
+        <span class="picker-caret" aria-hidden="true">▾</span>
+      </summary>
+      <ul class="picker-list scroll" role="menu">
+        {activeChapters.map((ch) => (
+          <li>
+            <a
+              class={ch.chapter === activeChapter ? 'active' : ''}
+              href={url(`/${activeSlug}/${ch.chapter}`)}
+              role="menuitem"
+            >
+              <span class="ch-num">{ch.chapter}</span>
+              <span class="ch-title">{ch.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  )}
 </aside>
