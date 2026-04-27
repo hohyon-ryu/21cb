@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const ROOT = '/Users/will/workspace/bible';
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(SCRIPT_DIR, '../..');
 const DATA_FILE = path.join(ROOT, 'scripts/book_cover_data.json');
 const OUT_DIR = path.join(ROOT, 'astro/public/assets/covers/books');
 const RAW_DIR = path.join(OUT_DIR, '_raw');
@@ -121,7 +123,8 @@ async function composeCover(book) {
   await sharp(raw)
     .resize(WIDTH, HEIGHT, { fit: 'cover', position: 'attention' })
     .composite([{ input: overlaySvg(book), left: 0, top: 0 }])
-    .jpeg({ quality: 88, mozjpeg: true })
+    .withMetadata()
+    .jpeg({ quality: 88, progressive: false })
     .toFile(out);
 }
 

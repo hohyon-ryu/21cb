@@ -670,10 +670,10 @@ a { color: inherit; }
 
 .book-cover img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1.414;
-  object-fit: cover;
+  margin: 0 auto;
 }
 
 .reader h1.chapter-title {
@@ -757,11 +757,10 @@ a { color: inherit; }
 
 .reader .map-figure img {
   display: block;
-  width: 100%;
-  height: auto !important;
+  width: auto;
   max-width: 100%;
-  aspect-ratio: auto;
-  object-fit: contain;
+  height: auto;
+  margin: 0 auto;
   image-orientation: from-image;
 }
 
