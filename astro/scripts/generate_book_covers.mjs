@@ -185,8 +185,8 @@ const options = parseArgs();
 const allBooks = JSON.parse(await fs.readFile(DATA_FILE, 'utf8'));
 const books = options.only ? allBooks.filter((book) => options.only.includes(book.slug)) : allBooks;
 
-if (allBooks.length !== 66) {
-  throw new Error(`expected 66 books, got ${allBooks.length}`);
+if (allBooks.length !== 67) {
+  throw new Error(`expected 67 books, got ${allBooks.length}`);
 }
 
 await fs.mkdir(RAW_DIR, { recursive: true });

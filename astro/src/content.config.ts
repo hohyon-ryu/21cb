@@ -131,4 +131,5 @@ export const collections = {
   john3: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/john3' }), schema: chapter }),
   jude: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/jude' }), schema: chapter }),
   revelation: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/revelation' }), schema: chapter }),
+  harmony: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/harmony' }), schema: chapter }),
 };

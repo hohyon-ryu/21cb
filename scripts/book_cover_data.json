@@ -64,5 +64,6 @@
   {"slug":"john2","name":"요한이서","scene":"short letter delivered to a modest house church, doorway and woven curtain"},
   {"slug":"john3","name":"요한삼서","scene":"travelling brothers welcomed at a doorway, hospitality table in soft daylight"},
   {"slug":"jude","name":"유다서","scene":"contending for faith, stormy sea cliffs, ancient warning scroll"},
-  {"slug":"revelation","name":"요한계시록","scene":"Patmos island rocks, stormy Aegean sea, seven lampstands glowing in darkness"}
+  {"slug":"revelation","name":"요한계시록","scene":"Patmos island rocks, stormy Aegean sea, seven lampstands glowing in darkness"},
+  {"slug":"harmony","name":"통합복음서","scene":"four ancient scrolls braiding into one open codex, soft dawn light over Galilee hills, calm waters of the Sea of Galilee at sunrise"}
 ]

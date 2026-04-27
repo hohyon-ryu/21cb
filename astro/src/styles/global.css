@@ -661,6 +661,38 @@ a { color: inherit; }
   line-height: 1.9;
 }
 
+.harmony-banner {
+  display: block;
+  margin: 0 auto 2.4em;
+  max-width: 100%;
+  padding: 0.95em 1.1em;
+  border: 1px solid var(--line);
+  border-left: 3px solid #6b6452;
+  background: #f7f3e9;
+  font-size: 0.92em;
+  line-height: 1.55;
+  color: #3a3526;
+}
+
+.harmony-banner strong {
+  display: block;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: #6b5a2e;
+}
+
+.harmony-banner span {
+  display: block;
+  color: #5a533f;
+}
+
+.cm-section-appendix {
+  margin-top: 0.6em;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.4em;
+}
+
 .book-cover {
   margin: 0 auto 3em;
   max-width: min(320px, 78%);
