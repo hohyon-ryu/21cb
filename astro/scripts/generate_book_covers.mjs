@@ -9,7 +9,9 @@ const RAW_DIR = path.join(OUT_DIR, '_raw');
 
 const WIDTH = 1024;
 const HEIGHT = 1448;
-const CONCURRENCY = 2;
+const GEN_WIDTH = 768;
+const GEN_HEIGHT = 1086;
+const CONCURRENCY = 1;
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -44,21 +46,26 @@ function buildPrompt(book) {
   ].join(' ');
 }
 
-async function fetchImageBuffer(prompt, seed, retries = 8) {
+async function fetchImageBuffer(prompt, seed, retries = 12) {
   const url =
     `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
-    `?width=${WIDTH}&height=${HEIGHT}&seed=${seed}&nologo=true&enhance=true`;
+    `?width=${GEN_WIDTH}&height=${GEN_HEIGHT}&seed=${seed}&nologo=true`;
 
   for (let attempt = 1; attempt <= retries; attempt += 1) {
     try {
       const res = await fetch(url, {
         headers: { Accept: 'image/*' },
-        signal: AbortSignal.timeout(70000),
+        signal: AbortSignal.timeout(35000),
       });
 
       if (res.ok) {
         const buffer = Buffer.from(await res.arrayBuffer());
         if (buffer.byteLength > 20000) return buffer;
+      }
+
+      if (res.status === 429) {
+        await sleep(18000 * attempt);
+        continue;
       }
 
       if (res.status !== 429 && res.status < 500) {
@@ -68,7 +75,7 @@ async function fetchImageBuffer(prompt, seed, retries = 8) {
       if (attempt === retries) throw err;
     }
 
-    await sleep(2500 * attempt);
+    await sleep(3500 * attempt);
   }
 
   throw new Error('exhausted retries');
