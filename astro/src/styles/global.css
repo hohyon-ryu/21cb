@@ -663,17 +663,18 @@ a { color: inherit; }
 
 .book-cover {
   margin: 0 auto 3em;
-  max-width: min(420px, 100%);
+  max-width: min(320px, 78%);
   border: 1px solid var(--line);
   background: var(--paper);
 }
 
 .book-cover img {
   display: block;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  margin: 0 auto;
+  aspect-ratio: 1024 / 1448;
+  object-fit: cover;
+  margin: 0;
 }
 
 .reader h1.chapter-title {

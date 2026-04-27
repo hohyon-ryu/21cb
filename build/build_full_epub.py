@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 BUILD = ROOT / "build"
 CSS = BUILD / "epub.css"
 OUT = BUILD / "21세기성경_전체.epub"
+FULL_COVER = ROOT / "astro/public/assets/covers/full.jpg"
 
 sys.path.insert(0, str(BUILD))
 from build_epub import (  # noqa: E402
@@ -47,12 +48,20 @@ CHAPTER_RE = re.compile(r"^(\d+)장\.md$")
 
 
 def make_master_intro() -> str:
-    return """---
+    cover_md = ""
+    if FULL_COVER.exists():
+        cover_md = (
+            '<div class="book-cover-page">\n'
+            f'  <img src="{FULL_COVER.as_posix()}" alt="21세기에 읽는 성경 전체 표지" />\n'
+            '</div>\n\n'
+        )
+    return f"""---
 title: 21세기에 읽는 성경
 subtitle: 구약 39권 + 신약 27권 — 현대 번역본 합본
 lang: ko
 ---
 
+{cover_md}\
 # 21세기에 읽는 성경
 
 **구약 39권 + 신약 27권 합본**
@@ -157,7 +166,7 @@ def main():
         resource_paths = [str(ROOT), str(ROOT / "astro/public")] + [
             str(ROOT / b) for b in BOOKS_ORDER if (ROOT / b).exists()
         ]
-        cover = get_book_cover_path("창세기")
+        cover = FULL_COVER if FULL_COVER.exists() else get_book_cover_path("창세기")
         cmd = [
             "pandoc",
             "-o", str(OUT),

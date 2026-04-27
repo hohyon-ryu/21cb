@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hohyon-ryu.github.io/21cb/sitemap-index.xml
