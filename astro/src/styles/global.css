@@ -872,3 +872,90 @@ a { color: inherit; }
   .topbar-inner { padding: 10px 16px; }
   .reader { padding: 0 16px; }
 }
+
+/* ===== Print styles ===== */
+@media print {
+  @page {
+    size: A4;
+    margin: 22mm 18mm 24mm 18mm;
+    @bottom-center { content: counter(page); font-size: 9pt; color: #888; }
+  }
+
+  :root {
+    --paper: #fff;
+    --bg: #fff;
+    --ink: #111;
+    --ink-soft: #1a1a1a;
+    --muted: #555;
+    --line: #ccc;
+    --line-soft: #eee;
+    --accent: #222;
+    --accent-soft: #f4f4f4;
+    --accent-strong: #000;
+    --shadow: none;
+  }
+
+  body { background: #fff; color: #000; }
+
+  .topbar, .chapter-nav, .topbar-actions, .crumb-picker, details, script,
+  .book-cover, nav.chapter-nav { display: none !important; }
+
+  .shell { max-width: none; padding: 0; }
+  .reader { max-width: none; padding: 0; font-size: 11pt; line-height: 1.7; }
+
+  .reader h1.chapter-title { page-break-after: avoid; margin: 0 0 1.4em; }
+  .reader h1.chapter-title .ch-emoji { font-size: 1.6rem; margin-bottom: 0.3em; }
+  .reader h1.chapter-title .ch-num { font-size: 0.6rem; }
+  .reader h1.chapter-title .ch-title { font-size: 1.5rem; }
+
+  .reader h2, .reader h3 { page-break-after: avoid; }
+  .reader p { orphans: 3; widows: 3; }
+  .reader blockquote {
+    background: var(--accent-soft);
+    border-left: 2px solid #888;
+    border-radius: 0;
+    page-break-inside: avoid;
+  }
+  .reader sup.verse { color: #555; }
+  .reader hr { max-width: 60px; margin: 1.4em auto; border-top: 1px solid #999; }
+
+  /* Hide images in print except book maps; keep maps */
+  .reader .map-figure { page-break-inside: avoid; border: 1px solid #999; }
+
+  a { color: inherit; text-decoration: none; }
+  a[href^="http"]::after { content: ""; }
+}
+
+/* Same print styling for kids reader */
+@media print {
+  .kids-body { background: #fff; color: #000; }
+  .kids-reader {
+    max-width: none;
+    padding: 0;
+    font-size: 12pt;
+    line-height: 1.7;
+  }
+  .kids-reader h1.chapter-title {
+    page-break-after: avoid;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0 0 0.8em;
+  }
+  .kids-reader h1.chapter-title::before { display: none; }
+  .kids-reader sup.verse {
+    background: none;
+    color: #555;
+    border-radius: 0;
+    padding: 0 0.2em 0 0;
+    font-weight: 600;
+  }
+  .kids-reader strong { background: none; padding: 0; color: #000; font-weight: 700; }
+  .kids-reader blockquote {
+    background: #f4f4f4;
+    border-left: 2px solid #888;
+    border-radius: 0;
+  }
+  .kids-reader blockquote::before { display: none; }
+  .kids-reader hr { background: none; border-top: 1px solid #aaa; height: auto; max-width: 60px; margin: 1.4em auto; }
+}

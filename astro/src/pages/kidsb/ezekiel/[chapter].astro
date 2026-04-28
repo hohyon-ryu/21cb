@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import KidsReader from '../../../layouts/KidsReader.astro';
+import ChapterTitle from '../../../components/ChapterTitle.astro';
+import { url } from '../../../lib/url';
+
+export async function getStaticPaths() {
+  const items = (await getCollection('kidsbEzekiel')).sort(
+    (a, b) => a.data.chapter - b.data.chapter
+  );
+
+  return items.map((entry, idx) => ({
+    params: { chapter: String(entry.data.chapter) },
+    props: {
+      entry,
+      prev: items[idx - 1]
+        ? { chapter: items[idx - 1].data.chapter, title: items[idx - 1].data.title }
+        : null,
+      next: items[idx + 1]
+        ? { chapter: items[idx + 1].data.chapter, title: items[idx + 1].data.title }
+        : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props as {
+  entry: Awaited<ReturnType<typeof getCollection<'kidsbEzekiel'>>>[number];
+  prev: { chapter: number; title: string } | null;
+  next: { chapter: number; title: string } | null;
+};
+const { Content } = await render(entry);
+const { chapter, title, emoji } = entry.data;
+const seoTitle = `어린이 성경 — 에스겔 ${chapter}장 · ${title}`;
+const desc = `어린이가 읽기 쉬운 21세기 성경. 에스겔 ${chapter}장: ${title}.`;
+---
+
+<KidsReader
+  title={seoTitle}
+  description={desc}
+  bookSlug="ezekiel"
+  chapter={chapter}
+  prev={prev ? { url: url(`/kidsb/ezekiel/${prev.chapter}`), label: `${prev.chapter}장 · ${prev.title}` } : null}
+  next={next ? { url: url(`/kidsb/ezekiel/${next.chapter}`), label: `${next.chapter}장 · ${next.title}` } : null}
+>
+  <ChapterTitle bookName="에스겔" chapter={chapter} title={title} emoji={emoji} />
+  <Content />
+</KidsReader>

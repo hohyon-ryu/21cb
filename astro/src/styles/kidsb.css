@@ -1,0 +1,243 @@
+/* ===== kidsb — 어린이 성경 (귀엽지만 깔끔하게) ===== */
+
+.kids-body {
+  --paper: #fffaf2;
+  --bg: #fdf4e3;
+  --ink: #2b2520;
+  --ink-soft: #4a3f37;
+  --muted: #8a7a6c;
+  --line: #f0d9b8;
+  --line-soft: #faecd0;
+  --accent: #e07a3c;        /* 따뜻한 코랄 */
+  --accent-soft: #ffe5cc;
+  --accent-strong: #c45a1f;
+  --pink: #ffb3c1;
+  --mint: #b8e0d2;
+  --sky: #c5d8f1;
+  --sun: #ffd966;
+  --shadow-soft: 0 4px 14px rgba(224, 122, 60, 0.08);
+  --shadow-puffy: 0 8px 22px rgba(224, 122, 60, 0.12);
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Pretendard', 'SUIT', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.kids-body .topbar {
+  background: var(--paper);
+  border-bottom: 2px solid var(--line);
+}
+
+.kids-body .crumb-brand,
+.kids-body .crumb-picker > summary,
+.kids-body .crumb-sep {
+  font-family: 'Pretendard', 'SUIT', sans-serif;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* shell tweak */
+.kids-body .shell { max-width: 760px; padding: 28px 24px 64px; }
+
+/* reader */
+.kids-reader {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 8px;
+  font-size: clamp(18px, 1.1vw, 21px);
+  line-height: 2;
+}
+
+/* chapter title — soft pillow */
+.kids-reader h1.chapter-title {
+  text-align: center;
+  margin: 0.5em 0 2em;
+  padding: 1.6em 1em 1.4em;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 28px;
+  box-shadow: var(--shadow-puffy);
+  position: relative;
+}
+
+.kids-reader h1.chapter-title::before {
+  content: "✨";
+  position: absolute;
+  top: -14px; left: 50%; transform: translateX(-50%);
+  font-size: 1.8rem;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.kids-reader h1.chapter-title .ch-emoji {
+  display: block;
+  font-size: 3rem;
+  line-height: 1;
+  margin: 0.2em 0 0.4em;
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+}
+
+.kids-reader h1.chapter-title .ch-num {
+  display: block;
+  width: auto;
+  flex-shrink: 1;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.55em;
+}
+
+.kids-reader h1.chapter-title .ch-title {
+  display: block;
+  font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  max-width: 16em;
+  margin: 0 auto;
+}
+
+/* h3 — section subtitles ("첫째 날 — 빛이 생겼어요") */
+.kids-reader h3 {
+  margin: 1.8em 0 0.6em;
+  font-size: clamp(1.1rem, 1.5vw, 1.32rem);
+  font-weight: 800;
+  color: var(--accent-strong);
+  letter-spacing: -0.005em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.kids-reader h3::before {
+  content: "🌟";
+  font-size: 1.05em;
+}
+
+/* paragraphs */
+.kids-reader p {
+  margin: 0 0 1em;
+  text-align: left;
+  text-wrap: pretty;
+  color: var(--ink-soft);
+  word-break: keep-all;
+}
+
+/* verse number bubble */
+.kids-reader sup.verse {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 800;
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  margin-right: 0.35em;
+  vertical-align: 0.15em;
+  line-height: 1;
+}
+
+/* strong (bold) */
+.kids-reader strong {
+  color: var(--accent-strong);
+  font-weight: 800;
+  background: linear-gradient(to top, var(--sun) 0 30%, transparent 30%);
+  padding: 0 0.05em;
+}
+
+/* blockquote — gentle highlight box */
+.kids-reader blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.2em 1em 2.6em;
+  background: var(--line-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: 18px;
+  color: var(--ink-soft);
+  font-size: 0.96em;
+  line-height: 1.85;
+  position: relative;
+}
+
+.kids-reader blockquote::before {
+  content: "💡";
+  position: absolute;
+  top: 0.95em; left: 0.85em;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.kids-reader blockquote p { margin: 0 0 0.5em; }
+.kids-reader blockquote p:last-child { margin: 0; }
+
+/* hr — wavy / dotted divider with hearts */
+.kids-reader hr {
+  border: 0;
+  margin: 2.5em auto;
+  width: 80%;
+  height: 24px;
+  background-image: radial-gradient(circle at center, var(--accent-soft) 4px, transparent 5px);
+  background-size: 24px 24px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* chapter nav buttons */
+.kids-reader + .nope {} /* unused */
+
+.kids-body .chapter-nav {
+  margin: 4em 0 1em;
+  padding-top: 1.8em;
+  border-top: 2px dashed var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.kids-body .chapter-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: 'Pretendard', 'SUIT', sans-serif;
+  font-weight: 600;
+  transition: transform 130ms ease, background 130ms ease, border-color 130ms ease, box-shadow 130ms ease;
+}
+
+.kids-body .chapter-nav-link:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.kids-body .chapter-nav-link .dir {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.kids-body .chapter-nav-link .lbl {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .kids-reader { padding: 0 4px; }
+  .kids-reader h1.chapter-title { padding: 1.4em 0.8em 1.2em; border-radius: 22px; }
+  .kids-reader sup.verse { padding: 0.12em 0.45em; }
+}

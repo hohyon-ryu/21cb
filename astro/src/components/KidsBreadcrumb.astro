@@ -1,0 +1,146 @@
+---
+import { getCollection } from 'astro:content';
+import { BOOKS, OT_BOOKS, NT_BOOKS, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
+  activeSlug?: BookSlug;
+  activeChapter?: number | null;
+};
+
+// kidsb-* 컬렉션 키 매핑 (slug → kidsbXxx)
+function toCollectionKey(slug: string): string {
+  return 'kidsb' + slug.split('-').map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join('');
+}
+
+// 사용 가능한 모든 kidsb 책 목록 — 컨텐츠가 있는 것만
+const ALL_BOOK_SLUGS: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS];
+
+const allChapters: Record<string, { chapter: number; title: string; emoji: string }[]> = {};
+for (const slug of ALL_BOOK_SLUGS) {
+  const key = toCollectionKey(slug);
+  try {
+    const items = await getCollection(key as any);
+    allChapters[slug] = items
+      .map((e: any) => ({ chapter: e.data.chapter, title: e.data.title, emoji: e.data.emoji ?? '' }))
+      .sort((a, b) => a.chapter - b.chapter);
+  } catch {
+    allChapters[slug] = [];
+  }
+}
+
+const activeChapters = allChapters[activeSlug] ?? [];
+const activeBookName = BOOKS[activeSlug].name;
+const activeBookEmoji = BOOKS[activeSlug].emoji;
+const activeChapterEntry = activeChapters.find((c) => c.chapter === activeChapter);
+const activeChapterTitle = activeChapterEntry?.title ?? '';
+const activeChapterEmoji = activeChapterEntry?.emoji ?? '';
+const chapterLabel = activeChapter
+  ? `${activeChapter}장 — ${activeChapterTitle}`
+  : '장 선택';
+
+// 컨텐츠 있는 책만 picker에 표시
+const otAvailable = OT_BOOKS.filter((s) => allChapters[s].length > 0);
+const ntAvailable = NT_BOOKS.filter((s) => allChapters[s].length > 0);
+---
+
+<header class="topbar" role="banner">
+  <div class="topbar-inner">
+    <nav class="crumb" aria-label="네비게이션">
+      <details class="crumb-picker brand">
+        <summary aria-label="버전 선택">
+          <span class="crumb-emoji" aria-hidden="true">🌱</span>
+          <span class="crumb-text">어린이 성경</span>
+        </summary>
+        <ul class="crumb-menu" role="menu">
+          <li>
+            <a class="active" href={url(`/kidsb/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">🌱</span>
+              <span class="cm-name">어린이 성경</span>
+            </a>
+          </li>
+          <li>
+            <a href={url(`/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">📖</span>
+              <span class="cm-name">21세기 성경</span>
+            </a>
+          </li>
+        </ul>
+      </details>
+
+      <details class="crumb-picker">
+        <summary>
+          <span class="crumb-emoji" aria-hidden="true">{activeBookEmoji}</span>
+          <span class="crumb-text">{activeBookName}</span>
+        </summary>
+        <ul class="crumb-menu scroll" role="menu">
+          {otAvailable.length > 0 && <li class="cm-section" aria-hidden="true">오랜 약속</li>}
+          {otAvailable.map((slug) => {
+            const cls = slug === activeSlug ? 'active' : '';
+            const href = url(`/kidsb/${slug}/${allChapters[slug][0].chapter}`);
+            return (
+              <li>
+                <a class={cls} href={href} role="menuitem">
+                  <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                  <span class="cm-name">{BOOKS[slug].name}</span>
+                </a>
+              </li>
+            );
+          })}
+          {ntAvailable.length > 0 && <li class="cm-section" aria-hidden="true">새 약속</li>}
+          {ntAvailable.map((slug) => {
+            const cls = slug === activeSlug ? 'active' : '';
+            const href = url(`/kidsb/${slug}/${allChapters[slug][0].chapter}`);
+            return (
+              <li>
+                <a class={cls} href={href} role="menuitem">
+                  <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                  <span class="cm-name">{BOOKS[slug].name}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+
+      {activeChapters.length > 0 && activeChapter !== null && (
+        <details class="crumb-picker chapter">
+          <summary>
+            <span class="crumb-emoji" aria-hidden="true">{activeChapterEmoji}</span>
+            <span class="crumb-text">{chapterLabel}</span>
+          </summary>
+          <ul class="crumb-menu scroll" role="menu">
+            {activeChapters.map((entry) => (
+              <li>
+                <a
+                  class={entry.chapter === activeChapter ? 'active' : ''}
+                  href={url(`/kidsb/${activeSlug}/${entry.chapter}`)}
+                  role="menuitem"
+                >
+                  <span class="cm-num">{entry.chapter}</span>
+                  <span class="cm-emoji" aria-hidden="true">{entry.emoji}</span>
+                  <span class="cm-title">{entry.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open]').forEach((d) => {
+      if (!d.contains(target)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open]').forEach((d) => {
+      d.open = false;
+    });
+  });
+</script>

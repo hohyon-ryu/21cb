@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import '../styles/kidsb.css';
+import KidsBreadcrumb from '../components/KidsBreadcrumb.astro';
+import { BOOKS, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const {
+  title,
+  description,
+  bookSlug = 'genesis',
+  chapter = null,
+  prev = null,
+  next = null,
+} = Astro.props as {
+  title: string;
+  description?: string;
+  bookSlug?: BookSlug;
+  chapter?: number | null;
+  prev?: { url: string; label: string } | null;
+  next?: { url: string; label: string } | null;
+};
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const bookName = BOOKS[bookSlug].name;
+const ogDescription = description ?? `어린이 성경 — ${bookName} ${chapter ?? ''}장.`;
+---
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={ogDescription} />
+  <meta name="theme-color" content="#fdf4e3" />
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="canonical" href={canonical} />
+</head>
+<body class="kids-body">
+  <KidsBreadcrumb activeSlug={bookSlug} activeChapter={chapter} />
+
+  <main class="shell">
+    <section class="reader-wrap">
+      <article class="kids-reader">
+        <slot />
+
+        <nav class="chapter-nav" aria-label="장 이동">
+          {prev ? (
+            <a class="chapter-nav-link prev" href={prev.url}>
+              <span class="dir">← 이전 이야기</span>
+              <span class="lbl">{prev.label}</span>
+            </a>
+          ) : <span></span>}
+          {next ? (
+            <a class="chapter-nav-link next" href={next.url}>
+              <span class="dir">다음 이야기 →</span>
+              <span class="lbl">{next.label}</span>
+            </a>
+          ) : <span></span>}
+        </nav>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

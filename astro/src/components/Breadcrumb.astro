@@ -99,10 +99,26 @@ const chapterLabel = activeChapter
 <header class="topbar" role="banner">
  <div class="topbar-inner">
   <nav class="crumb" aria-label="네비게이션">
-    <a class="crumb-brand" href={url('/genesis/1')} aria-label="21세기 성경 홈">
-      <span class="crumb-brand-text">21세기 성경</span>
-      <span class="crumb-brand-icon" aria-hidden="true">📖</span>
-    </a>
+    <details class="crumb-picker brand">
+      <summary aria-label="버전 선택">
+        <span class="crumb-emoji" aria-hidden="true">📖</span>
+        <span class="crumb-text">21세기 성경</span>
+      </summary>
+      <ul class="crumb-menu" role="menu">
+        <li>
+          <a class="active" href={url(`/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+            <span class="cm-emoji" aria-hidden="true">📖</span>
+            <span class="cm-name">21세기 성경</span>
+          </a>
+        </li>
+        <li>
+          <a href={url(`/kidsb/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+            <span class="cm-emoji" aria-hidden="true">🌱</span>
+            <span class="cm-name">어린이 성경</span>
+          </a>
+        </li>
+      </ul>
+    </details>
 
     <details class="crumb-picker">
       <summary>
