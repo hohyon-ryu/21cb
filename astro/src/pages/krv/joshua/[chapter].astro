@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import KrvReader from '../../../layouts/KrvReader.astro';
+import ChapterTitle from '../../../components/ChapterTitle.astro';
+import { url } from '../../../lib/url';
+
+export async function getStaticPaths() {
+  const items = (await getCollection('krvJoshua')).sort(
+    (a, b) => a.data.chapter - b.data.chapter
+  );
+
+  return items.map((entry, idx) => ({
+    params: { chapter: String(entry.data.chapter) },
+    props: {
+      entry,
+      prev: items[idx - 1]
+        ? { chapter: items[idx - 1].data.chapter }
+        : null,
+      next: items[idx + 1]
+        ? { chapter: items[idx + 1].data.chapter }
+        : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props as {
+  entry: Awaited<ReturnType<typeof getCollection<'krvJoshua'>>>[number];
+  prev: { chapter: number } | null;
+  next: { chapter: number } | null;
+};
+const { Content } = await render(entry);
+const { chapter, emoji } = entry.data;
+const label = "여호수아" === "시편" ? `${chapter}편` : `${chapter}장`;
+const seoTitle = `개역한글 — 여호수아 ${label}`;
+const desc = `1961년 개역한글판 성경. 여호수아 ${label}.`;
+---
+
+<KrvReader
+  title={seoTitle}
+  description={desc}
+  bookSlug="joshua"
+  chapter={chapter}
+  prev={prev ? { url: url(`/krv/joshua/${prev.chapter}`), label: "여호수아 " + prev.chapter + "장" } : null}
+  next={next ? { url: url(`/krv/joshua/${next.chapter}`), label: "여호수아 " + next.chapter + "장" } : null}
+>
+  <ChapterTitle bookName="여호수아" chapter={chapter} title="개역한글" emoji={emoji} />
+  <Content />
+</KrvReader>

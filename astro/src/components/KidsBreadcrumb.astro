@@ -65,6 +65,12 @@ const ntAvailable = NT_BOOKS.filter((s) => allChapters[s].length > 0);
               <span class="cm-name">21세기 성경</span>
             </a>
           </li>
+          <li>
+            <a href={url(`/krv/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">📜</span>
+              <span class="cm-name">개역한글</span>
+            </a>
+          </li>
         </ul>
       </details>
 

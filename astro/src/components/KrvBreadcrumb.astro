@@ -1,0 +1,139 @@
+---
+import { getCollection } from 'astro:content';
+import { BOOKS, OT_BOOKS, NT_BOOKS, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
+  activeSlug?: BookSlug;
+  activeChapter?: number | null;
+};
+
+function toCollectionKey(slug: string): string {
+  return 'krv' + slug.split('-').map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join('');
+}
+
+const ALL_BOOK_SLUGS: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS];
+const allChapters: Record<string, number[]> = {};
+for (const slug of ALL_BOOK_SLUGS) {
+  const key = toCollectionKey(slug);
+  try {
+    const items = await getCollection(key as any);
+    allChapters[slug] = items.map((e: any) => e.data.chapter).sort((a, b) => a - b);
+  } catch {
+    allChapters[slug] = [];
+  }
+}
+
+const activeChapters = allChapters[activeSlug] ?? [];
+const activeBookName = BOOKS[activeSlug].name;
+const activeBookEmoji = BOOKS[activeSlug].emoji;
+const isPsalms = activeSlug === 'psalms';
+const labelSuffix = isPsalms ? '편' : '장';
+const chapterLabel = activeChapter
+  ? `${activeChapter}${labelSuffix}`
+  : '장 선택';
+---
+
+<header class="topbar" role="banner">
+  <div class="topbar-inner">
+    <nav class="crumb" aria-label="네비게이션">
+      <details class="crumb-picker brand">
+        <summary aria-label="버전 선택">
+          <span class="crumb-emoji" aria-hidden="true">📜</span>
+          <span class="crumb-text">개역한글</span>
+        </summary>
+        <ul class="crumb-menu" role="menu">
+          <li>
+            <a class="active" href={url(`/krv/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">📜</span>
+              <span class="cm-name">개역한글</span>
+            </a>
+          </li>
+          <li>
+            <a href={url(`/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">📖</span>
+              <span class="cm-name">21세기 성경</span>
+            </a>
+          </li>
+          <li>
+            <a href={url(`/kidsb/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+              <span class="cm-emoji" aria-hidden="true">🌱</span>
+              <span class="cm-name">어린이 성경</span>
+            </a>
+          </li>
+        </ul>
+      </details>
+
+      <details class="crumb-picker">
+        <summary>
+          <span class="crumb-emoji" aria-hidden="true">{activeBookEmoji}</span>
+          <span class="crumb-text">{activeBookName}</span>
+        </summary>
+        <ul class="crumb-menu scroll" role="menu">
+          <li class="cm-section" aria-hidden="true">오랜 약속</li>
+          {OT_BOOKS.map((slug) => {
+            const cls = slug === activeSlug ? 'active' : '';
+            const href = url(`/krv/${slug}/1`);
+            return (
+              <li>
+                <a class={cls} href={href} role="menuitem">
+                  <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                  <span class="cm-name">{BOOKS[slug].name}</span>
+                </a>
+              </li>
+            );
+          })}
+          <li class="cm-section" aria-hidden="true">새 약속</li>
+          {NT_BOOKS.map((slug) => {
+            const cls = slug === activeSlug ? 'active' : '';
+            const href = url(`/krv/${slug}/1`);
+            return (
+              <li>
+                <a class={cls} href={href} role="menuitem">
+                  <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                  <span class="cm-name">{BOOKS[slug].name}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+
+      {activeChapters.length > 0 && activeChapter !== null && (
+        <details class="crumb-picker chapter">
+          <summary>
+            <span class="crumb-text">{chapterLabel}</span>
+          </summary>
+          <ul class="crumb-menu scroll" role="menu">
+            {activeChapters.map((chap) => (
+              <li>
+                <a
+                  class={chap === activeChapter ? 'active' : ''}
+                  href={url(`/krv/${activeSlug}/${chap}`)}
+                  role="menuitem"
+                >
+                  <span class="cm-num">{chap}{labelSuffix}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open]').forEach((d) => {
+      if (!d.contains(target)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll<HTMLDetailsElement>('details.crumb-picker[open]').forEach((d) => {
+      d.open = false;
+    });
+  });
+</script>
