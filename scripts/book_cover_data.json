@@ -65,5 +65,14 @@
   {"slug":"john3","name":"요한삼서","scene":"travelling brothers welcomed at a doorway, hospitality table in soft daylight"},
   {"slug":"jude","name":"유다서","scene":"contending for faith, stormy sea cliffs, ancient warning scroll"},
   {"slug":"revelation","name":"요한계시록","scene":"Patmos island rocks, stormy Aegean sea, seven lampstands glowing in darkness"},
-  {"slug":"harmony","name":"통합복음서","scene":"four ancient scrolls braiding into one open codex, soft dawn light over Galilee hills, calm waters of the Sea of Galilee at sunrise"}
+  {"slug":"harmony","name":"통합복음서","scene":"four ancient scrolls braiding into one open codex, soft dawn light over Galilee hills, calm waters of the Sea of Galilee at sunrise"},
+  {"slug":"tobit","name":"토빗기","scene":"exiled Israelite household in Nineveh, travel road to Media, river fish motif, healing light and an unseen angelic guide"},
+  {"slug":"judith","name":"유딧기","scene":"mountain town of Bethulia under siege, dignified widow's tent, distant Assyrian camp at twilight, courageous quiet tension"},
+  {"slug":"maccabees1","name":"마카베오기 상권","scene":"Judean hill country resistance, Jerusalem temple rededication, menorah lamps, winter light after conflict"},
+  {"slug":"maccabees2","name":"마카베오기 하권","scene":"purified Jerusalem temple courtyard, oil lamps, martyr remembrance, storm clearing over sacred stones"},
+  {"slug":"wisdom","name":"지혜서","scene":"Hellenistic Jewish wisdom scroll in Alexandria, lamp-lit study, scales, sea horizon, radiant personified wisdom atmosphere"},
+  {"slug":"sirach","name":"집회서","scene":"Jerusalem wisdom teacher's study, students gathered around scrolls, oil lamp, ordered sayings and practical instruction"},
+  {"slug":"baruch","name":"바룩서","scene":"exiles beside Babylonian canal, scribe's letter and lament scroll, distant Jerusalem memory, dawn of consolation"},
+  {"slug":"danielExtra","name":"다니엘 추가","scene":"Babylonian court and furnace glow, faithful young exiles, sealed scrolls, divine rescue suggested by radiant light"},
+  {"slug":"estherExtra","name":"에스테르 추가","scene":"Persian palace at Susa, Queen Esther in prayer, sealed royal decree on table, golden textiles and solemn courage"}
 ]

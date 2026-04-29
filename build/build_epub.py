@@ -44,7 +44,12 @@ def load_cover_slugs() -> dict[str, str]:
     if not COVER_DATA.exists():
         return {}
     books = json.loads(COVER_DATA.read_text(encoding="utf-8"))
-    return {book["name"]: book["slug"] for book in books}
+    slugs = {}
+    for book in books:
+        name = book["name"]
+        slugs[name] = book["slug"]
+        slugs[name.replace(" ", "")] = book["slug"]
+    return slugs
 
 
 BOOK_COVER_SLUGS = load_cover_slugs()

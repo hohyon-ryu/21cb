@@ -185,8 +185,19 @@ const options = parseArgs();
 const allBooks = JSON.parse(await fs.readFile(DATA_FILE, 'utf8'));
 const books = options.only ? allBooks.filter((book) => options.only.includes(book.slug)) : allBooks;
 
-if (allBooks.length !== 67) {
-  throw new Error(`expected 67 books, got ${allBooks.length}`);
+const slugs = new Set(allBooks.map((book) => book.slug));
+if (slugs.size !== allBooks.length) {
+  throw new Error('duplicate book cover slugs');
+}
+
+if (allBooks.length < 67) {
+  throw new Error(`expected at least 67 books, got ${allBooks.length}`);
+}
+
+if (options.only && books.length !== options.only.length) {
+  const found = new Set(books.map((book) => book.slug));
+  const missing = options.only.filter((slug) => !found.has(slug));
+  throw new Error(`unknown cover slugs: ${missing.join(', ')}`);
 }
 
 await fs.mkdir(RAW_DIR, { recursive: true });

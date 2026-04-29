@@ -7,6 +7,17 @@ const chapter = z.object({
   emoji: z.string().optional().default(''),
 });
 
+const intro = z.object({
+  title: z.string(),
+  bookName: z.string(),
+  emoji: z.string().optional().default(''),
+  author: z.string().optional(),
+  era: z.string().optional(),
+  themes: z.array(z.string()).optional(),
+});
+
+
+
 export const collections = {
   genesis: defineCollection({
     loader: glob({ pattern: '*.md', base: './src/content/genesis' }),
@@ -282,4 +293,5 @@ export const collections = {
   kidsbDanielextra: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/kidsb-danielExtra' }), schema: chapter }),
   estherExtra: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/estherExtra' }), schema: chapter }),
   kidsbEstherextra: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/kidsb-estherExtra' }), schema: chapter }),
+  intros: defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/intros' }), schema: intro }),
 };
