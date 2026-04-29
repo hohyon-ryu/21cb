@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { BOOKS, BOOK_ORDER, OT_BOOKS, NT_BOOKS, APPENDIX_BOOKS, type BookSlug } from '../lib/books';
+import { BOOKS, BOOK_ORDER, OT_BOOKS, NT_BOOKS, APPENDIX_BOOKS, DEUTERO_BOOKS, type BookSlug } from '../lib/books';
 import { url } from '../lib/url';
 import DownloadMenu from './DownloadMenu.astro';
 
@@ -77,6 +77,15 @@ const all: Record<BookSlug, { chapter: number; title: string; emoji: string }[]>
   jude: [],
   revelation: [],
   harmony: [],
+  tobit: [],
+  judith: [],
+  maccabees1: [],
+  maccabees2: [],
+  wisdom: [],
+  sirach: [],
+  baruch: [],
+  danielExtra: [],
+  estherExtra: [],
 };
 for (const slug of BOOK_ORDER) {
   const items = await getCollection(slug);
@@ -171,6 +180,20 @@ const chapterLabel = activeChapter
         })}
         <li class="cm-section cm-section-appendix" aria-hidden="true">부록 — 새로 쓴 책</li>
         {APPENDIX_BOOKS.map((slug) => {
+          const written = all[slug].length;
+          const cls = slug === activeSlug ? 'active' : '';
+          const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);
+          return (
+            <li>
+              <a class={cls} href={href} role="menuitem">
+                <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                <span class="cm-name">{BOOKS[slug].name}</span>
+              </a>
+            </li>
+          );
+        })}
+        <li class="cm-section cm-section-appendix" aria-hidden="true">외경 — 천주교 정경</li>
+        {DEUTERO_BOOKS.map((slug) => {
           const written = all[slug].length;
           const cls = slug === activeSlug ? 'active' : '';
           const href = written > 0 ? url(`/${slug}/${all[slug][0].chapter}`) : url(`/${slug}`);

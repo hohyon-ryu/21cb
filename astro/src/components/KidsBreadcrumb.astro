@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { BOOKS, OT_BOOKS, NT_BOOKS, type BookSlug } from '../lib/books';
+import { BOOKS, OT_BOOKS, NT_BOOKS, DEUTERO_BOOKS, type BookSlug } from '../lib/books';
 import { url } from '../lib/url';
 
 const { activeSlug = 'genesis', activeChapter = null } = Astro.props as {
@@ -14,7 +14,7 @@ function toCollectionKey(slug: string): string {
 }
 
 // 사용 가능한 모든 kidsb 책 목록 — 컨텐츠가 있는 것만
-const ALL_BOOK_SLUGS: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS];
+const ALL_BOOK_SLUGS: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS, ...DEUTERO_BOOKS];
 
 const allChapters: Record<string, { chapter: number; title: string; emoji: string }[]> = {};
 for (const slug of ALL_BOOK_SLUGS) {
@@ -48,6 +48,7 @@ const chapterLabel = activeChapter
 // 컨텐츠 있는 책만 picker에 표시
 const otAvailable = OT_BOOKS.filter((s) => allChapters[s].length > 0);
 const ntAvailable = NT_BOOKS.filter((s) => allChapters[s].length > 0);
+const deuteroAvailable = DEUTERO_BOOKS.filter((s) => allChapters[s].length > 0);
 ---
 
 <header class="topbar" role="banner">
@@ -101,6 +102,19 @@ const ntAvailable = NT_BOOKS.filter((s) => allChapters[s].length > 0);
           })}
           {ntAvailable.length > 0 && <li class="cm-section" aria-hidden="true">새 약속</li>}
           {ntAvailable.map((slug) => {
+            const cls = slug === activeSlug ? 'active' : '';
+            const href = url(`/kidsb/${slug}/${allChapters[slug][0].chapter}`);
+            return (
+              <li>
+                <a class={cls} href={href} role="menuitem">
+                  <span class="cm-emoji" aria-hidden="true">{BOOKS[slug].emoji}</span>
+                  <span class="cm-name">{BOOKS[slug].name}</span>
+                </a>
+              </li>
+            );
+          })}
+          {deuteroAvailable.length > 0 && <li class="cm-section" aria-hidden="true">외경 — 천주교 정경</li>}
+          {deuteroAvailable.map((slug) => {
             const cls = slug === activeSlug ? 'active' : '';
             const href = url(`/kidsb/${slug}/${allChapters[slug][0].chapter}`);
             return (

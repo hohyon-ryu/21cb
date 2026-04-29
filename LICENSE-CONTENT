@@ -1,0 +1,65 @@
+# Content License — Creative Commons Attribution-ShareAlike 4.0 International
+
+The original Bible translations created by this project are licensed under
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**.
+
+This applies to:
+- **21세기 성경** — original new Korean translation (root directories: `창세기/`, `출애굽기/`, …, plus deuterocanonical books `토빗기/`, `유딧기/`, …, and `통합복음서/`).
+- **어린이 성경** — children's adaptation (`kidsb/<책>/`).
+
+Full license text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+---
+
+## You are free to:
+
+- **Share** — copy and redistribute the material in any medium or format.
+- **Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
+
+## Under the following terms:
+
+- **Attribution** — You must give appropriate credit, provide a link to this
+  repository (https://github.com/hohyon-ryu/21cb), and indicate if changes
+  were made. You may do so in any reasonable manner, but not in any way
+  that suggests the licensor endorses you or your use.
+- **ShareAlike** — If you remix, transform, or build upon the material, you
+  must distribute your contributions under the **same license** as the original.
+- **No additional restrictions** — You may not apply legal terms or
+  technological measures that legally restrict others from doing anything
+  the license permits.
+
+---
+
+## Excluded content (not licensed under CC BY-SA 4.0)
+
+The following content has separate licensing terms:
+
+### 개역한글 (Korean Revised Version, 1961)
+
+Located under `astro/src/content/krv-*/` and accessed via `/krv/<book>/<chapter>` routes.
+
+- **Status**: Public Domain in South Korea (the 50-year copyright term, in effect
+  when the work was published, has expired).
+- **Source data**: https://github.com/bluesaurel/Korean-Bible-1961-KRV
+- **Required attribution**: 대한성서공회 (Korean Bible Society) per BSK guidance —
+  https://www.bskorea.or.kr/bbs/board.php?bo_table=copyright_faq&wr_id=5
+- **Integrity requirement (인격저작권)**: The text must not be modified
+  arbitrarily; preserve original wording.
+
+### Source code
+
+All Astro templates, Python build scripts, and configuration files are licensed
+under MIT — see `LICENSE`.
+
+---
+
+## Why CC BY-SA?
+
+- It allows the translation to spread and be adapted (including for printed
+  Bibles, classroom use, derivative paraphrases).
+- ShareAlike ensures derivative works remain freely available, preventing
+  enclosure of the translation into closed commercial products.
+- It mirrors the spirit of major open content projects (Wikipedia, OpenStreetMap).
+
+If you have a use case that this license blocks but you believe the project
+should support, open an issue.
