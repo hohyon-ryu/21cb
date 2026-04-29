@@ -32,6 +32,12 @@ for (const slug of ALL_BOOK_SLUGS) {
 const activeChapters = allChapters[activeSlug] ?? [];
 const activeBookName = BOOKS[activeSlug].name;
 const activeBookEmoji = BOOKS[activeSlug].emoji;
+
+// KRV에 없는 책(외경 등)은 fallback
+const KRV_BOOKS = new Set<BookSlug>([...OT_BOOKS, ...NT_BOOKS]);
+const krvFallbackHref = KRV_BOOKS.has(activeSlug)
+  ? url(`/krv/${activeSlug}/${activeChapter ?? 1}`)
+  : url('/krv/genesis/1');
 const activeChapterEntry = activeChapters.find((c) => c.chapter === activeChapter);
 const activeChapterTitle = activeChapterEntry?.title ?? '';
 const activeChapterEmoji = activeChapterEntry?.emoji ?? '';
@@ -66,7 +72,7 @@ const ntAvailable = NT_BOOKS.filter((s) => allChapters[s].length > 0);
             </a>
           </li>
           <li>
-            <a href={url(`/krv/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+            <a href={krvFallbackHref} role="menuitem">
               <span class="cm-emoji" aria-hidden="true">📜</span>
               <span class="cm-name">개역한글</span>
             </a>

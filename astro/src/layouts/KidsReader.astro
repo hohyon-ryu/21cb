@@ -21,9 +21,40 @@ const {
   next?: { url: string; label: string } | null;
 };
 
+const siteOrigin = (Astro.site ?? Astro.url).origin;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const ogImage = new URL(url('/assets/og/kidsb-og.jpg'), Astro.site ?? Astro.url).toString();
+const coverImage = url('/assets/covers/kidsb.jpg');
 const bookName = BOOKS[bookSlug].name;
 const ogDescription = description ?? `어린이 성경 — ${bookName} ${chapter ?? ''}장.`;
+const ogImageAlt = '어린이 성경 — 초등학생을 위한 쉬운 번역본';
+const showCover = bookSlug === 'genesis' && chapter === 1;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: title,
+  description: ogDescription,
+  image: ogImage,
+  url: canonical,
+  inLanguage: 'ko-KR',
+  educationalLevel: '초등학생',
+  learningResourceType: '성경 본문',
+  audience: {
+    '@type': 'EducationalAudience',
+    educationalRole: 'student',
+  },
+  isPartOf: {
+    '@type': 'Book',
+    name: `어린이 성경 — ${bookName}`,
+    inLanguage: 'ko-KR',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: '21세기 성경',
+    url: siteOrigin,
+  },
+};
 ---
 
 <!doctype html>
@@ -33,9 +64,31 @@ const ogDescription = description ?? `어린이 성경 — ${bookName} ${chapter
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={ogDescription} />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#fdf4e3" />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="alternate icon" href={url('/favicon.ico')} />
   <link rel="canonical" href={canonical} />
+
+  <meta property="og:site_name" content="어린이 성경" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={ogImageAlt} />
+  <meta property="article:section" content={bookName} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body class="kids-body">
   <KidsBreadcrumb activeSlug={bookSlug} activeChapter={chapter} />
@@ -43,6 +96,11 @@ const ogDescription = description ?? `어린이 성경 — ${bookName} ${chapter
   <main class="shell">
     <section class="reader-wrap">
       <article class="kids-reader">
+        {showCover && (
+          <figure class="book-cover" aria-label="어린이 성경 표지">
+            <img src={coverImage} alt="어린이 성경 표지" loading="eager" decoding="async" />
+          </figure>
+        )}
         <slot />
 
         <nav class="chapter-nav" aria-label="장 이동">

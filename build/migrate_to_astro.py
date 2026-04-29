@@ -23,7 +23,7 @@ EMOJI = bw.CHAPTER_EMOJI_BY_BOOK
 
 SUPER_TO_NORMAL = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
 VERSE_RE = re.compile(r"^\*\*(\d+)\*\*\s*", re.MULTILINE)
-H1_RE = re.compile(r"^#\s+(\S+)\s+(\d+)(?:장|편)\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
+H1_RE = re.compile(r"^#\s+(.+?)\s+(\d+)(?:장|편)\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
 TAIL_ITALIC_RE = re.compile(r"^(.+?)(?<!\*)\s+\*([^*]{12,}?)\*\s*$")
 
 
@@ -107,6 +107,15 @@ BOOKS = [
     ("유다서", "jude"),
     ("요한계시록", "revelation"),
     ("통합복음서", "harmony"),
+    ("토빗기", "tobit"),
+    ("유딧기", "judith"),
+    ("마카베오기상권", "maccabees1"),
+    ("마카베오기하권", "maccabees2"),
+    ("지혜서", "wisdom"),
+    ("집회서", "sirach"),
+    ("바룩서", "baruch"),
+    ("다니엘추가", "danielExtra"),
+    ("에스테르추가", "estherExtra"),
 ]
 
 

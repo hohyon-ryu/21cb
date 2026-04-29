@@ -88,6 +88,15 @@ for (const slug of BOOK_ORDER) {
 const activeChapters = all[activeSlug] ?? [];
 const activeBookName = BOOKS[activeSlug].name;
 const activeBookEmoji = BOOKS[activeSlug].emoji;
+
+// kidsb/krv에 없는 책(harmony 등)은 해당 버전의 첫 페이지로 fallback
+const CANON_BOOKS = new Set<BookSlug>([...OT_BOOKS, ...NT_BOOKS]);
+const kidsbHref = CANON_BOOKS.has(activeSlug)
+  ? url(`/kidsb/${activeSlug}/${activeChapter ?? 1}`)
+  : url('/kidsb/genesis/1');
+const krvHref = CANON_BOOKS.has(activeSlug)
+  ? url(`/krv/${activeSlug}/${activeChapter ?? 1}`)
+  : url('/krv/genesis/1');
 const activeChapterEntry = activeChapters.find((c) => c.chapter === activeChapter);
 const activeChapterTitle = activeChapterEntry?.title ?? '';
 const activeChapterEmoji = activeChapterEntry?.emoji ?? '';
@@ -112,13 +121,13 @@ const chapterLabel = activeChapter
           </a>
         </li>
         <li>
-          <a href={url(`/kidsb/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+          <a href={kidsbHref} role="menuitem">
             <span class="cm-emoji" aria-hidden="true">🌱</span>
             <span class="cm-name">어린이 성경</span>
           </a>
         </li>
         <li>
-          <a href={url(`/krv/${activeSlug}/${activeChapter ?? 1}`)} role="menuitem">
+          <a href={krvHref} role="menuitem">
             <span class="cm-emoji" aria-hidden="true">📜</span>
             <span class="cm-name">개역한글</span>
           </a>

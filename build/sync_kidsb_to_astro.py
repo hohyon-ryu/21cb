@@ -97,10 +97,19 @@ BOOKS = [
     ("요한삼서", "kidsb-john3"),
     ("유다서", "kidsb-jude"),
     ("요한계시록", "kidsb-revelation"),
+    ("토빗기", "kidsb-tobit"),
+    ("유딧기", "kidsb-judith"),
+    ("마카베오기상권", "kidsb-maccabees1"),
+    ("마카베오기하권", "kidsb-maccabees2"),
+    ("지혜서", "kidsb-wisdom"),
+    ("집회서", "kidsb-sirach"),
+    ("바룩서", "kidsb-baruch"),
+    ("다니엘추가", "kidsb-danielExtra"),
+    ("에스테르추가", "kidsb-estherExtra"),
 ]
 
 SUPER_TO_NORMAL = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹", "0123456789")
-H1_RE = re.compile(r"^#\s+\S+\s+(\d+)(?:장|편)\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
+H1_RE = re.compile(r"^#\s+.+?\s+(\d+)(?:장|편)\s*[—–-]\s*(.+?)\s*$", re.MULTILINE)
 VERSE_RE = re.compile(r"^\*\*([\d\-]+)\*\*\s*", re.MULTILINE)
 
 

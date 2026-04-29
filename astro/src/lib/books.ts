@@ -1,4 +1,4 @@
-export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'psalms' | 'proverbs' | 'ecclesiastes' | 'song' | 'isaiah' | 'jeremiah' | 'lamentations' | 'ezekiel' | 'daniel' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi' | 'matthew' | 'mark' | 'luke' | 'john' | 'acts' | 'romans' | 'corinthians1' | 'corinthians2' | 'galatians' | 'ephesians' | 'philippians' | 'colossians' | 'thessalonians1' | 'thessalonians2' | 'timothy1' | 'timothy2' | 'titus' | 'philemon' | 'hebrews' | 'james' | 'peter1' | 'peter2' | 'john1' | 'john2' | 'john3' | 'jude' | 'revelation' | 'harmony';
+export type BookSlug = 'genesis' | 'exodus' | 'leviticus' | 'numbers' | 'deuteronomy' | 'joshua' | 'judges' | 'ruth' | 'samuel1' | 'samuel2' | 'kings1' | 'kings2' | 'chronicles1' | 'chronicles2' | 'ezra' | 'nehemiah' | 'esther' | 'job' | 'psalms' | 'proverbs' | 'ecclesiastes' | 'song' | 'isaiah' | 'jeremiah' | 'lamentations' | 'ezekiel' | 'daniel' | 'hosea' | 'joel' | 'amos' | 'obadiah' | 'jonah' | 'micah' | 'nahum' | 'habakkuk' | 'zephaniah' | 'haggai' | 'zechariah' | 'malachi' | 'matthew' | 'mark' | 'luke' | 'john' | 'acts' | 'romans' | 'corinthians1' | 'corinthians2' | 'galatians' | 'ephesians' | 'philippians' | 'colossians' | 'thessalonians1' | 'thessalonians2' | 'timothy1' | 'timothy2' | 'titus' | 'philemon' | 'hebrews' | 'james' | 'peter1' | 'peter2' | 'john1' | 'john2' | 'john3' | 'jude' | 'revelation' | 'harmony' | 'tobit' | 'judith' | 'maccabees1' | 'maccabees2' | 'wisdom' | 'sirach' | 'baruch' | 'danielExtra' | 'estherExtra';
 
 export const BOOKS: Record<BookSlug, { name: string; total: number; emoji: string }> = {
   genesis: { name: '창세기', total: 50, emoji: '🌱' },
@@ -68,6 +68,15 @@ export const BOOKS: Record<BookSlug, { name: string; total: number; emoji: strin
   jude: { name: '유다서', total: 1, emoji: '⚔️' },
   revelation: { name: '요한계시록', total: 22, emoji: '🐉' },
   harmony: { name: '통합복음서', total: 28, emoji: '✨' },
+  tobit: { name: '토빗기', total: 14, emoji: '🐟' },
+  judith: { name: '유딧기', total: 16, emoji: '🌟' },
+  maccabees1: { name: '마카베오기 상권', total: 16, emoji: '🕎' },
+  maccabees2: { name: '마카베오기 하권', total: 15, emoji: '🕯️' },
+  wisdom: { name: '지혜서', total: 19, emoji: '💡' },
+  sirach: { name: '집회서', total: 51, emoji: '📜' },
+  baruch: { name: '바룩서', total: 6, emoji: '🌿' },
+  danielExtra: { name: '다니엘 추가', total: 3, emoji: '🦁' },
+  estherExtra: { name: '에스테르 추가', total: 6, emoji: '👑' },
 };
 
 export const OT_BOOKS: BookSlug[] = ['genesis', 'exodus', 'leviticus', 'numbers', 'deuteronomy', 'joshua', 'judges', 'ruth', 'samuel1', 'samuel2', 'kings1', 'kings2', 'chronicles1', 'chronicles2', 'ezra', 'nehemiah', 'esther', 'job', 'psalms', 'proverbs', 'ecclesiastes', 'song', 'isaiah', 'jeremiah', 'lamentations', 'ezekiel', 'daniel', 'hosea', 'joel', 'amos', 'obadiah', 'jonah', 'micah', 'nahum', 'habakkuk', 'zephaniah', 'haggai', 'zechariah', 'malachi'];
@@ -76,4 +85,6 @@ export const NT_BOOKS: BookSlug[] = ['matthew', 'mark', 'luke', 'john', 'acts', 
 
 export const APPENDIX_BOOKS: BookSlug[] = ['harmony'];
 
-export const BOOK_ORDER: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS, ...APPENDIX_BOOKS];
+export const DEUTERO_BOOKS: BookSlug[] = ['tobit', 'judith', 'maccabees1', 'maccabees2', 'wisdom', 'sirach', 'baruch', 'danielExtra', 'estherExtra'];
+
+export const BOOK_ORDER: BookSlug[] = [...OT_BOOKS, ...NT_BOOKS, ...APPENDIX_BOOKS, ...DEUTERO_BOOKS];
