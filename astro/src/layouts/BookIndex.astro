@@ -1,0 +1,156 @@
+---
+import '../styles/global.css';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { getCollection, render } from 'astro:content';
+import { BOOKS, type BookSlug } from '../lib/books';
+import { url } from '../lib/url';
+
+const { slug } = Astro.props as { slug: BookSlug };
+
+const bookName = BOOKS[slug].name;
+const bookEmoji = BOOKS[slug].emoji;
+
+// chapter list
+const chapters = (await getCollection(slug as any))
+  .map((c: any) => ({ chapter: c.data.chapter, title: c.data.title, emoji: c.data.emoji ?? '' }))
+  .sort((a: any, b: any) => a.chapter - b.chapter);
+
+// intro entry (optional)
+let introContent: any = null;
+let introData: any = null;
+try {
+  const intros = await getCollection('intros' as any);
+  const entry = intros.find((e: any) => e.id === slug);
+  if (entry) {
+    introData = entry.data;
+    const rendered = await render(entry);
+    introContent = rendered.Content;
+  }
+} catch {}
+
+const isPsalms = slug === 'psalms';
+const labelSuffix = isPsalms ? '편' : '장';
+const seoTitle = `${bookName} 소개 | 21세기 성경`;
+const seoDesc = introData?.summary ?? `${bookName} ${chapters.length}${labelSuffix}의 요약과 배경.`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{seoTitle}</title>
+  <meta name="description" content={seoDesc} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={seoTitle} />
+  <meta property="og:description" content={seoDesc} />
+</head>
+<body>
+  <Breadcrumb activeSlug={slug} activeChapter={null} />
+
+  <main class="shell">
+    <article class="reader book-index">
+      <header class="book-index-hero">
+        <div class="hero-emoji">{bookEmoji}</div>
+        <h1 class="hero-title">{bookName}</h1>
+        {introData?.author && <div class="hero-meta">저자: {introData.author}</div>}
+        {introData?.era && <div class="hero-meta">시대: {introData.era}</div>}
+      </header>
+
+      {introContent ? <introContent /> : (
+        <p class="muted">이 책의 소개는 아직 준비 중입니다.</p>
+      )}
+
+      {chapters.length > 0 && (
+        <section class="ch-grid-section">
+          <h2>목차</h2>
+          <nav class="ch-grid" aria-label="장 목록">
+            {chapters.map((c) => (
+              <a href={url(`/${slug}/${c.chapter}`)} title={c.title}>
+                <span class="emoji" aria-hidden="true">{c.emoji || bookEmoji}</span>
+                <span class="num">{c.chapter}{labelSuffix}</span>
+                <span class="title">{c.title}</span>
+              </a>
+            ))}
+          </nav>
+        </section>
+      )}
+    </article>
+  </main>
+</body>
+</html>
+
+<style>
+  .book-index { max-width: 760px; }
+  .book-index-hero {
+    text-align: center;
+    padding: 2.4em 0 2em;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2em;
+  }
+  .book-index-hero .hero-emoji {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.4em;
+    font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  }
+  .book-index-hero .hero-title {
+    font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 0.4em;
+    color: var(--ink);
+  }
+  .book-index-hero .hero-meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-family: 'Pretendard', 'SUIT', sans-serif;
+  }
+  .muted { color: var(--muted); text-align: center; padding: 2em 0; }
+  .ch-grid-section { margin-top: 2.5em; padding-top: 1.5em; border-top: 1px solid var(--line); }
+  .ch-grid-section h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 1em;
+    text-align: center;
+  }
+  .ch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .ch-grid a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: 'Pretendard', 'SUIT', sans-serif;
+    transition: background 130ms ease, border-color 130ms ease;
+  }
+  .ch-grid a:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .ch-grid a .emoji { font-size: 1rem; }
+  .ch-grid a .num {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+  }
+  .ch-grid a .title {
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin-top: 1px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
